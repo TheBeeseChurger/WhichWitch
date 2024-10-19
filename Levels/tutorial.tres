@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Level" load_steps=3 format=3 uid="uid://dvocg8glldoo7"]
+[gd_resource type="Resource" script_class="Level" load_steps=5 format=3 uid="uid://dvocg8glldoo7"]
 
 [ext_resource type="Resource" uid="uid://chghd2hydv51e" path="res://DynamicAudio/tutorial-music.tres" id="1_nugtv"]
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_omq3d"]
+[ext_resource type="Resource" uid="uid://bcj2nxhmla31t" path="res://Levels/nightcore.tres" id="2_qvc3k"]
+[ext_resource type="Texture2D" uid="uid://dr4xpua05ut5j" path="res://Sprites/PumpkinNote.png" id="6_f8l77"]
 
 [resource]
 script = ExtResource("1_omq3d")
@@ -10,5 +12,7 @@ min_speed = 150.0
 min_speed_gain = 30.0
 max_speed = 600.0
 max_speed_gain = 0.0
+next_level = ExtResource("2_qvc3k")
 dialogue_name = "tutorial_character"
 dynamic_music = ExtResource("1_nugtv")
+note_textures = Array[Texture2D]([ExtResource("6_f8l77")])

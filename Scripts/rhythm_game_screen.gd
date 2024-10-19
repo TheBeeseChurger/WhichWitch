@@ -9,17 +9,20 @@ extends Control
 
 var dynamic_music_player: DynamicMusicPlayer
 
+@onready var opponent_portrait: TextureRect = $PortraitContainer/OpponentPortrait
+@onready var player_portrait: TextureRect = $PortraitContainer/PlayerPortrait
 
-@onready var p1_portrait: TextureRect = $PortraitContainer/P1Portrait
-@onready var p2_portrait: TextureRect = $PortraitContainer/P2Portrait
-
+@onready var background: TextureRect = $Background
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Level.current_level = level
 	dynamic_music_player = $DynamicMusicPlayer
 	dynamic_music_player.dynamic_music = level.dynamic_music
 	dynamic_music_player.play_next_track()
+	
+	background.texture = level.background_texture
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -16,6 +16,8 @@ var linger_time_remaining: float
 # true for in intro cutscene, false for in outro cutscene
 var in_intro_cutscene: bool
 
+var in_level_transition: bool
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	play_intro_cutscene()
@@ -59,8 +61,12 @@ func display_next_line():
 			visible = false
 			rhythm.current_note_speed = rhythm.game_screen.level.starting_speed
 			rhythm.start_rhythm_mode()
-		else:
-			# Go to the next level
+		elif not in_level_transition:
+			var next_level = rhythm.game_screen.level.next_level
+			if next_level:
+				transition_to_level(next_level)
+			else:
+				dialogue.npc_dialogue_box.show_message("(There are no levels after this yet, thanks for playing!)")
 			pass
 	else:
 		var dialogue_line = current_cutscene_lines[cutscene_index]
@@ -74,6 +80,27 @@ func display_next_line():
 			player_dialogue_box.visible = false
 			npc_dialogue_box.show_message(message)
 		
+func transition_to_level(next_level: Level):
+	in_level_transition = true
+	var base_pos = rhythm.game_screen.opponent_portrait.position
+	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "position", base_pos + Vector2.LEFT * 450, 1.25)
+	await get_tree().create_tween().tween_property(rhythm.game_screen.dynamic_music_player, "volume_db", -30, 1.5).finished
+	
+	rhythm.game_screen.level = next_level
+	Level.current_level = next_level
+	rhythm.game_screen.dynamic_music_player.dynamic_music = next_level.dynamic_music
+	rhythm.game_screen.dynamic_music_player.current_track_index = -1
+	rhythm.game_screen.dynamic_music_player.current_division = 0
+	rhythm.game_screen.dynamic_music_player. in_transition_track = false
+	rhythm.game_screen.dynamic_music_player.play_next_track()
+	dialogue.load_dialog_from_file()
+	dialogue.current_question_index = -1
+	rhythm.game_screen.background.texture = next_level.background_texture
+	play_intro_cutscene()
+	
+	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "position", base_pos, 1.25)
+	await get_tree().create_tween().tween_property(rhythm.game_screen.dynamic_music_player, "volume_db", 0, 1.5).finished
+	in_level_transition = false
 	
 func on_line_finished():
 	pass

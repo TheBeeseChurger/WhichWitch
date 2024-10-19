@@ -1,7 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=28 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
-[ext_resource type="Resource" uid="uid://bcj2nxhmla31t" path="res://Levels/nightcore.tres" id="2_hgxc8"]
+[ext_resource type="Resource" uid="uid://dvocg8glldoo7" path="res://Levels/tutorial.tres" id="2_anosn"]
 [ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://Sprites/3.png" id="2_y82fn"]
 [ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_6yd2o"]
@@ -13,24 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://y4luavrw6fox" path="res://Scenes/UI/okay_popup.tscn" id="7_arxmi"]
 [ext_resource type="PackedScene" uid="uid://cer4k85kawh0k" path="res://Scenes/UI/good_popup.tscn" id="8_58pgq"]
 [ext_resource type="PackedScene" uid="uid://bml6s31gf1mpy" path="res://Scenes/UI/great_popup.tscn" id="9_ft756"]
+[ext_resource type="Texture2D" uid="uid://dpnyebe4b1d1a" path="res://Sprites/cauldron.png" id="12_cikpx"]
 [ext_resource type="PackedScene" uid="uid://dtgldgmvfjpqr" path="res://Scenes/UI/npc_dialogue_box.tscn" id="12_ha5er"]
+[ext_resource type="Texture2D" uid="uid://b4l75ixqp7660" path="res://Sprites/PumpkinNote1.png" id="12_i0q81"]
 [ext_resource type="Texture2D" uid="uid://d2ufvqqxskipr" path="res://Sprites/BadArrow.png" id="13_nnqw2"]
 [ext_resource type="Script" path="res://Scripts/cutscene.gd" id="15_sro5w"]
 [ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
-
-[sub_resource type="Gradient" id="Gradient_8locq"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ypnh"]
-gradient = SubResource("Gradient_8locq")
-
-[sub_resource type="Gradient" id="Gradient_q28l7"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.924369, 0.19816, 0.252588, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nhl5c"]
-gradient = SubResource("Gradient_q28l7")
 
 [sub_resource type="Gradient" id="Gradient_vbo6e"]
 offsets = PackedFloat32Array(0)
@@ -46,6 +34,20 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_bpxxe"]
 gradient = SubResource("Gradient_vumdn")
 
+[sub_resource type="Gradient" id="Gradient_8locq"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ypnh"]
+gradient = SubResource("Gradient_8locq")
+
+[sub_resource type="Gradient" id="Gradient_q28l7"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.924369, 0.19816, 0.252588, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nhl5c"]
+gradient = SubResource("Gradient_q28l7")
+
 [node name="TutorialLevel" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -54,30 +56,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u1iya")
-level = ExtResource("2_hgxc8")
+level = ExtResource("2_anosn")
 
-[node name="HealthMarginContainer" type="MarginContainer" parent="."]
+[node name="Background" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 45
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 45
-theme_override_constants/margin_bottom = 30
 
-[node name="HealthBar" type="TextureProgressBar" parent="HealthMarginContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-step = 0.0
-value = 100.0
-nine_patch_stretch = true
-stretch_margin_top = 20
-stretch_margin_bottom = 20
-texture_under = SubResource("GradientTexture1D_8ypnh")
-texture_progress = SubResource("GradientTexture2D_nhl5c")
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0156863, 0.0156863, 0.0470588, 0.580392)
 
 [node name="PortraitContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -119,7 +116,6 @@ expand_mode = 3
 flip_h = true
 
 [node name="Rhythm" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -143,9 +139,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -5.0
-offset_top = -226.5
+offset_top = -383.0
 offset_right = 5.0
-offset_bottom = 226.5
+offset_bottom = 227.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.301961)
@@ -178,20 +174,45 @@ offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="TargetCenter" type="Marker2D" parent="Rhythm/ColorRect/ColorRect3"]
+position = Vector2(5, 15.5)
+
+[node name="NoteTargetVisual" type="Sprite2D" parent="Rhythm/ColorRect/ColorRect3/TargetCenter"]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("12_i0q81")
+
+[node name="PopupCenter" type="Marker2D" parent="Rhythm/ColorRect/ColorRect3"]
+position = Vector2(49, 15.5)
+
 [node name="NoteSpawnPoint" type="Marker2D" parent="Rhythm/ColorRect"]
 position = Vector2(5, 16.5)
 
-[node name="TargetCenter" type="Marker2D" parent="Rhythm/ColorRect"]
-position = Vector2(5, 416.5)
-
-[node name="PopupCenter" type="Marker2D" parent="Rhythm/ColorRect"]
-position = Vector2(49, 416.5)
+[node name="Cauldron" type="TextureRect" parent="Rhythm/ColorRect"]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -31.5
+offset_right = -30.0
+offset_bottom = 96.5
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("12_cikpx")
+expand_mode = 1
 
 [node name="Notes" type="Control" parent="Rhythm"]
 anchors_preset = 0
 
+[node name="ClearedNotes" type="Control" parent="Rhythm"]
+anchors_preset = 0
+
 [node name="Dialogue" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -224,15 +245,15 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 step = 0.0
-value = 10.0
+value = 41.6
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture1D_bpxxe")
 
 [node name="RandomPopupContainer" type="Control" parent="Dialogue"]
 anchors_preset = 0
-offset_left = 650.0
-offset_top = 112.0
-offset_right = 1089.0
+offset_left = 613.0
+offset_top = 101.0
+offset_right = 1110.0
 offset_bottom = 589.0
 
 [node name="Cutscene" type="Control" parent="."]
@@ -258,6 +279,30 @@ offset_left = 622.0
 offset_top = 403.0
 offset_right = 1091.0
 offset_bottom = 550.0
+
+[node name="HealthMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 30
+
+[node name="HealthBar" type="TextureProgressBar" parent="HealthMarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+step = 0.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_top = 20
+stretch_margin_bottom = 20
+texture_under = SubResource("GradientTexture1D_8ypnh")
+texture_progress = SubResource("GradientTexture2D_nhl5c")
 
 [node name="DynamicMusicPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")
