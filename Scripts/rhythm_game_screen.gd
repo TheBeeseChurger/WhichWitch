@@ -1,6 +1,9 @@
 class_name RhythmGameScreen
 extends Control
 
+# current level being played
+@export var level: Level
+
 # Health is stored in this bar
 @onready var health_bar: TextureProgressBar = $HealthMarginContainer/HealthBar
 

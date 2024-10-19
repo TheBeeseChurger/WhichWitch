@@ -1,11 +1,6 @@
 class_name Rhythm
 extends Control
 
-@export var starting_speed: float = 300
-@export var min_speed: float = 200
-@export var min_speed_gain: float = 25 # amount min_speed increases by at the end of each round
-@export var max_speed: float = 600
-@export var max_speed_gain: float = 0 # amount max_speed increases by at the end of each round
 @export var note_scene: PackedScene
 @export var max_note_distance: float = 50
 @export var miss_popup: PackedScene
@@ -20,17 +15,22 @@ extends Control
 @onready var notes_parent: Node = $Notes
 @onready var game_screen: RhythmGameScreen = $".."
 @onready var dialogue: Dialogue = $"../Dialogue"
-@onready var dynamic_music: DynamicMusic = $"../DynamicMusic"
+@onready var dynamic_music_player: DynamicMusicPlayer = $"../DynamicMusic"
 
 var current_note_speed: float
 var notes_left: int
 var time_until_next_note: float
 var in_rhythm_mode = false # true while in rhythm mode
 
+var min_speed: float = 200
+var max_speed: float = 600
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
-	current_note_speed = starting_speed
+	current_note_speed = game_screen.level.starting_speed
+	min_speed = game_screen.level.min_speed
+	max_speed = game_screen.level.max_speed
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -64,8 +64,8 @@ func _process(delta: float) -> void:
 			
 	if notes_left <= 0 and notes_parent.get_child_count() == 0:
 		in_rhythm_mode = false
-		min_speed += min_speed_gain
-		max_speed += max_speed_gain
+		min_speed += game_screen.level.min_speed_gain
+		max_speed += game_screen.level.max_speed_gain
 		adjust_speed(0)
 		dialogue.start_dialogue_mode()
 		return

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Level" load_steps=2 format=3 uid="uid://dvocg8glldoo7"]
+
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_omq3d"]
+
+[resource]
+script = ExtResource("1_omq3d")
+starting_speed = 150.0
+min_speed = 150.0
+min_speed_gain = 30.0
+max_speed = 600.0
+max_speed_gain = 0.0
