@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Level" load_steps=3 format=3 uid="uid://bcj2nxhmla31t"]
+
+[ext_resource type="Resource" uid="uid://n1sw5uh8ucwk" path="res://DynamicAudio/music-lvl-1.tres" id="1_xclto"]
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_xd3v5"]
+
+[resource]
+script = ExtResource("1_xd3v5")
+starting_speed = 240.0
+min_speed = 200.0
+min_speed_gain = 40.0
+max_speed = 600.0
+max_speed_gain = 0.0
+dialogue_name = "nightcore_character"
+dynamic_music = ExtResource("1_xclto")

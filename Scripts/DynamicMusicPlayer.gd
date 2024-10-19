@@ -1,9 +1,9 @@
 class_name DynamicMusicPlayer
 extends AudioStreamPlayer
 
-@export var dynamic_music: DynamicMusic
-
 @onready var rhythm: Rhythm = $"../Rhythm"
+
+var dynamic_music: DynamicMusic
 
 var current_track_index: int = -1
 var current_division: int = 0
@@ -15,7 +15,6 @@ var in_transition_track: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	play_next_track()
 	start_time = Time.get_unix_time_from_system()
 	finished.connect(on_finished)
 	
