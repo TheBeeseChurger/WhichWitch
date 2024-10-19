@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://0wdabi3tm4m6"
+path="res://.godot/imported/music lvl 1 pt 1 intro.mp3-c983786b87c3636c7a1f7c38178b1af7.mp3str"
+
+[deps]
+
+source_file="res://music lvl 1 pt 1 intro.mp3"
+dest_files=["res://.godot/imported/music lvl 1 pt 1 intro.mp3-c983786b87c3636c7a1f7c38178b1af7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
