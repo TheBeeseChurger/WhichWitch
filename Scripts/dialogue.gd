@@ -75,6 +75,11 @@ func start_dialogue_mode():
 		
 	# choose the next question to ask
 	current_question_index += 1
+	if current_question_index >= len(questions):
+		visible = false
+		cutscene.play_outro_cutscene()
+		return
+	
 	current_question = questions[current_question_index];
 		
 	npc_dialogue_box.show_message(current_question["text"])
@@ -176,11 +181,6 @@ func submit_dialogue(reply: Dictionary):
 		child.queue_free()
 		
 	in_dialogue_mode = false
-	
-	if current_question_index >= len(questions) - 1:
-		visible = false
-		cutscene.play_outro_cutscene()
-		return
 	
 	rhythm.start_rhythm_mode()
 

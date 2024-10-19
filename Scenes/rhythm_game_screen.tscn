@@ -148,6 +148,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_dd3rv")
+starting_speed = 150.0
+min_speed = 150.0
+max_speed = 500.0
 note_scene = ExtResource("4_6yd2o")
 max_note_distance = 40.0
 miss_popup = ExtResource("5_gu8r3")
@@ -256,7 +259,6 @@ offset_right = 1089.0
 offset_bottom = 589.0
 
 [node name="Cutscene" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -271,6 +273,13 @@ offset_left = 57.0
 offset_top = 402.0
 offset_right = 526.0
 offset_bottom = 549.0
+
+[node name="PlayerDialogueBox" parent="Cutscene" instance=ExtResource("12_ha5er")]
+layout_mode = 0
+offset_left = 622.0
+offset_top = 403.0
+offset_right = 1091.0
+offset_bottom = 550.0
 
 [node name="DynamicMusic" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")

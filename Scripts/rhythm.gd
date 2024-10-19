@@ -3,7 +3,9 @@ extends Control
 
 @export var starting_speed: float = 300
 @export var min_speed: float = 200
+@export var min_speed_gain: float = 25 # amount min_speed increases by at the end of each round
 @export var max_speed: float = 600
+@export var max_speed_gain: float = 0 # amount max_speed increases by at the end of each round
 @export var note_scene: PackedScene
 @export var max_note_distance: float = 50
 @export var miss_popup: PackedScene
@@ -62,6 +64,9 @@ func _process(delta: float) -> void:
 			
 	if notes_left <= 0 and notes_parent.get_child_count() == 0:
 		in_rhythm_mode = false
+		min_speed += min_speed_gain
+		max_speed += max_speed_gain
+		adjust_speed(0)
 		dialogue.start_dialogue_mode()
 		return
 		

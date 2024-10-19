@@ -4,6 +4,7 @@ extends Control
 @export var message_linger_time: float = 2.0
 
 @onready var npc_dialogue_box: DialogueBox = $NpcDialogueBox
+@onready var player_dialogue_box: DialogueBox = $PlayerDialogueBox
 
 @onready var rhythm: Rhythm = $"../Rhythm"
 @onready var dialogue: Dialogue = $"../Dialogue"
@@ -17,6 +18,9 @@ var in_intro_cutscene: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	play_intro_cutscene()
+	
+func play_intro_cutscene():
 	current_cutscene_lines = dialogue.dialogue["intro_dialogue"]
 	cutscene_index = -1
 	in_intro_cutscene = true
@@ -27,7 +31,6 @@ func play_outro_cutscene():
 	in_intro_cutscene = false
 	current_cutscene_lines = dialogue.dialogue["outro_dialogue"]
 	cutscene_index = -1
-	in_intro_cutscene = true
 	visible = true
 	display_next_line()
 	
@@ -61,7 +64,12 @@ func display_next_line():
 		var speaker: String = dialogue_line[0]
 		var message: String = dialogue_line[1]
 		# if "npc" show on npc box, if "player" show on player box. not implemented yet
-		npc_dialogue_box.show_message(message)
+		if speaker == "player":
+			npc_dialogue_box.visible = false
+			player_dialogue_box.show_message(message)
+		else:
+			player_dialogue_box.visible = false
+			npc_dialogue_box.show_message(message)
 		
 	
 func on_line_finished():
