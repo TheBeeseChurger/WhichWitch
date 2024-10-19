@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=27 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Resource" uid="uid://dvocg8glldoo7" path="res://Levels/tutorial.tres" id="2_4rpds"]
@@ -13,16 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://y4luavrw6fox" path="res://Scenes/UI/okay_popup.tscn" id="7_arxmi"]
 [ext_resource type="PackedScene" uid="uid://cer4k85kawh0k" path="res://Scenes/UI/good_popup.tscn" id="8_58pgq"]
 [ext_resource type="PackedScene" uid="uid://bml6s31gf1mpy" path="res://Scenes/UI/great_popup.tscn" id="9_ft756"]
-[ext_resource type="PackedScene" uid="uid://dtgldgmvfjpqr" path="res://Scenes/npc_dialogue_box.tscn" id="12_ha5er"]
+[ext_resource type="PackedScene" uid="uid://dtgldgmvfjpqr" path="res://Scenes/UI/npc_dialogue_box.tscn" id="12_ha5er"]
 [ext_resource type="Texture2D" uid="uid://d2ufvqqxskipr" path="res://Sprites/BadArrow.png" id="13_nnqw2"]
-[ext_resource type="AudioStream" uid="uid://ccwcnbidkkjxf" path="res://Audio/tutorial pt1.mp3" id="15_myd6t"]
 [ext_resource type="Script" path="res://Scripts/cutscene.gd" id="15_sro5w"]
 [ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
-[ext_resource type="AudioStream" uid="uid://b7llm4ooid77e" path="res://Audio/tutorial pt2.mp3" id="17_7g7rx"]
-[ext_resource type="AudioStream" uid="uid://vmm45lie058r" path="res://Audio/tutorial transition_introloop.mp3" id="17_iasmw"]
-[ext_resource type="AudioStream" uid="uid://5j45eo3xsvp2" path="res://Audio/tutorial pt3.mp3" id="18_23yam"]
-[ext_resource type="AudioStream" uid="uid://xnlb7vso2u2s" path="res://Audio/tutorial pt4.mp3" id="19_rpv6v"]
-[ext_resource type="AudioStream" uid="uid://c23omiapfmml8" path="res://Audio/tutorial speeding up transition.mp3" id="22_mpg1u"]
+[ext_resource type="Resource" uid="uid://chghd2hydv51e" path="res://DynamicAudio/tutorial-music.tres" id="18_wi1ib"]
 
 [sub_resource type="Gradient" id="Gradient_8locq"]
 offsets = PackedFloat32Array(0)
@@ -267,10 +262,6 @@ offset_bottom = 550.0
 
 [node name="DynamicMusicPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")
-audio_streams = Array[AudioStream]([ExtResource("17_iasmw"), ExtResource("15_myd6t"), ExtResource("17_7g7rx"), ExtResource("18_23yam"), ExtResource("19_rpv6v")])
-intensity_speeds = Array[float]([0.0, 200.0, 300.0, 400.0, 500.0])
-divisions = Array[int]([4, 8, 4, 8])
-bpms = Array[float]([0.0, 113.744, 113.946, 152.381, 152.866])
-transition_audio_streams = Array[AudioStream]([null, null, null, ExtResource("22_mpg1u"), null])
+dynamic_music = ExtResource("18_wi1ib")
 
 [editable path="Dialogue/NpcDialogueBox"]

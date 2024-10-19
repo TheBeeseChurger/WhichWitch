@@ -1,11 +1,7 @@
 class_name DynamicMusicPlayer
 extends AudioStreamPlayer
 
-@export var audio_streams: Array[AudioStream]
-@export var intensity_speeds: Array[float]
-@export var divisions: Array[int]
-@export var bpms: Array[float]
-@export var transition_audio_streams: Array[AudioStream]
+@export var dynamic_music: DynamicMusic
 
 @onready var rhythm: Rhythm = $"../Rhythm"
 
@@ -27,7 +23,7 @@ func _process(delta: float) -> void:
 	var t := get_playback_position() / stream.get_length()
 	
 	if not in_transition_track:
-		var total_divisions = divisions[current_track_index]
+		var total_divisions = dynamic_music.divisions[current_track_index]
 		var new_division = floor(t * total_divisions)
 		
 		if new_division > current_division:
@@ -43,9 +39,9 @@ func on_finished():
 
 # play next track if a transition needs to happen. if not, keep playing the current track
 func play_next_track(play: bool = true):
-	var next_track_index = len(intensity_speeds)-1
-	for i in range(0, len(intensity_speeds)):
-		var speed = intensity_speeds[i]
+	var next_track_index = len(dynamic_music.intensity_speeds)-1
+	for i in range(0, len(dynamic_music.intensity_speeds)):
+		var speed = dynamic_music.intensity_speeds[i]
 		if rhythm.current_note_speed <= speed:
 			next_track_index = i
 			break
@@ -53,16 +49,15 @@ func play_next_track(play: bool = true):
 	if next_track_index != current_track_index or in_transition_track:
 		print("switching from track ", current_track_index, " to ", next_track_index)
 		current_track_index = next_track_index
-		var transition_stream: AudioStream = transition_audio_streams[current_track_index]
+		var transition_stream: AudioStream = dynamic_music.transition_audio_streams[current_track_index]
 		if transition_stream and not in_transition_track:
 			stream = transition_stream
 			in_transition_track = true
 			current_bpm = 0
 		else:
-			stream = audio_streams[current_track_index]
+			stream = dynamic_music.audio_streams[current_track_index]
 			in_transition_track = false
-			current_bpm = bpms[current_track_index]
-		
+			current_bpm = dynamic_music.bpms[current_track_index]
 		
 		start_time = Time.get_unix_time_from_system()
 		self.play()
@@ -73,5 +68,5 @@ func play_next_track(play: bool = true):
 
 	if play:
 		start_time = Time.get_unix_time_from_system()
-		current_bpm = bpms[current_track_index]
+		current_bpm = dynamic_music.bpms[current_track_index]
 		self.play()

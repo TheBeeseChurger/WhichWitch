@@ -77,6 +77,7 @@ func start_dialogue_mode():
 	current_question_index += 1
 	if current_question_index >= len(questions):
 		visible = false
+		rhythm.current_note_speed = 0
 		cutscene.play_outro_cutscene()
 		return
 	
@@ -97,7 +98,7 @@ func start_dialogue_mode():
 func spawn_random_option():
 	var i = randi_range(0, len(dialogue_options_queued)-1)
 	var option_index = dialogue_options_queued.pop_at(i)
-	print(dialogue_options_queued)
+	#print(dialogue_options_queued)
 	var reply: Dictionary = current_question["replies"][option_index]
 	var option: Button = dialogue_option_scene.instantiate()
 	option.text = reply["text"]
@@ -129,7 +130,7 @@ func spawn_random_option():
 			print("MAX ITERATIONS REACHED")
 			break
 	
-	print("placed at ", random_x, ", ", random_y)
+	#print("placed at ", random_x, ", ", random_y)
 	random_popup_container.add_child(option)
 	option.position = Vector2(random_x, random_y)
 	option.modulate = Color(1,1,1,0)
@@ -149,7 +150,7 @@ func spawn_random_option():
 	
 	if is_instance_valid(option):
 		option.queue_free()
-		print(dialogue_options_queued)
+		#print(dialogue_options_queued)
 		dialogue_options_queued.push_back(option_index)
 
 # empty dictionary for nothing selected (ignored opponent)
@@ -157,7 +158,7 @@ func submit_dialogue(reply: Dictionary):
 	respond_time_left_bar.value = 0
 	
 	if reply.is_empty():
-		bad_rating()
+		very_bad_rating()
 		var ignored_responses = dialogue["ignored_responses"]
 		var ignored_response = ignored_responses[randi_range(0, len(ignored_responses)-1)]
 		npc_dialogue_box.show_message(ignored_response)
@@ -181,6 +182,10 @@ func submit_dialogue(reply: Dictionary):
 		child.queue_free()
 		
 	in_dialogue_mode = false
+	
+	rhythm.min_speed += rhythm.game_screen.level.min_speed_gain
+	rhythm.max_speed += rhythm.game_screen.level.max_speed_gain
+	rhythm.adjust_speed(0)
 	
 	rhythm.start_rhythm_mode()
 

@@ -17,7 +17,7 @@ extends Control
 @onready var dialogue: Dialogue = $"../Dialogue"
 @onready var dynamic_music_player: DynamicMusicPlayer = $"../DynamicMusic"
 
-var current_note_speed: float
+var current_note_speed: float = 0 # should be 0 during cutscenes to activate intro/outro track
 var notes_left: int
 var time_until_next_note: float
 var in_rhythm_mode = false # true while in rhythm mode
@@ -28,7 +28,6 @@ var max_speed: float = 600
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
-	current_note_speed = game_screen.level.starting_speed
 	min_speed = game_screen.level.min_speed
 	max_speed = game_screen.level.max_speed
 
@@ -41,6 +40,7 @@ func _process(delta: float) -> void:
 		rhythm_press()
 	
 	for note: Node2D in notes_parent.get_children():
+		print("current note speed in process: ", current_note_speed)
 		note.global_position.y += current_note_speed * delta
 		if note.global_position.y > target_center.global_position.y + max_note_distance:
 			game_screen.lose_health(6)
@@ -64,9 +64,6 @@ func _process(delta: float) -> void:
 			
 	if notes_left <= 0 and notes_parent.get_child_count() == 0:
 		in_rhythm_mode = false
-		min_speed += game_screen.level.min_speed_gain
-		max_speed += game_screen.level.max_speed_gain
-		adjust_speed(0)
 		dialogue.start_dialogue_mode()
 		return
 		
@@ -111,6 +108,7 @@ func adjust_speed(speed: float):
 		current_note_speed = min_speed
 	elif current_note_speed > max_speed:
 		current_note_speed = max_speed
+	print("speed: ", current_note_speed)
 
 func hit_popup(scene: PackedScene):
 	var popup: Control = scene.instantiate()
