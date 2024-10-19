@@ -11,6 +11,7 @@
 	"questions": [
 		{
 			"text": "Hey!",
+			"time": 9999,
 			"replies": [
 				{
 					"text": "Yo.",
@@ -30,68 +31,101 @@
 			]
 		},
 		{
-			"text": "This is a question",
+			"text": "So, how was your day?",
+			"time": 8,
 			"replies": [
 				{
-					"text": "Good option",
-					"response": "Good response",
-					"rating": "good"
+					"text": "Horrible.",
+					"response": "Right...",
+					"rating": "bad"
 				},
 				{
-					"text": "Neutral option",
-					"response": "Neutral response",
+					"text": "Eh. It was oaky.",
+					"response": "You didn't spell that right but I'll let it slide...",
 					"rating": "meh"
 				},
 				{
-					"text": "Bad option",
-					"response": "Bad response",
-					"rating": "bad"
+					"text": "....",
+					"response": "Come on... It was a simple question...",
+					"rating": "very bad"
+				},
+				{
+					"text": "Half decent. And you?",
+					"response": "Oh~ Well my day was pretty nice.",
+					"rating": "good"
 				}
 			]
 		},
 		{
-			"text": "This is a question",
+			"text": "Are you keeping up so far?",
+			"time": 8,
 			"replies": [
 				{
-					"text": "Good option",
-					"response": "Good response",
-					"rating": "good"
-				},
-				{
-					"text": "Neutral option",
-					"response": "Neutral response",
-					"rating": "meh"
-				},
-				{
-					"text": "Bad option",
-					"response": "Bad response",
-					"rating": "bad"
-				}
-			]
-		},
-		{
-			"text": "This is an important question",
-			"replies": [
-				{
-					"text": "Very Good option",
-					"response": "Very good response",
+					"text": "Yeah! I got this!",
+					"response": "Alright!",
 					"rating": "very good"
 				},
 				{
-					"text": "Very bad option",
-					"response": "Very bad response",
+					"text": "I think so...",
+					"response": "Ok, ok.",
+					"rating": "meh"
+				},
+				{
+					"text": "Wait, what?",
+					"response": "No jokes. Take this serious, man!",
+					"rating": "bad"
+				},
+				{
+					"text": "*Yawn*",
+					"response": "Yikes. Not a good sign...",
+					"rating": "bad"
+				}
+			]
+		},
+		{
+			"text": "Quick! What's your favorite food from the academy?!",
+			"time": 4,
+			"replies": [
+				{
+					"text": "Crazy Frog Stew!",
+					"response": "Nice reaction time!",
+					"rating": "very good"
+				},
+				{
+					"text": "Glowing Deathshrooms!",
+					"response": "Those are definitely poisonous...",
+					"rating": "meh"
+				},
+				{
+					"text": "Basic Slop #1",
+					"response": "I mean... okay..",
+					"rating": "meh"
+				},
+				{
+					"text": "....",
+					"response": "You choose this one cause you didn't want to run out of time, right? Right?!",
 					"rating": "very bad"
+				},
+				{
+					"text": "Magic Cotton Candy",
+					"response": "That is literally my favorite!",
+					"rating": "very good"
 				}
 			]
 		}
 	],
 	"ignored_responses": [
-		"you ignored me!!!!! :(",
-		"ignored response"
+		"You know you need to give a response... Right?",
+		"How did you manage to find no good response in that time?",
+		"Come on, really? Nothing at all?",
+		"...I'm waiting, dude..."
 	],
 	"outro_dialogue": [
-		"",
-		"",
-		""
+		["npc", "That was nice and exhilarating!"],
+		["npc", "Get your blood pumping? Ready to get out there?"],
+		["player", "Uh.. Yes?"],
+		["npc", "Aw man! I can't wait to see you walk up with a lovely witch in your arms!"],
+		["npc", "I can see it now!"],
+		["npc", "Ah! But I shouldn't stop you! Go on! Get out there, champ!"]
 	]
 }

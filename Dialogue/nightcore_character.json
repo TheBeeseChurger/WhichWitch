@@ -8,6 +8,7 @@
     "questions": [
         {
             "text": "This is a question's displayed text.",
+            "time": 8,
             "replies": [
                 {
                     "text": "Good Option",
