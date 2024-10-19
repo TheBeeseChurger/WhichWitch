@@ -7,7 +7,7 @@
         ["npc", "...."],
         ["npc", "See? It just doesn't go away..."],
         ["npc", "I swear..."],
-        ["player", "Now's my chance! Let's introduce myself. I can't mess this up!"]
+        ["player", "Now's my chance! Let's introduce myself."]
     ],
     "questions": [
         {
@@ -95,7 +95,7 @@
         },
         {
             "text": "SCREW IT. LET'S TURN THE HEAT UP. WHAT DO YOU USUALLY SPEND TIME DOING?",
-            "time": 6,
+            "time": 5,
             "replies": [
                 {
                     "text": "Sleeping.",
