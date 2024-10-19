@@ -17,3 +17,5 @@ static var current_level: Level
 @export var dynamic_music: DynamicMusic
 
 @export var background_texture: Texture2D
+
+@export var note_textures: Array[Texture2D]

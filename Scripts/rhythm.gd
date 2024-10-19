@@ -121,7 +121,10 @@ func hit_popup(scene: PackedScene):
 		popup.queue_free()
 
 func spawn_note():
-	var note: Node2D = note_scene.instantiate()
+	var note: Sprite2D = note_scene.instantiate()
 	note.global_position = note_spawn_point.global_position
+	var note_textures = game_screen.level.note_textures
+	if note_textures and len(note_textures) > 0:
+		note.texture = note_textures[randi_range(0, len(note_textures)-1)]
 	notes_parent.add_child(note)
 	print("spawned note at ", note.global_position)

@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="Level" load_steps=5 format=3 uid="uid://dvocg8glldoo7"]
+[gd_resource type="Resource" script_class="Level" load_steps=8 format=3 uid="uid://dvocg8glldoo7"]
 
 [ext_resource type="Resource" uid="uid://chghd2hydv51e" path="res://DynamicAudio/tutorial-music.tres" id="1_nugtv"]
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_omq3d"]
 [ext_resource type="Texture2D" uid="uid://bsd2pjvg1s1my" path="res://Sprites/Tutorial Background V1.png" id="1_rg0r3"]
 [ext_resource type="Resource" uid="uid://bcj2nxhmla31t" path="res://Levels/nightcore.tres" id="2_qvc3k"]
+[ext_resource type="Texture2D" uid="uid://b4l75ixqp7660" path="res://Sprites/PumpkinNote1.png" id="4_yfq6i"]
+[ext_resource type="Texture2D" uid="uid://4cr46tyg3vhq" path="res://Sprites/PumpkinNote2.png" id="5_21beh"]
+[ext_resource type="Texture2D" uid="uid://dr4xpua05ut5j" path="res://Sprites/PumpkinNote.png" id="6_f8l77"]
 
 [resource]
 script = ExtResource("1_omq3d")
@@ -16,3 +19,4 @@ next_level = ExtResource("2_qvc3k")
 dialogue_name = "tutorial_character"
 dynamic_music = ExtResource("1_nugtv")
 background_texture = ExtResource("1_rg0r3")
+note_textures = Array[Texture2D]([ExtResource("4_yfq6i"), ExtResource("5_21beh"), ExtResource("6_f8l77")])
