@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=31 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Resource" uid="uid://dvocg8glldoo7" path="res://Levels/tutorial.tres" id="2_anosn"]
 [ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://Sprites/3.png" id="2_y82fn"]
 [ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
+[ext_resource type="Texture2D" uid="uid://bsd2pjvg1s1my" path="res://Sprites/Tutorial Background V1.png" id="3_khtge"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_6yd2o"]
 [ext_resource type="Script" path="res://Scripts/rhythm.gd" id="4_gfr0l"]
 [ext_resource type="PackedScene" uid="uid://dcglolmwry002" path="res://Scenes/UI/miss_popup.tscn" id="5_gu8r3"]
@@ -16,9 +17,13 @@
 [ext_resource type="Texture2D" uid="uid://dpnyebe4b1d1a" path="res://Sprites/cauldron.png" id="12_cikpx"]
 [ext_resource type="PackedScene" uid="uid://dtgldgmvfjpqr" path="res://Scenes/UI/npc_dialogue_box.tscn" id="12_ha5er"]
 [ext_resource type="Texture2D" uid="uid://b4l75ixqp7660" path="res://Sprites/PumpkinNote1.png" id="12_i0q81"]
+[ext_resource type="Texture2D" uid="uid://chgo4ti4m28t6" path="res://Sprites/cauldron-back.png" id="13_1sv17"]
 [ext_resource type="Texture2D" uid="uid://d2ufvqqxskipr" path="res://Sprites/BadArrow.png" id="13_nnqw2"]
 [ext_resource type="Script" path="res://Scripts/cutscene.gd" id="15_sro5w"]
 [ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
+
+[sub_resource type="Gradient" id="Gradient_pkw60"]
+colors = PackedColorArray(0.243137, 0.623529, 0.207843, 1, 0.517647, 0.764706, 0.345098, 1)
 
 [sub_resource type="Gradient" id="Gradient_vbo6e"]
 offsets = PackedFloat32Array(0)
@@ -59,15 +64,17 @@ script = ExtResource("1_u1iya")
 level = ExtResource("2_anosn")
 
 [node name="Background" type="TextureRect" parent="."]
-visible = false
+z_index = -2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("3_khtge")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,7 +148,7 @@ anchor_bottom = 0.5
 offset_left = -5.0
 offset_top = -383.0
 offset_right = 5.0
-offset_bottom = 227.0
+offset_bottom = 163.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.301961)
@@ -188,29 +195,40 @@ position = Vector2(49, 15.5)
 [node name="NoteSpawnPoint" type="Marker2D" parent="Rhythm/ColorRect"]
 position = Vector2(5, 16.5)
 
-[node name="Cauldron" type="TextureRect" parent="Rhythm/ColorRect"]
+[node name="ClearedNotes" type="Node2D" parent="Rhythm"]
+
+[node name="CauldronBack" type="Sprite2D" parent="Rhythm"]
+z_index = -1
 texture_filter = 1
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -158.0
-offset_top = -31.5
-offset_right = -30.0
-offset_bottom = 96.5
-grow_horizontal = 2
-grow_vertical = 0
+position = Vector2(576, 581)
+scale = Vector2(2, 2)
+texture = ExtResource("13_1sv17")
+
+[node name="Notes" type="Node2D" parent="Rhythm"]
+
+[node name="CauldronFront" type="Sprite2D" parent="Rhythm"]
+z_index = 1
+texture_filter = 1
+position = Vector2(576, 581)
+scale = Vector2(2, 2)
 texture = ExtResource("12_cikpx")
-expand_mode = 1
 
-[node name="Notes" type="Control" parent="Rhythm"]
-anchors_preset = 0
-
-[node name="ClearedNotes" type="Control" parent="Rhythm"]
-anchors_preset = 0
+[node name="CauldronSplashParticles" type="CPUParticles2D" parent="Rhythm"]
+position = Vector2(576, 561)
+scale = Vector2(2, 2)
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(20, 1)
+direction = Vector2(0, -1)
+initial_velocity_min = 167.16
+initial_velocity_max = 237.2
+scale_amount_min = 5.0
+scale_amount_max = 15.0
+color_ramp = SubResource("Gradient_pkw60")
 
 [node name="Dialogue" type="Control" parent="."]
 layout_mode = 1

@@ -17,6 +17,7 @@ extends Control
 @onready var game_screen: RhythmGameScreen = $".."
 @onready var dialogue: Dialogue = $"../Dialogue"
 @onready var dynamic_music_player: DynamicMusicPlayer = $"../DynamicMusic"
+@onready var cauldron: Sprite2D = $CauldronFront
 
 var current_note_speed: float = 0 # should be 0 during cutscenes to activate intro/outro track
 var notes_left: int
@@ -99,7 +100,10 @@ func rhythm_press():
 			hit_popup(miss_popup)
 		
 		if hit_type:
-			note.queue_free()
+			if hit_type == "miss":
+				note.queue_free()
+			else:
+				clear_anim(note)
 			return
 		
 func adjust_speed(speed: float):
@@ -131,4 +135,23 @@ func spawn_note():
 	print("spawned note at ", note.global_position)
 
 func clear_anim(note: Sprite2D):
+	note_hit_anim(note)
+	
 	note.reparent(cleared_notes_parent)
+	
+	get_tree().create_tween().tween_property(note, "global_position", cauldron.global_position, 0.3)
+	await get_tree().create_tween().tween_property(note, "rotation", note.rotation + deg_to_rad(randf_range(-30, 30)), 0.3).finished
+	
+	note.queue_free()
+	
+func note_hit_anim(note: Sprite2D):
+	var note_hit = note.duplicate()
+	cleared_notes_parent.add_child(note_hit)
+	
+	if Level.current_level.note_hit_textures:
+		note_hit.texture = Level.current_level.note_hit_textures[0]
+	
+	get_tree().create_tween().tween_property(note_hit, "modulate", Color(1,1,1,0), 0.3)
+	await get_tree().create_tween().tween_property(note_hit, "scale", note_hit.scale*1.75, 0.3).finished
+	
+	note_hit.queue_free()
