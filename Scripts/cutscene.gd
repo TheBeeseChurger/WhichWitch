@@ -1,3 +1,4 @@
+class_name Cutscene
 extends Control
 
 @export var message_linger_time: float = 2.0
@@ -22,7 +23,18 @@ func _ready() -> void:
 	visible = true
 	display_next_line()
 	
+func play_outro_cutscene():
+	in_intro_cutscene = false
+	current_cutscene_lines = dialogue.dialogue["outro_dialogue"]
+	cutscene_index = -1
+	in_intro_cutscene = true
+	visible = true
+	display_next_line()
+	
 func _process(delta: float) -> void:
+	if not visible:
+		return
+	
 	if Input.is_action_just_pressed("rhythm_press"):
 		if npc_dialogue_box.typing:
 			npc_dialogue_box.show_full_line()

@@ -139,11 +139,29 @@
 		"...I'm waiting, dude..."
 	],
 	"outro_dialogue": [
-		["npc", "That was nice and exhilarating!"],
-		["npc", "Get your blood pumping? Ready to get out there?"],
-		["player", "Uh.. Yes?"],
-		["npc", "Aw man! I can't wait to see you walk up with a lovely witch in your arms!"],
-		["npc", "I can see it now!"],
-		["npc", "Ah! But I shouldn't stop you! Go on! Get out there, champ!"]
+		[
+			"npc",
+			"That was nice and exhilarating!"
+		],
+		[
+			"npc",
+			"Get your blood pumping? Ready to get out there?"
+		],
+		[
+			"player",
+			"Uh.. Yes?"
+		],
+		[
+			"npc",
+			"Aw man! I can't wait to see you walk up with a lovely witch in your arms!"
+		],
+		[
+			"npc",
+			"I can see it now!"
+		],
+		[
+			"npc",
+			"Ah! But I shouldn't stop you! Go on! Get out there, champ!"
+		]
 	]
 }

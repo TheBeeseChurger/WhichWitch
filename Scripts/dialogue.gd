@@ -11,10 +11,15 @@ extends Control
 @onready var random_popup_container: Control = $RandomPopupContainer
 @onready var rhythm: Rhythm = $"../Rhythm"
 @onready var rating_anim_rect: TextureRect = $"../PortraitContainer/OpponentPortrait/RatingAnimRect"
+@onready var cutscene: Cutscene = $"../Cutscene"
+
+
 
 # Contains all dialogue
 var dialogue: Dictionary
 var questions: Array
+
+var current_question_index: int = -1
 
 # current question the opponent is asking
 var current_question: Dictionary
@@ -60,7 +65,7 @@ func _process(delta: float) -> void:
 	respond_time_remaining -= delta
 	if respond_time_remaining <= 0:
 		submit_dialogue({})
-		respond_time_remaining = 100.0
+		respond_time_remaining = 10000.0
 	else:
 		respond_time_left_bar.value = respond_time_remaining
 
@@ -68,21 +73,26 @@ func start_dialogue_mode():
 	if in_dialogue_mode:
 		return
 		
-	# choose a random question to ask
-	current_question = questions[randi_range(0, len(questions)-1)];
+	# choose the next question to ask
+	current_question_index += 1
+	current_question = questions[current_question_index];
 		
 	npc_dialogue_box.show_message(current_question["text"])
 	in_dialogue_mode = true
 	dialogue_options_queued = []
 	for i in range(len(current_question["replies"])):
 		dialogue_options_queued.append(i)
-	respond_time_remaining = 10.0
+	if current_question.has("time"):
+		respond_time_remaining = current_question["time"]
+	else:
+		respond_time_remaining = 10.0
 	
 	respond_time_left_bar.max_value = respond_time_remaining
 
 func spawn_random_option():
 	var i = randi_range(0, len(dialogue_options_queued)-1)
 	var option_index = dialogue_options_queued.pop_at(i)
+	print(dialogue_options_queued)
 	var reply: Dictionary = current_question["replies"][option_index]
 	var option: Button = dialogue_option_scene.instantiate()
 	option.text = reply["text"]
@@ -134,7 +144,8 @@ func spawn_random_option():
 	
 	if is_instance_valid(option):
 		option.queue_free()
-		dialogue_options_queued.push_back(i)
+		print(dialogue_options_queued)
+		dialogue_options_queued.push_back(option_index)
 
 # empty dictionary for nothing selected (ignored opponent)
 func submit_dialogue(reply: Dictionary):
@@ -165,6 +176,12 @@ func submit_dialogue(reply: Dictionary):
 		child.queue_free()
 		
 	in_dialogue_mode = false
+	
+	if current_question_index >= len(questions) - 1:
+		visible = false
+		cutscene.play_outro_cutscene()
+		return
+	
 	rhythm.start_rhythm_mode()
 
 func very_good_rating():
