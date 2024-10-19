@@ -277,7 +277,9 @@ offset_top = 112.0
 offset_right = 1089.0
 offset_bottom = 589.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="DynamicMusic" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")
 audio_streams = Array[AudioStream]([ExtResource("15_myd6t"), ExtResource("17_7g7rx"), ExtResource("18_23yam"), ExtResource("19_rpv6v")])
 intensity_speeds = Array[float]([200.0, 300.0, 400.0, 500.0])
+divisions = Array[int]([8, 16, 8, 16])
+bpms = Array[float]([113.744, 113.946, 152.381, 152.866])

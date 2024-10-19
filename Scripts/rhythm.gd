@@ -6,7 +6,6 @@ extends Control
 @export var max_speed: float = 600
 @export var note_scene: PackedScene
 @export var max_note_distance: float = 50
-
 @export var miss_popup: PackedScene
 @export var bad_popup: PackedScene
 @export var okay_popup: PackedScene
@@ -17,15 +16,13 @@ extends Control
 @onready var target_center: Marker2D = $ColorRect/TargetCenter
 @onready var popup_center: Marker2D = $ColorRect/PopupCenter
 @onready var notes_parent: Node = $Notes
-
 @onready var game_screen: RhythmGameScreen = $".."
 @onready var dialogue: Dialogue = $"../Dialogue"
+@onready var dynamic_music: DynamicMusic = $"../DynamicMusic"
 
 var current_note_speed: float
-
 var notes_left: int
 var time_until_next_note: float
-
 var in_rhythm_mode = false # true while in rhythm mode
 
 # Called when the node enters the scene tree for the first time.
@@ -53,6 +50,14 @@ func _process(delta: float) -> void:
 		if time_until_next_note < 0:
 			spawn_note()
 			time_until_next_note = randf_range(0.25, 1.0)
+			var next_note_time = Time.get_unix_time_from_system() + time_until_next_note
+			
+			# LEAVING QUANTIZING ATTEMPT FOR LATER too much math...
+			#var next_note_song_time_elapsed = next_note_time - dynamic_music.start_time
+			#var beat_length = 60 / (dynamic_music.current_bpm * 4)
+			#var next_beat = ceil(next_note_song_time_elapsed / beat_length) * beat_length
+			#time_until_next_note = next_beat
+			
 			notes_left -= 1
 			
 	if notes_left <= 0 and notes_parent.get_child_count() == 0:
