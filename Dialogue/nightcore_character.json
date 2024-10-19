@@ -1,47 +1,129 @@
 {
-    "name": "NPC name",
+    "name": "Nightcore girl",
     "intro_dialogue": [
-        ["player", "This is intro dialogue from the player."],
-        ["npc", "This is another intro dialogue from the NPC."],
-        ["", ""]
+        ["npc", "*Walks past you cutely*"],
+        ["npc", "Ugh... Ignore that..."],
+        ["npc", "For some reason, that happens to me often. *says cutely*"],
+        ["npc", "...."],
+        ["npc", "See? It just doesn't go away..."],
+        ["npc", "I swear..."],
+        ["player", "Now's my chance! Let's introduce myself. I can't mess this up!"]
     ],
     "questions": [
         {
-            "text": "This is a question's displayed text.",
-            "time": 8,
+            "text": "*cutely looks at you*",
+            "time": 7,
             "replies": [
                 {
-                    "text": "Good Option",
-                    "response": "Good response",
-                    "rating": "good"
+                    "text": "Bro... Like... Stop...",
+                    "response": "I FREAKING WOULD IF I COULD!!!",
+                    "rating": "very bad"
                 },
                 {
-                    "text": "Neutral Option",
-                    "response": "Neutral response",
+                    "text": "Uh.. Hello... *says manly-ly*",
+                    "response": "Great. Now it's happening to you.",
                     "rating": "meh"
                 },
                 {
-                    "text": "Bad Option",
-                    "response": "Bad response",
-                    "rating": "bad"
-                },
-                {
-                    "text": "Very Good Option",
-                    "response": "Very Good response",
+                    "text": "Default Greetings Initiated *says robotically*",
+                    "response": "BAHAHAHHAHA! Duuude, like great use of an awkward situation!",
                     "rating": "very good"
                 },
                 {
-                    "text": "Very Bad Option",
-                    "response": "Very Bad response",
+                    "text": "Slide up, wyd",
+                    "response": "Uhhh... Nothing much, I guess.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Hey, Miss...",
+                    "response": "Oh, nice to meet you. I'm a grad student here. Already got my witch hat, see?",
+                    "rating": "good"
+                }
+            ]
+        },
+        {
+            "text": "S-So uh... I don't usually get this far into a convo...",
+            "time": 7,
+            "replies": [
+                {
+                    "text": "Me either. First time.",
+                    "response": "Relatable...",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Well, what are you looking at on your phone?",
+                    "response": "O-Oh this thing? It doesn't really work anymore. I've burned it too many times.",
+                    "rating": "good"
+                },
+                {
+                    "text": "*silently watches you*",
+                    "response": "That sounds creepy and it looks creepy too...",
+                    "rating": "bad"
+                },
+                {
+                    "text": "True.",
+                    "response": "I don't hate this reply. But I feel like you could have done better. *says cutely*",
+                    "rating": "bad"
+                }
+            ]
+        },
+        {
+            "text": "O-Okay. I think I've stopped that weird thing from- *says cutely*. I DIDN'T EVEN FINISH MY SENTENCE!",
+            "time": 4,
+            "replies": [
+                {
+                    "text": "Woah. Calm down.",
+                    "response": "DON'T YOU TELL ME TO CALM DOWN!",
                     "rating": "very bad"
+                },
+                {
+                    "text": "Do you need some help with that?",
+                    "response": "YES, I WOULD. THANK YOU VERY MUCH.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Just burn it bro.",
+                    "response": "...WHY DIDN'T I THINK OF THAT?!?!",
+                    "rating": "very good"
+                },
+                {
+                    "text": "Uhh...",
+                    "response": "...ANGR",
+                    "rating": "bad"
+                }
+            ]
+        },
+        {
+            "text": "SCREW IT. LET'S TURN THE HEAT UP. WHAT DO YOU USUALLY SPEND TIME DOING?",
+            "time": 4,
+            "replies": [
+                {
+                    "text": "Sleeping.",
+                    "response": "Mid.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Lighting fires",
+                    "response": "Nice!",
+                    "rating": "good"
+                },
+                {
+                    "text": "Talking to witches.",
+                    "response": "Dude. Aren't you supposed to not tell that to a witch you're currently talking to?",
+                    "rating": "bad"
+                },
+                {
+                    "text": "Cronically Online",
+                    "response": "You. I like you. We're friends now.",
+                    "rating": "very good"
                 }
             ]
         }
     ],
     "ignored_responses": [
-        "This is an ignored response from an NPC.",
-        "This is another ignored response from an NPC.",
-        ""
+        "I am a pyromage for a reason... *says annoyedly*",
+        "Why? Every guy I talk to ends like this...",
+        "U-Uhm.. Nvm..."
     ],
     "outro_dialogue": [
         ["player", "This is an outro dialogue from the player."],
