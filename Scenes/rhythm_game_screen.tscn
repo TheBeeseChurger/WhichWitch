@@ -1,14 +1,14 @@
 [gd_scene load_steps=24 format=3 uid="uid://cgqldht5h0lp7"]
 
-[ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_lsysd"]
-[ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://3.png" id="2_lru5b"]
-[ext_resource type="Script" path="res://scripts/rhythm.gd" id="3_jxymp"]
-[ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://rhythm_note.tscn" id="3_uxjkh"]
-[ext_resource type="Script" path="res://Scripts/dialogue.gd" id="5_ablqd"]
-[ext_resource type="StyleBox" uid="uid://fxyj8hn6d8id" path="res://style_box_flat.tres" id="6_xko0w"]
-[ext_resource type="LabelSettings" uid="uid://cb5ugextvxap5" path="res://label_settings.tres" id="7_y7e43"]
-[ext_resource type="PackedScene" uid="uid://bjpoyliyupyqp" path="res://dialogue_option.tscn" id="8_72mb1"]
-[ext_resource type="Script" path="res://dialogue_box.gd" id="8_pq7th"]
+[ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
+[ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://Sprites/3.png" id="2_y82fn"]
+[ext_resource type="Script" path="res://scripts/rhythm.gd" id="3_dd3rv"]
+[ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_6yd2o"]
+[ext_resource type="Script" path="res://Scripts/dialogue.gd" id="5_tw8ck"]
+[ext_resource type="PackedScene" uid="uid://bjpoyliyupyqp" path="res://Scenes/UI/dialogue_option.tscn" id="6_gsqgo"]
+[ext_resource type="StyleBox" uid="uid://fxyj8hn6d8id" path="res://Style/style_box_flat.tres" id="7_bldjm"]
+[ext_resource type="Script" path="res://Scripts/dialogue_box.gd" id="8_5k541"]
+[ext_resource type="LabelSettings" uid="uid://cb5ugextvxap5" path="res://Style/label_settings.tres" id="9_42hfe"]
 
 [sub_resource type="Gradient" id="Gradient_8locq"]
 offsets = PackedFloat32Array(0)
@@ -40,12 +40,12 @@ colors = PackedColorArray(0.383406, 0.798426, 0.143755, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_j0v77"]
 gradient = SubResource("Gradient_6pnel")
 
-[sub_resource type="Gradient" id="Gradient_ygqog"]
+[sub_resource type="Gradient" id="Gradient_vbo6e"]
 offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.661795, 0.673085, 0.677916, 1)
+colors = PackedColorArray(0.821789, 0.821789, 0.821789, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_h2wtx"]
-gradient = SubResource("Gradient_ygqog")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lrsc3"]
+gradient = SubResource("Gradient_vbo6e")
 
 [sub_resource type="Gradient" id="Gradient_g23c4"]
 offsets = PackedFloat32Array(0)
@@ -67,7 +67,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lsysd")
+script = ExtResource("1_u1iya")
 
 [node name="HealthMarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -109,7 +109,7 @@ custom_minimum_size = Vector2(250, 400)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-texture = ExtResource("2_lru5b")
+texture = ExtResource("2_y82fn")
 expand_mode = 3
 
 [node name="RatingAnimRect" type="TextureRect" parent="PortraitContainer/OpponentPortrait"]
@@ -126,7 +126,7 @@ custom_minimum_size = Vector2(250, 400)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("2_lru5b")
+texture = ExtResource("2_y82fn")
 expand_mode = 3
 flip_h = true
 
@@ -137,8 +137,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_jxymp")
-note_scene = ExtResource("3_uxjkh")
+script = ExtResource("3_dd3rv")
+note_scene = ExtResource("4_6yd2o")
 
 [node name="ColorRect" type="ColorRect" parent="Rhythm"]
 layout_mode = 1
@@ -199,10 +199,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("5_ablqd")
-dialogue_option_scene = ExtResource("8_72mb1")
+script = ExtResource("5_tw8ck")
+dialogue_option_scene = ExtResource("6_gsqgo")
 good_rating_texture = SubResource("GradientTexture1D_j0v77")
-neutral_rating_texture = SubResource("GradientTexture1D_h2wtx")
+meh_rating_texture = SubResource("GradientTexture1D_lrsc3")
 bad_rating_texture = SubResource("GradientTexture1D_oms63")
 
 [node name="OpponentDialogueBox" type="Panel" parent="Dialogue"]
@@ -217,8 +217,8 @@ offset_right = -596.0
 offset_bottom = -134.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_styles/panel = ExtResource("6_xko0w")
-script = ExtResource("8_pq7th")
+theme_override_styles/panel = ExtResource("7_bldjm")
+script = ExtResource("8_5k541")
 
 [node name="Label" type="Label" parent="Dialogue/OpponentDialogueBox"]
 layout_mode = 1
@@ -232,7 +232,7 @@ offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Blablablablablablablablabla"
-label_settings = ExtResource("7_y7e43")
+label_settings = ExtResource("9_42hfe")
 
 [node name="RespondTimeLeftBar" type="TextureProgressBar" parent="Dialogue/OpponentDialogueBox"]
 layout_mode = 1

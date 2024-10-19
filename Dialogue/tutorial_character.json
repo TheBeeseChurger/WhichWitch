@@ -7,7 +7,7 @@
                 {
                     "text": "Fine",
                     "response": "Ok...",
-                    "rating": "neutral"
+                    "rating": "meh"
                 },
                 {
                     "text": "Great hbu?",
@@ -32,12 +32,27 @@
                 {
                     "text": "Neutral option",
                     "response": "Neutral response",
-                    "rating": "neutral"
+                    "rating": "meh"
                 },
                 {
                     "text": "Bad option",
                     "response": "Bad response",
                     "rating": "bad"
+                }
+            ]
+        },
+        {
+            "text": "This is an important question",
+            "replies": [
+                {
+                    "text": "Very Good option",
+                    "response": "Very good response",
+                    "rating": "very good"
+                },
+                {
+                    "text": "Very bad option",
+                    "response": "Very bad response",
+                    "rating": "very bad"
                 }
             ]
         }

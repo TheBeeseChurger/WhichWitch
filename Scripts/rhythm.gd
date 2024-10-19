@@ -1,7 +1,7 @@
 class_name Rhythm
 extends Control
 
-@export var note_speed: float = 200
+@export var note_speed: float = 300
 @export var note_scene: PackedScene
 @export var max_note_distance: float = 50
 
@@ -9,6 +9,7 @@ extends Control
 @onready var notes_parent: Node = $Notes
 @onready var target_center: Marker2D = $ColorRect/TargetCenter
 
+@onready var game_screen: RhythmGameScreen = $".."
 @onready var dialogue: Dialogue = $"../Dialogue"
 
 var notes_left: int
@@ -31,7 +32,8 @@ func _process(delta: float) -> void:
 	for note: Node2D in notes_parent.get_children():
 		note.global_position.y += note_speed * delta
 		if note.global_position.y > target_center.global_position.y + max_note_distance:
-			# note went past the target, it was missed, take damage
+			# MISS
+			game_screen.lose_health(5)
 			note.queue_free()
 		
 	if notes_left > 0:
@@ -49,17 +51,35 @@ func _process(delta: float) -> void:
 func start_rhythm_mode():
 	if not in_rhythm_mode:
 		in_rhythm_mode = true
-		notes_left = 3
+		notes_left = 5
 
 func rhythm_press():
+	var hit_type
 	for note: Node2D in notes_parent.get_children():
 		var distance_from_target = abs(note.global_position.y - target_center.global_position.y)
 		if distance_from_target < max_note_distance:
-			# note was hit successfully, gain some health based on how close it was to the target
-			note.queue_free()
-			return
 			
-	# if code reaches here, no note cleared on press, take damage or something
+			if distance_from_target < 12.5:
+				hit_type = "great"
+				game_screen.gain_health(3)
+			elif distance_from_target < 25:
+				hit_type = "good"
+				game_screen.gain_health(2)
+			elif distance_from_target < 37.5:
+				hit_type = "okay"
+				game_screen.gain_health(1)
+			elif distance_from_target < 50:
+				hit_type = "bad"
+			
+			note.queue_free()
+			break
+			
+	if not hit_type:
+		hit_type = "miss"
+		game_screen.lose_health(6)
+		
+func set_speed(speed: float):
+	note_speed = speed
 
 func spawn_note():
 	var note: Node2D = note_scene.instantiate()

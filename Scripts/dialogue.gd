@@ -3,7 +3,7 @@ extends Control
 
 @export var dialogue_option_scene: PackedScene
 @export var good_rating_texture: Texture2D
-@export var neutral_rating_texture: Texture2D
+@export var meh_rating_texture: Texture2D
 @export var bad_rating_texture: Texture2D
 
 @onready var opponent_dialogue_box: DialogueBox = $OpponentDialogueBox
@@ -38,9 +38,9 @@ func _ready() -> void:
 	
 	rating_anim_rect.modulate = Color(1,1,1,0)
 	
-	var file = FileAccess.open("res://Characters/tutorial_character.json", FileAccess.READ)
-	var json_string = file.get_as_text()
-	file.close()
+	var dialogue_file = FileAccess.open("res://Dialogue/tutorial_character.json", FileAccess.READ)
+	var json_string = dialogue_file.get_as_text()
+	dialogue_file.close()
 	var json = JSON.new()
 	json.parse(json_string)
 	dialogue = json.data
@@ -147,12 +147,16 @@ func submit_dialogue(reply: Dictionary):
 		opponent_dialogue_box.show_message(ignored_response)
 	else:
 		var rating = reply["rating"]
-		if rating == "good":
+		if rating == "very good":
+			very_good_rating()
+		elif rating == "good":
 			good_rating()
 		elif rating == "bad":
 			bad_rating()
+		elif rating == "very bad":
+			very_bad_rating()
 		else:
-			neutral_rating()
+			meh_rating()
 			
 		var response = reply["response"]
 		opponent_dialogue_box.show_message(response)
@@ -163,15 +167,28 @@ func submit_dialogue(reply: Dictionary):
 	in_dialogue_mode = false
 	rhythm.start_rhythm_mode()
 
+func very_good_rating():
+	rating_anim_rect.texture = good_rating_texture
+	rhythm.set_speed(200)
+	rating_anim(Vector2.UP)
+
 func good_rating():
 	rating_anim_rect.texture = good_rating_texture
+	rhythm.set_speed(250)
 	rating_anim(Vector2.UP)
 	
-func neutral_rating():
-	rating_anim_rect.texture = neutral_rating_texture
+func meh_rating():
+	rhythm.set_speed(300)
+	rating_anim_rect.texture = meh_rating_texture
 	rating_anim(Vector2.ZERO)
 	
 func bad_rating():
+	rhythm.set_speed(400)
+	rating_anim_rect.texture = bad_rating_texture
+	rating_anim(Vector2.DOWN)
+	
+func very_bad_rating():
+	rhythm.set_speed(500)
 	rating_anim_rect.texture = bad_rating_texture
 	rating_anim(Vector2.DOWN)
 	
