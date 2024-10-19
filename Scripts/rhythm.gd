@@ -1,13 +1,22 @@
 class_name Rhythm
 extends Control
 
-@export var note_speed: float = 300
+@export var starting_speed: float = 300
+@export var min_speed: float = 200
+@export var starting_speed: float = 1000
 @export var note_scene: PackedScene
 @export var max_note_distance: float = 50
 
+@export var miss_popup: PackedScene
+@export var bad_popup: PackedScene
+@export var okay_popup: PackedScene
+@export var good_popup: PackedScene
+@export var great_popup: PackedScene
+
 @onready var note_spawn_point: Marker2D = $ColorRect/NoteSpawnPoint
-@onready var notes_parent: Node = $Notes
 @onready var target_center: Marker2D = $ColorRect/TargetCenter
+@onready var popup_center: Marker2D = $ColorRect/PopupCenter
+@onready var notes_parent: Node = $Notes
 
 @onready var game_screen: RhythmGameScreen = $".."
 @onready var dialogue: Dialogue = $"../Dialogue"
@@ -57,29 +66,44 @@ func rhythm_press():
 	var hit_type
 	for note: Node2D in notes_parent.get_children():
 		var distance_from_target = abs(note.global_position.y - target_center.global_position.y)
-		if distance_from_target < max_note_distance:
 			
-			if distance_from_target < 12.5:
-				hit_type = "great"
-				game_screen.gain_health(3)
-			elif distance_from_target < 25:
-				hit_type = "good"
-				game_screen.gain_health(2)
-			elif distance_from_target < 37.5:
-				hit_type = "okay"
-				game_screen.gain_health(1)
-			elif distance_from_target < 50:
-				hit_type = "bad"
-			
+		if distance_from_target < max_note_distance*0.15:
+			hit_type = "great"
+			game_screen.gain_health(3)
+			hit_popup(great_popup)
+		elif distance_from_target < max_note_distance*0.35:
+			hit_type = "good"
+			game_screen.gain_health(2)
+			hit_popup(good_popup)
+		elif distance_from_target < max_note_distance*0.65:
+			hit_type = "okay"
+			game_screen.gain_health(1)
+			hit_popup(okay_popup)
+		elif distance_from_target < max_note_distance:
+			hit_type = "bad"
+			hit_popup(bad_popup)
+		elif distance_from_target < max_note_distance*2:
+			hit_type = "miss"
+			game_screen.lose_health(6)
+			hit_popup(miss_popup)
+		
+		if hit_type:
 			note.queue_free()
-			break
-			
-	if not hit_type:
-		hit_type = "miss"
-		game_screen.lose_health(6)
+			return
 		
 func set_speed(speed: float):
 	note_speed = speed
+
+func hit_popup(scene: PackedScene):
+	var popup: Control = scene.instantiate()
+	popup.global_position = popup_center.global_position
+	add_child(popup)
+	
+	get_tree().create_tween().tween_property(popup, "modulate", Color(1,1,1,0), 1.0)
+	await get_tree().create_tween().tween_property(popup, "position", popup.position + Vector2.UP*50, 1.0).finished
+	
+	if is_instance_valid(popup):
+		popup.queue_free()
 
 func spawn_note():
 	var note: Node2D = note_scene.instantiate()

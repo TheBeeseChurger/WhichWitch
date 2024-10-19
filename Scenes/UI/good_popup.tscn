@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cer4k85kawh0k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dygwn"]
+font_size = 20
+font_color = Color(0.417635, 0.828295, 0.347932, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label"]
+offset_right = 69.0
+offset_bottom = 28.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "GOOD"
+label_settings = SubResource("LabelSettings_dygwn")
+horizontal_alignment = 1
+vertical_alignment = 1
