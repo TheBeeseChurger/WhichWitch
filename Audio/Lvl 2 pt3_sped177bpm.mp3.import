@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://qts1lef03s3b"
+path="res://.godot/imported/Lvl 2 pt3_sped177bpm.mp3-2f1afca51db2340627bfd944571c06fd.mp3str"
+
+[deps]
+
+source_file="res://Audio/Lvl 2 pt3_sped177bpm.mp3"
+dest_files=["res://.godot/imported/Lvl 2 pt3_sped177bpm.mp3-2f1afca51db2340627bfd944571c06fd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

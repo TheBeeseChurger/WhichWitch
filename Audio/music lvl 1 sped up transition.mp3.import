@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dtxdw5sjqkwpm"
+path="res://.godot/imported/music lvl 1 sped up transition.mp3-e66d1d4fc7dd8c6fd2ae758cee73e794.mp3str"
+
+[deps]
+
+source_file="res://Audio/music lvl 1 sped up transition.mp3"
+dest_files=["res://.godot/imported/music lvl 1 sped up transition.mp3-e66d1d4fc7dd8c6fd2ae758cee73e794.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
