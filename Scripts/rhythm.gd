@@ -3,7 +3,7 @@ extends Control
 
 @export var starting_speed: float = 300
 @export var min_speed: float = 200
-@export var starting_speed: float = 1000
+@export var max_speed: float = 600
 @export var note_scene: PackedScene
 @export var max_note_distance: float = 50
 
@@ -21,6 +21,8 @@ extends Control
 @onready var game_screen: RhythmGameScreen = $".."
 @onready var dialogue: Dialogue = $"../Dialogue"
 
+var current_note_speed: float
+
 var notes_left: int
 var time_until_next_note: float
 
@@ -28,6 +30,7 @@ var in_rhythm_mode = false # true while in rhythm mode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	current_note_speed = starting_speed
 	start_rhythm_mode()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,10 +42,10 @@ func _process(delta: float) -> void:
 		rhythm_press()
 	
 	for note: Node2D in notes_parent.get_children():
-		note.global_position.y += note_speed * delta
+		note.global_position.y += current_note_speed * delta
 		if note.global_position.y > target_center.global_position.y + max_note_distance:
-			# MISS
-			game_screen.lose_health(5)
+			game_screen.lose_health(6)
+			hit_popup(miss_popup)
 			note.queue_free()
 		
 	if notes_left > 0:
@@ -91,8 +94,12 @@ func rhythm_press():
 			note.queue_free()
 			return
 		
-func set_speed(speed: float):
-	note_speed = speed
+func adjust_speed(speed: float):
+	current_note_speed += speed
+	if current_note_speed < min_speed:
+		current_note_speed = min_speed
+	elif current_note_speed > max_speed:
+		current_note_speed = max_speed
 
 func hit_popup(scene: PackedScene):
 	var popup: Control = scene.instantiate()

@@ -169,26 +169,26 @@ func submit_dialogue(reply: Dictionary):
 
 func very_good_rating():
 	rating_anim_rect.texture = good_rating_texture
-	rhythm.set_speed(200)
+	rhythm.adjust_speed(-100)
 	rating_anim(Vector2.UP)
 
 func good_rating():
 	rating_anim_rect.texture = good_rating_texture
-	rhythm.set_speed(250)
+	rhythm.adjust_speed(-50)
 	rating_anim(Vector2.UP)
 	
 func meh_rating():
-	rhythm.set_speed(300)
+	rhythm.adjust_speed(0)
 	rating_anim_rect.texture = meh_rating_texture
 	rating_anim(Vector2.ZERO)
 	
 func bad_rating():
-	rhythm.set_speed(400)
+	rhythm.adjust_speed(50)
 	rating_anim_rect.texture = bad_rating_texture
 	rating_anim(Vector2.DOWN)
 	
 func very_bad_rating():
-	rhythm.set_speed(500)
+	rhythm.adjust_speed(100)
 	rating_anim_rect.texture = bad_rating_texture
 	rating_anim(Vector2.DOWN)
 	

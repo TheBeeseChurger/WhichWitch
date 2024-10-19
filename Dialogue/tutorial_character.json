@@ -1,94 +1,94 @@
 {
-    "name": "Tutorial girl",
-    "intro_dialogue": [
-        "",
-        "",
-        ""
-    ],
-    "questions": [
-        {
-            "text": "How are you doing?",
-            "replies": [
-                {
-                    "text": "Fine",
-                    "response": "Ok...",
-                    "rating": "meh"
-                },
-                {
-                    "text": "Great hbu?",
-                    "response": "I'm good",
-                    "rating": "good"
-                },
-                {
-                    "text": "BAD!!!!",
-                    "response": "Umm... get help",
-                    "rating": "bad"
-                }
-            ]
-        },
-        {
-            "text": "This is a question",
-            "replies": [
-                {
-                    "text": "Good option",
-                    "response": "Good response",
-                    "rating": "good"
-                },
-                {
-                    "text": "Neutral option",
-                    "response": "Neutral response",
-                    "rating": "meh"
-                },
-                {
-                    "text": "Bad option",
-                    "response": "Bad response",
-                    "rating": "bad"
-                }
-            ]
-        },
-        {
-            "text": "This is a question",
-            "replies": [
-                {
-                    "text": "Good option",
-                    "response": "Good response",
-                    "rating": "good"
-                },
-                {
-                    "text": "Neutral option",
-                    "response": "Neutral response",
-                    "rating": "meh"
-                },
-                {
-                    "text": "Bad option",
-                    "response": "Bad response",
-                    "rating": "bad"
-                }
-            ]
-        },
-        {
-            "text": "This is an important question",
-            "replies": [
-                {
-                    "text": "Very Good option",
-                    "response": "Very good response",
-                    "rating": "very good"
-                },
-                {
-                    "text": "Very bad option",
-                    "response": "Very bad response",
-                    "rating": "very bad"
-                }
-            ]
-        }
-    ],
-    "ignored_responses": [
-        "you ignored me!!!!! :(", 
-        "ignored response"
-    ],
-    "outro_dialogue": [
-        "",
-        "",
-        ""
-    ]
+	"name": "Tutorial girl",
+	"intro_dialogue": [
+		"",
+		"",
+		""
+	],
+	"questions": [
+		{
+			"text": "How are you doing?",
+			"replies": [
+				{
+					"text": "Fine",
+					"response": "Ok...",
+					"rating": "meh"
+				},
+				{
+					"text": "Great hbu?",
+					"response": "I'm good",
+					"rating": "good"
+				},
+				{
+					"text": "BAD!!!!",
+					"response": "Umm... get help",
+					"rating": "bad"
+				}
+			]
+		},
+		{
+			"text": "This is a question",
+			"replies": [
+				{
+					"text": "Good option",
+					"response": "Good response",
+					"rating": "good"
+				},
+				{
+					"text": "Neutral option",
+					"response": "Neutral response",
+					"rating": "meh"
+				},
+				{
+					"text": "Bad option",
+					"response": "Bad response",
+					"rating": "bad"
+				}
+			]
+		},
+		{
+			"text": "This is a question",
+			"replies": [
+				{
+					"text": "Good option",
+					"response": "Good response",
+					"rating": "good"
+				},
+				{
+					"text": "Neutral option",
+					"response": "Neutral response",
+					"rating": "meh"
+				},
+				{
+					"text": "Bad option",
+					"response": "Bad response",
+					"rating": "bad"
+				}
+			]
+		},
+		{
+			"text": "This is an important question",
+			"replies": [
+				{
+					"text": "Very Good option",
+					"response": "Very good response",
+					"rating": "very good"
+				},
+				{
+					"text": "Very bad option",
+					"response": "Very bad response",
+					"rating": "very bad"
+				}
+			]
+		}
+	],
+	"ignored_responses": [
+		"you ignored me!!!!! :(", 
+		"ignored response"
+	],
+	"outro_dialogue": [
+		"",
+		"",
+		""
+	]
 }

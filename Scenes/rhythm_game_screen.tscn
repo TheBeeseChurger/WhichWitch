@@ -143,7 +143,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_dd3rv")
-note_speed = null
 note_scene = ExtResource("4_6yd2o")
 max_note_distance = 40.0
 miss_popup = ExtResource("5_gu8r3")
