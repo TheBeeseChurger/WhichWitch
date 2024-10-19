@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=27 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
+[ext_resource type="Resource" uid="uid://dvocg8glldoo7" path="res://Levels/tutorial.tres" id="2_4rpds"]
 [ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://Sprites/3.png" id="2_y82fn"]
-[ext_resource type="Script" path="res://scripts/rhythm.gd" id="3_dd3rv"]
 [ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_6yd2o"]
+[ext_resource type="Script" path="res://Scripts/rhythm.gd" id="4_gfr0l"]
 [ext_resource type="PackedScene" uid="uid://dcglolmwry002" path="res://Scenes/UI/miss_popup.tscn" id="5_gu8r3"]
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="5_tw8ck"]
 [ext_resource type="PackedScene" uid="uid://bjpoyliyupyqp" path="res://Scenes/UI/dialogue_option.tscn" id="6_gsqgo"]
@@ -12,14 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://y4luavrw6fox" path="res://Scenes/UI/okay_popup.tscn" id="7_arxmi"]
 [ext_resource type="PackedScene" uid="uid://cer4k85kawh0k" path="res://Scenes/UI/good_popup.tscn" id="8_58pgq"]
 [ext_resource type="PackedScene" uid="uid://bml6s31gf1mpy" path="res://Scenes/UI/great_popup.tscn" id="9_ft756"]
-[ext_resource type="PackedScene" uid="uid://dtgldgmvfjpqr" path="res://Scenes/npc_dialogue_box.tscn" id="12_ha5er"]
+[ext_resource type="PackedScene" uid="uid://dtgldgmvfjpqr" path="res://Scenes/UI/npc_dialogue_box.tscn" id="12_ha5er"]
 [ext_resource type="Texture2D" uid="uid://d2ufvqqxskipr" path="res://Sprites/BadArrow.png" id="13_nnqw2"]
-[ext_resource type="AudioStream" uid="uid://ccwcnbidkkjxf" path="res://Audio/tutorial pt 1.mp3" id="15_myd6t"]
 [ext_resource type="Script" path="res://Scripts/cutscene.gd" id="15_sro5w"]
-[ext_resource type="Script" path="res://Scripts/DynamicMusic.gd" id="16_43nax"]
-[ext_resource type="AudioStream" uid="uid://b7llm4ooid77e" path="res://Audio/tutorial pt2.mp3" id="17_7g7rx"]
-[ext_resource type="AudioStream" uid="uid://5j45eo3xsvp2" path="res://Audio/tutorial pt3.mp3" id="18_23yam"]
-[ext_resource type="AudioStream" uid="uid://xnlb7vso2u2s" path="res://Audio/tutorial pt4.mp3" id="19_rpv6v"]
+[ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
+[ext_resource type="Resource" uid="uid://chghd2hydv51e" path="res://DynamicAudio/tutorial-music.tres" id="18_wi1ib"]
 
 [sub_resource type="Gradient" id="Gradient_8locq"]
 offsets = PackedFloat32Array(0)
@@ -49,7 +47,7 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_bpxxe"]
 gradient = SubResource("Gradient_vumdn")
 
-[node name="RhythmGameScreen" type="Control"]
+[node name="TutorialLevel" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,6 +55,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u1iya")
+level = ExtResource("2_4rpds")
 
 [node name="HealthMarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -128,10 +127,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_dd3rv")
-starting_speed = 150.0
-min_speed = 150.0
-max_speed = 500.0
+script = ExtResource("4_gfr0l")
 note_scene = ExtResource("4_6yd2o")
 max_note_distance = 40.0
 miss_popup = ExtResource("5_gu8r3")
@@ -264,11 +260,8 @@ offset_top = 403.0
 offset_right = 1091.0
 offset_bottom = 550.0
 
-[node name="DynamicMusic" type="AudioStreamPlayer" parent="."]
+[node name="DynamicMusicPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")
-audio_streams = Array[AudioStream]([ExtResource("15_myd6t"), ExtResource("17_7g7rx"), ExtResource("18_23yam"), ExtResource("19_rpv6v")])
-intensity_speeds = Array[float]([200.0, 300.0, 400.0, 500.0])
-divisions = Array[int]([4, 8, 4, 8])
-bpms = Array[float]([113.744, 113.946, 152.381, 152.866])
+dynamic_music = ExtResource("18_wi1ib")
 
 [editable path="Dialogue/NpcDialogueBox"]

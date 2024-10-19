@@ -55,6 +55,7 @@ func display_next_line():
 	if cutscene_index >= len(current_cutscene_lines):
 		if in_intro_cutscene:
 			visible = false
+			rhythm.current_note_speed = rhythm.game_screen.level.starting_speed
 			rhythm.start_rhythm_mode()
 		else:
 			# Go to the next level
