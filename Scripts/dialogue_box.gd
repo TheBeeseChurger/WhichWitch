@@ -3,6 +3,8 @@ extends Panel
 
 @export var characters_per_second: float = 40.0
 
+@export var linger_time = 2.5
+
 var showing: bool
 var full_message: String
 var current_index: int = 0
