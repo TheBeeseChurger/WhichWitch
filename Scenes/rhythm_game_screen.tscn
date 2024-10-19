@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://dvocg8glldoo7" path="res://Levels/tutorial.tres" id="2_anosn"]
 [ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://Sprites/3.png" id="2_y82fn"]
 [ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
-[ext_resource type="Texture2D" uid="uid://bsd2pjvg1s1my" path="res://Sprites/Tutorial Background V1.png" id="3_y23da"]
+[ext_resource type="Texture2D" uid="uid://db2ej6pon4xh5" path="res://Sprites/Lvl 1 Background.png" id="3_tntd6"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_6yd2o"]
 [ext_resource type="Script" path="res://Scripts/rhythm.gd" id="4_gfr0l"]
 [ext_resource type="PackedScene" uid="uid://dcglolmwry002" path="res://Scenes/UI/miss_popup.tscn" id="5_gu8r3"]
@@ -62,9 +62,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_y23da")
+texture = ExtResource("3_tntd6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
