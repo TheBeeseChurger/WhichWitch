@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\bunderw\\Documents\\GitHub\\CougarJams2024\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\bunderw\\Documents\\GitHub\\CougarJams2024\\Dialogue\\tutorial_character.json||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Dialogue\\tutorial_character.json||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "tutorial_character.json",
+              "DocumentMoniker": "C:\\Users\\bunderw\\Documents\\GitHub\\CougarJams2024\\Dialogue\\tutorial_character.json",
+              "RelativeDocumentMoniker": "Dialogue\\tutorial_character.json",
+              "ToolTip": "C:\\Users\\bunderw\\Documents\\GitHub\\CougarJams2024\\Dialogue\\tutorial_character.json",
+              "RelativeToolTip": "Dialogue\\tutorial_character.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-19T08:58:41.87Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
