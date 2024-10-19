@@ -43,6 +43,9 @@ func _ready() -> void:
 	
 	rating_anim_rect.modulate = Color(1,1,1,0)
 	
+	load_dialog_from_file()
+
+func load_dialog_from_file():
 	var dialogue_file = FileAccess.open("res://Dialogue/"+rhythm.game_screen.level.dialogue_name+".json", FileAccess.READ)
 	var json_string = dialogue_file.get_as_text()
 	dialogue_file.close()
@@ -78,9 +81,11 @@ func start_dialogue_mode():
 	if current_question_index >= len(questions):
 		visible = false
 		rhythm.current_note_speed = 0
+		rhythm.game_screen.dynamic_music_player.play_next_track()
 		cutscene.play_outro_cutscene()
 		return
 	
+	visible = true
 	current_question = questions[current_question_index];
 		
 	npc_dialogue_box.show_message(current_question["text"])
@@ -204,7 +209,7 @@ func very_good_rating():
 func good_rating():
 	rating_anim_rect.texture = good_rating_texture
 	rhythm.adjust_speed(-50)
-	rating_anim(Vector2.UP)
+	rating_anim(Vector2.UP*0.5)
 	
 func meh_rating():
 	rhythm.adjust_speed(0)
@@ -214,7 +219,7 @@ func meh_rating():
 func bad_rating():
 	rhythm.adjust_speed(50)
 	rating_anim_rect.texture = bad_rating_texture
-	rating_anim(Vector2.DOWN)
+	rating_anim(Vector2.DOWN*0.5)
 	
 func very_bad_rating():
 	rhythm.adjust_speed(100)

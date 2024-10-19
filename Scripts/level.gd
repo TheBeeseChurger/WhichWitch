@@ -1,6 +1,8 @@
 class_name Level
 extends Resource
 
+static var current_level: Level
+
 @export var starting_speed: float = 300
 @export var min_speed: float = 200
 @export var min_speed_gain: float = 25 # amount min_speed increases by at the end of each round
