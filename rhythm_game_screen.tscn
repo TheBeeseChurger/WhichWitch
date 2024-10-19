@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgqldht5h0lp7"]
+
+[ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_lsysd"]
+
+[sub_resource type="Gradient" id="Gradient_8locq"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ypnh"]
+gradient = SubResource("Gradient_8locq")
+
+[sub_resource type="Gradient" id="Gradient_q28l7"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.924369, 0.19816, 0.252588, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nhl5c"]
+gradient = SubResource("Gradient_q28l7")
+
+[node name="RhythmGameScreen" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("1_lsysd")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+value = 28.0
+nine_patch_stretch = true
+stretch_margin_top = 20
+stretch_margin_bottom = 20
+texture_under = SubResource("GradientTexture1D_8ypnh")
+texture_progress = SubResource("GradientTexture2D_nhl5c")
