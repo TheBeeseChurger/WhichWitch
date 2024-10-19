@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=24 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_lsysd"]
 [ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://3.png" id="2_lru5b"]
@@ -8,6 +8,7 @@
 [ext_resource type="StyleBox" uid="uid://fxyj8hn6d8id" path="res://style_box_flat.tres" id="6_xko0w"]
 [ext_resource type="LabelSettings" uid="uid://cb5ugextvxap5" path="res://label_settings.tres" id="7_y7e43"]
 [ext_resource type="PackedScene" uid="uid://bjpoyliyupyqp" path="res://dialogue_option.tscn" id="8_72mb1"]
+[ext_resource type="Script" path="res://dialogue_box.gd" id="8_pq7th"]
 
 [sub_resource type="Gradient" id="Gradient_8locq"]
 offsets = PackedFloat32Array(0)
@@ -204,7 +205,7 @@ good_rating_texture = SubResource("GradientTexture1D_j0v77")
 neutral_rating_texture = SubResource("GradientTexture1D_h2wtx")
 bad_rating_texture = SubResource("GradientTexture1D_oms63")
 
-[node name="OpponentDialoguePanel" type="Panel" parent="Dialogue"]
+[node name="OpponentDialogueBox" type="Panel" parent="Dialogue"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -217,8 +218,9 @@ offset_bottom = -134.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("6_xko0w")
+script = ExtResource("8_pq7th")
 
-[node name="Label" type="Label" parent="Dialogue/OpponentDialoguePanel"]
+[node name="Label" type="Label" parent="Dialogue/OpponentDialogueBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -232,7 +234,7 @@ grow_vertical = 2
 text = "Blablablablablablablablabla"
 label_settings = ExtResource("7_y7e43")
 
-[node name="RespondTimeLeftBar" type="TextureProgressBar" parent="Dialogue/OpponentDialoguePanel"]
+[node name="RespondTimeLeftBar" type="TextureProgressBar" parent="Dialogue/OpponentDialogueBox"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

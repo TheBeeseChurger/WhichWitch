@@ -6,14 +6,18 @@ extends Control
 @export var neutral_rating_texture: Texture2D
 @export var bad_rating_texture: Texture2D
 
-@onready var respond_time_left_bar: TextureProgressBar = $OpponentDialoguePanel/RespondTimeLeftBar
+@onready var opponent_dialogue_box: DialogueBox = $OpponentDialogueBox
+
+@onready var respond_time_left_bar: TextureProgressBar = $OpponentDialogueBox/RespondTimeLeftBar
 @onready var random_popup_container: Control = $RandomPopupContainer
 @onready var rhythm: Rhythm = $"../Rhythm"
 @onready var rating_anim_rect: TextureRect = $"../PortraitContainer/OpponentPortrait/RatingAnimRect"
 
-var dialogue_options = []
-var dialogue_ratings = []
-var dialogue_options_queued = []
+var dialogue_options: Array[String]
+var dialogue_ratings: Array[String]
+var dialogue_responses: Array[String]
+var ignored_response: String
+var dialogue_options_queued: Array[String]
 var time_until_next_option: float
 var in_dialogue_mode = false # true while in rhythm mode
 
@@ -21,7 +25,7 @@ var respond_time_remaining: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	visible = false
+	opponent_dialogue_box.visible = false
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,10 +50,12 @@ func start_dialogue_mode():
 	if in_dialogue_mode:
 		return
 		
-	visible = true
+	opponent_dialogue_box.show_message("This is a question blablablablabla")
 	in_dialogue_mode = true
 	dialogue_options = ["good option 1", "good option 2", "neutral option 3", "bad option 4", "bad option 5"]
 	dialogue_ratings = ["good", "good", "neutral", "bad", "bad"]
+	dialogue_responses = ["good response 1", "good response 2", "neutral response 3", "bad response 4", "bad response 5"]
+	ignored_response = "you ignored me!!!!!! :("
 	dialogue_options_queued = dialogue_options
 	respond_time_remaining = 10.0
 	
@@ -113,8 +119,11 @@ func spawn_random_option():
 
 # empty for no dialogue option selected
 func submit_dialogue(option_index: int):
+	respond_time_left_bar.value = 0
+	
 	if option_index == -1:
 		bad_rating()
+		opponent_dialogue_box.show_message(ignored_response)
 	else:
 		var rating = dialogue_ratings[option_index]
 		if rating == "good":
@@ -123,11 +132,13 @@ func submit_dialogue(option_index: int):
 			bad_rating()
 		else:
 			neutral_rating()
+			
+		var response = dialogue_responses[option_index]
+		opponent_dialogue_box.show_message(response)
 		
 	for child in random_popup_container.get_children():
 		child.queue_free()
 		
-	visible = false
 	in_dialogue_mode = false
 	rhythm.start_rhythm_mode()
 
@@ -153,4 +164,5 @@ func rating_anim(dir: Vector2):
 	if is_instance_valid(rating_anim_rect):
 		rating_anim_rect.modulate = Color(1,1,1,0)
 		rating_anim_rect.position = base_position
+
 	
