@@ -13,20 +13,38 @@ extends Control
 @onready var rhythm: Rhythm = $"../Rhythm"
 @onready var rating_anim_rect: TextureRect = $"../PortraitContainer/OpponentPortrait/RatingAnimRect"
 
-var dialogue_options: Array[String]
-var dialogue_ratings: Array[String]
-var dialogue_responses: Array[String]
-var ignored_response: String
-var dialogue_options_queued: Array[String]
-var time_until_next_option: float
-var in_dialogue_mode = false # true while in rhythm mode
+# Contains all dialogue
+var dialogue: Dictionary
+var questions: Array
 
+# current question the opponent is asking
+var current_question: Dictionary
+
+# list of indexes for reply options to the current question.
+var dialogue_options_queued: Array[int]
+
+# used for randomly queueing question reply options
+var time_until_next_option: float
+
+# true while in dialogue mode and not in rhythm mode
+var in_dialogue_mode = false 
+
+# time remaining to answer the current question
 var respond_time_remaining: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	opponent_dialogue_box.visible = false
-	pass # Replace with function body.
+	
+	rating_anim_rect.modulate = Color(1,1,1,0)
+	
+	var file = FileAccess.open("res://Characters/tutorial_character.json", FileAccess.READ)
+	var json_string = file.get_as_text()
+	file.close()
+	var json = JSON.new()
+	json.parse(json_string)
+	dialogue = json.data
+	questions = dialogue["questions"]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -41,7 +59,7 @@ func _process(delta: float) -> void:
 		
 	respond_time_remaining -= delta
 	if respond_time_remaining <= 0:
-		submit_dialogue(-1)
+		submit_dialogue({})
 		respond_time_remaining = 100.0
 	else:
 		respond_time_left_bar.value = respond_time_remaining
@@ -50,24 +68,25 @@ func start_dialogue_mode():
 	if in_dialogue_mode:
 		return
 		
-	opponent_dialogue_box.show_message("This is a question blablablablabla")
+	# choose a random question to ask
+	current_question = questions[randi_range(0, len(questions)-1)];
+		
+	opponent_dialogue_box.show_message(current_question["text"])
 	in_dialogue_mode = true
-	dialogue_options = ["good option 1", "good option 2", "neutral option 3", "bad option 4", "bad option 5"]
-	dialogue_ratings = ["good", "good", "neutral", "bad", "bad"]
-	dialogue_responses = ["good response 1", "good response 2", "neutral response 3", "bad response 4", "bad response 5"]
-	ignored_response = "you ignored me!!!!!! :("
-	dialogue_options_queued = dialogue_options
+	dialogue_options_queued = []
+	for i in range(len(current_question["replies"])):
+		dialogue_options_queued.append(i)
 	respond_time_remaining = 10.0
 	
 	respond_time_left_bar.max_value = respond_time_remaining
 
 func spawn_random_option():
 	var i = randi_range(0, len(dialogue_options_queued)-1)
-	var text: String = dialogue_options_queued.pop_at(i)
-	var option_index = dialogue_options.find(text)
+	var option_index = dialogue_options_queued.pop_at(i)
+	var reply: Dictionary = current_question["replies"][option_index]
 	var option: Button = dialogue_option_scene.instantiate()
-	option.text = text
-	option.pressed.connect(func(): submit_dialogue(option_index))
+	option.text = reply["text"]
+	option.pressed.connect(func(): submit_dialogue(reply))
 	
 	var random_x: int = 0
 	var random_y: int = 0
@@ -115,17 +134,19 @@ func spawn_random_option():
 	
 	if is_instance_valid(option):
 		option.queue_free()
-		dialogue_options_queued.push_back(text)
+		dialogue_options_queued.push_back(i)
 
-# empty for no dialogue option selected
-func submit_dialogue(option_index: int):
+# empty dictionary for nothing selected (ignored opponent)
+func submit_dialogue(reply: Dictionary):
 	respond_time_left_bar.value = 0
 	
-	if option_index == -1:
+	if reply.is_empty():
 		bad_rating()
+		var ignored_responses = dialogue["ignored_responses"]
+		var ignored_response = ignored_responses[randi_range(0, len(ignored_responses)-1)]
 		opponent_dialogue_box.show_message(ignored_response)
 	else:
-		var rating = dialogue_ratings[option_index]
+		var rating = reply["rating"]
 		if rating == "good":
 			good_rating()
 		elif rating == "bad":
@@ -133,7 +154,7 @@ func submit_dialogue(option_index: int):
 		else:
 			neutral_rating()
 			
-		var response = dialogue_responses[option_index]
+		var response = reply["response"]
 		opponent_dialogue_box.show_message(response)
 		
 	for child in random_popup_container.get_children():
@@ -158,8 +179,8 @@ func rating_anim(dir: Vector2):
 	var base_position = rating_anim_rect.position
 	rating_anim_rect.modulate = Color.WHITE
 	
-	#get_tree().create_tween().tween_property(rating_anim_rect, "modulate", Color(1,1,1,0), 1.0)
-	#await get_tree().create_tween().tween_property(rating_anim_rect, "position", base_position + dir*50, 1.0).finished
+	get_tree().create_tween().tween_property(rating_anim_rect, "modulate", Color(1,1,1,0), 1.0)
+	await get_tree().create_tween().tween_property(rating_anim_rect, "position", base_position + dir*50, 1.0).finished
 	
 	if is_instance_valid(rating_anim_rect):
 		rating_anim_rect.modulate = Color(1,1,1,0)
