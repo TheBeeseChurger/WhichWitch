@@ -43,7 +43,7 @@ func _ready() -> void:
 	
 	rating_anim_rect.modulate = Color(1,1,1,0)
 	
-	var dialogue_file = FileAccess.open("res://Dialogue/tutorial_character.json", FileAccess.READ)
+	var dialogue_file = FileAccess.open("res://Dialogue/"+rhythm.game_screen.level.dialogue_name+".json", FileAccess.READ)
 	var json_string = dialogue_file.get_as_text()
 	dialogue_file.close()
 	var json = JSON.new()

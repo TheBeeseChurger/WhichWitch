@@ -41,10 +41,12 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("rhythm_press"):
 		if npc_dialogue_box.typing:
 			npc_dialogue_box.show_full_line()
+		elif player_dialogue_box.typing:
+			player_dialogue_box.show_full_line()
 		else:
 			display_next_line()
 	
-	if not npc_dialogue_box.typing:
+	if not npc_dialogue_box.typing and not player_dialogue_box.typing:
 		linger_time_remaining -= delta
 		if linger_time_remaining <= 0:
 			display_next_line()

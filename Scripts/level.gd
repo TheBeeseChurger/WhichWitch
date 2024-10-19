@@ -9,3 +9,7 @@ extends Resource
 
 # level that comes after this level, if any.
 @export var next_level: Level
+
+@export var dialogue_name: String
+
+@export var dynamic_music: DynamicMusic

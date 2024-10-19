@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Level" load_steps=2 format=3 uid="uid://dvocg8glldoo7"]
+[gd_resource type="Resource" script_class="Level" load_steps=3 format=3 uid="uid://dvocg8glldoo7"]
 
+[ext_resource type="Resource" uid="uid://chghd2hydv51e" path="res://DynamicAudio/tutorial-music.tres" id="1_nugtv"]
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_omq3d"]
 
 [resource]
@@ -9,3 +10,5 @@ min_speed = 150.0
 min_speed_gain = 30.0
 max_speed = 600.0
 max_speed_gain = 0.0
+dialogue_name = "tutorial_character"
+dynamic_music = ExtResource("1_nugtv")
