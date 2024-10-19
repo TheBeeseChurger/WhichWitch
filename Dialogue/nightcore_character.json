@@ -12,7 +12,7 @@
     "questions": [
         {
             "text": "*cutely looks at you*",
-            "time": 7,
+            "time": 6,
             "replies": [
                 {
                     "text": "Bro... Like... Stop...",
@@ -43,7 +43,7 @@
         },
         {
             "text": "S-So uh... I don't usually get this far into a convo...",
-            "time": 7,
+            "time": 6,
             "replies": [
                 {
                     "text": "Me either. First time.",
@@ -69,7 +69,7 @@
         },
         {
             "text": "O-Okay. I think I've stopped that weird thing from- *says cutely*. I DIDN'T EVEN FINISH MY SENTENCE!",
-            "time": 4,
+            "time": 6,
             "replies": [
                 {
                     "text": "Woah. Calm down.",
@@ -95,7 +95,7 @@
         },
         {
             "text": "SCREW IT. LET'S TURN THE HEAT UP. WHAT DO YOU USUALLY SPEND TIME DOING?",
-            "time": 4,
+            "time": 6,
             "replies": [
                 {
                     "text": "Sleeping.",
@@ -113,7 +113,7 @@
                     "rating": "bad"
                 },
                 {
-                    "text": "Cronically Online",
+                    "text": "Chronically Online",
                     "response": "You. I like you. We're friends now.",
                     "rating": "very good"
                 }
