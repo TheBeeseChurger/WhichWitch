@@ -1,9 +1,11 @@
 class_name RhythmGameScreen
-extends MarginContainer
+extends Control
 
 # Health is stored in this bar
 @onready var health_bar: TextureProgressBar = $HealthBar
 
+@onready var p1_portrait: TextureRect = $PortraitContainer/P1Portrait
+@onready var p2_portrait: TextureRect = $PortraitContainer/P2Portrait
 
 
 

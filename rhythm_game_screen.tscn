@@ -1,7 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=23 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_lsysd"]
 [ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://3.png" id="2_lru5b"]
+[ext_resource type="Script" path="res://scripts/rhythm.gd" id="3_jxymp"]
+[ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://rhythm_note.tscn" id="3_uxjkh"]
+[ext_resource type="Script" path="res://Scripts/dialogue.gd" id="5_ablqd"]
+[ext_resource type="StyleBox" uid="uid://fxyj8hn6d8id" path="res://style_box_flat.tres" id="6_xko0w"]
+[ext_resource type="LabelSettings" uid="uid://cb5ugextvxap5" path="res://label_settings.tres" id="7_y7e43"]
+[ext_resource type="PackedScene" uid="uid://bjpoyliyupyqp" path="res://dialogue_option.tscn" id="8_72mb1"]
 
 [sub_resource type="Gradient" id="Gradient_8locq"]
 offsets = PackedFloat32Array(0)
@@ -17,12 +23,41 @@ colors = PackedColorArray(0.924369, 0.19816, 0.252588, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nhl5c"]
 gradient = SubResource("Gradient_q28l7")
 
-[sub_resource type="Gradient" id="Gradient_vq37u"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 0.45098)
+[sub_resource type="Gradient" id="Gradient_1c6gt"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.384314, 0.8, 0.145098, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ent6y"]
-gradient = SubResource("Gradient_vq37u")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f1oke"]
+gradient = SubResource("Gradient_1c6gt")
+width = 32
+height = 32
+
+[sub_resource type="Gradient" id="Gradient_6pnel"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.383406, 0.798426, 0.143755, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j0v77"]
+gradient = SubResource("Gradient_6pnel")
+
+[sub_resource type="Gradient" id="Gradient_ygqog"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.661795, 0.673085, 0.677916, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h2wtx"]
+gradient = SubResource("Gradient_ygqog")
+
+[sub_resource type="Gradient" id="Gradient_g23c4"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.647261, 0.116715, 0.144658, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oms63"]
+gradient = SubResource("Gradient_g23c4")
+
+[sub_resource type="Gradient" id="Gradient_lv5lr"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sciba"]
+gradient = SubResource("Gradient_lv5lr")
 
 [node name="RhythmGameScreen" type="Control"]
 layout_mode = 3
@@ -48,6 +83,7 @@ theme_override_constants/margin_bottom = 20
 [node name="HealthBar" type="TextureProgressBar" parent="HealthMarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
+step = 0.0
 value = 28.0
 nine_patch_stretch = true
 stretch_margin_top = 20
@@ -63,11 +99,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 90
+theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 150
-theme_override_constants/margin_bottom = 90
+theme_override_constants/margin_bottom = 150
 
-[node name="P1Portrait" type="TextureRect" parent="PortraitContainer"]
+[node name="OpponentPortrait" type="TextureRect" parent="PortraitContainer"]
 custom_minimum_size = Vector2(250, 400)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -75,21 +111,147 @@ size_flags_vertical = 8
 texture = ExtResource("2_lru5b")
 expand_mode = 3
 
-[node name="P2Portrait" type="TextureRect" parent="PortraitContainer"]
+[node name="RatingAnimRect" type="TextureRect" parent="PortraitContainer/OpponentPortrait"]
+layout_mode = 1
+offset_left = -14.0
+offset_top = 26.0
+offset_right = 24.0
+offset_bottom = 77.0
+texture = SubResource("GradientTexture2D_f1oke")
+expand_mode = 1
+
+[node name="PlayerPortrait" type="TextureRect" parent="PortraitContainer"]
 custom_minimum_size = Vector2(250, 400)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 texture = ExtResource("2_lru5b")
 expand_mode = 3
+flip_h = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Rhythm" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_jxymp")
+note_scene = ExtResource("3_uxjkh")
+
+[node name="ColorRect" type="ColorRect" parent="Rhythm"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -226.5
+offset_right = 5.0
+offset_bottom = 226.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.301961)
+
+[node name="ColorRect2" type="ColorRect" parent="Rhythm/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -80.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.787759, 0.787759, 0.787759, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Rhythm/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -52.0
+offset_right = 5.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="NoteSpawnPoint" type="Marker2D" parent="Rhythm/ColorRect"]
+position = Vector2(5, 16.5)
+
+[node name="TargetCenter" type="Marker2D" parent="Rhythm/ColorRect"]
+position = Vector2(5, 416.5)
+
+[node name="Notes" type="Control" parent="Rhythm"]
+anchors_preset = 0
+
+[node name="Dialogue" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_ablqd")
+dialogue_option_scene = ExtResource("8_72mb1")
+good_rating_texture = SubResource("GradientTexture1D_j0v77")
+neutral_rating_texture = SubResource("GradientTexture1D_h2wtx")
+bad_rating_texture = SubResource("GradientTexture1D_oms63")
+
+[node name="OpponentDialoguePanel" type="Panel" parent="Dialogue"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -254.0
+offset_left = 55.0
+offset_top = -281.0
+offset_right = -596.0
+offset_bottom = -134.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = SubResource("GradientTexture1D_ent6y")
+theme_override_styles/panel = ExtResource("6_xko0w")
+
+[node name="Label" type="Label" parent="Dialogue/OpponentDialoguePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 18.0
+offset_right = -27.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Blablablablablablablablabla"
+label_settings = ExtResource("7_y7e43")
+
+[node name="RespondTimeLeftBar" type="TextureProgressBar" parent="Dialogue/OpponentDialoguePanel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = -26.0
+offset_right = -31.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+step = 0.0
+value = 30.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_sciba")
+
+[node name="RandomPopupContainer" type="Control" parent="Dialogue"]
+anchors_preset = 0
+offset_left = 650.0
+offset_top = 112.0
+offset_right = 1089.0
+offset_bottom = 589.0
