@@ -27,8 +27,8 @@ var in_rhythm_mode = false # true while in rhythm mode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	visible = false
 	current_note_speed = starting_speed
-	start_rhythm_mode()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -67,6 +67,7 @@ func _process(delta: float) -> void:
 		
 func start_rhythm_mode():
 	if not in_rhythm_mode:
+		visible = true
 		in_rhythm_mode = true
 		notes_left = 5
 

@@ -1,12 +1,30 @@
 {
 	"name": "Tutorial girl",
 	"intro_dialogue": [
-		["npc", "Hey! Ready for your training on picking up a partner?"],
-		["npc", "I've decided that I'm the best candidate to start your training with."],
-		["npc", "You don't have to say much for your first talk so let's keep this simple."],
-		["npc", "Most witches (Or witches in training like me) will start the convo first."],
-		["npc", "All you gotta do is walk up to them and say a basic hello of some kind."],
-		["npc", "I'll start so get ready..."]
+		[
+			"npc",
+			"Hey! Ready for your training on picking up a partner?"
+		],
+		[
+			"npc",
+			"I've decided that I'm the best candidate to start your training with."
+		],
+		[
+			"npc",
+			"You don't have to say much for your first talk so let's keep this simple."
+		],
+		[
+			"npc",
+			"Most witches (Or witches in training like me) will start the convo first."
+		],
+		[
+			"npc",
+			"All you gotta do is walk up to them and say a basic hello of some kind."
+		],
+		[
+			"npc",
+			"I'll start so get ready..."
+		]
 	],
 	"questions": [
 		{
