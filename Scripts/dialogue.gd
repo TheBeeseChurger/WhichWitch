@@ -109,8 +109,15 @@ func spawn_random_option():
 	
 	option.position = Vector2(random_x, random_y)
 	
-	var iteration_max: int = 50
+	random_popup_container.add_child(option)
 	
+	call_deferred("place_option", option, option_index)
+
+	
+func place_option(option: Button, restore_option_index: int):
+	var random_x
+	var random_y
+	var iteration_max: int = 50
 	var intersects: bool = true
 	while intersects:
 		random_x = randi_range(0, random_popup_container.size.x - option.size.x)
@@ -131,13 +138,13 @@ func spawn_random_option():
 			break
 	
 	#print("placed at ", random_x, ", ", random_y)
-	random_popup_container.add_child(option)
+	
 	option.position = Vector2(random_x, random_y)
 	option.modulate = Color(1,1,1,0)
 	var fade_in_tween = get_tree().create_tween().tween_property(option, "modulate", Color.WHITE, 0.5)
 	await fade_in_tween.finished
 		
-	await get_tree().create_timer(randf_range(2.0, 6.0)).timeout
+	await get_tree().create_timer(randf_range(1.5, 5.0)).timeout
 	
 	if not is_instance_valid(option):
 		return
@@ -151,7 +158,7 @@ func spawn_random_option():
 	if is_instance_valid(option):
 		option.queue_free()
 		#print(dialogue_options_queued)
-		dialogue_options_queued.push_back(option_index)
+		dialogue_options_queued.push_back(restore_option_index)
 
 # empty dictionary for nothing selected (ignored opponent)
 func submit_dialogue(reply: Dictionary):

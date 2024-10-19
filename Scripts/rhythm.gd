@@ -40,7 +40,6 @@ func _process(delta: float) -> void:
 		rhythm_press()
 	
 	for note: Node2D in notes_parent.get_children():
-		print("current note speed in process: ", current_note_speed)
 		note.global_position.y += current_note_speed * delta
 		if note.global_position.y > target_center.global_position.y + max_note_distance:
 			game_screen.lose_health(6)
