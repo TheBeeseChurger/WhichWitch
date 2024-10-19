@@ -95,11 +95,11 @@ func transition_to_level(next_level: Level):
 	rhythm.game_screen.dynamic_music_player.play_next_track()
 	dialogue.load_dialog_from_file()
 	dialogue.current_question_index = -1
+	rhythm.game_screen.background.texture = next_level.background_texture
 	play_intro_cutscene()
 	
-	
 	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "position", base_pos, 1.25)
-	await get_tree().create_tween().tween_property(rhythm.game_screen.dynamic_music_player, "volume_db", -30, 1.5).finished
+	await get_tree().create_tween().tween_property(rhythm.game_screen.dynamic_music_player, "volume_db", 0, 1.5).finished
 	in_level_transition = false
 	
 func on_line_finished():

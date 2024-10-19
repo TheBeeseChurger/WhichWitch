@@ -15,3 +15,5 @@ static var current_level: Level
 @export var dialogue_name: String
 
 @export var dynamic_music: DynamicMusic
+
+@export var background_texture: Texture2D
