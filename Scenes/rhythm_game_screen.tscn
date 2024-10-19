@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=29 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://Sprites/3.png" id="2_y82fn"]
 [ext_resource type="Script" path="res://scripts/rhythm.gd" id="3_dd3rv"]
+[ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_6yd2o"]
 [ext_resource type="PackedScene" uid="uid://dcglolmwry002" path="res://Scenes/UI/miss_popup.tscn" id="5_gu8r3"]
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="5_tw8ck"]
@@ -12,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cer4k85kawh0k" path="res://Scenes/UI/good_popup.tscn" id="8_58pgq"]
 [ext_resource type="PackedScene" uid="uid://bml6s31gf1mpy" path="res://Scenes/UI/great_popup.tscn" id="9_ft756"]
 [ext_resource type="PackedScene" uid="uid://dtgldgmvfjpqr" path="res://Scenes/npc_dialogue_box.tscn" id="12_ha5er"]
+[ext_resource type="Texture2D" uid="uid://d2ufvqqxskipr" path="res://Sprites/BadArrow.png" id="13_nnqw2"]
 [ext_resource type="AudioStream" uid="uid://ccwcnbidkkjxf" path="res://Audio/tutorial pt 1.mp3" id="15_myd6t"]
 [ext_resource type="Script" path="res://Scripts/cutscene.gd" id="15_sro5w"]
 [ext_resource type="Script" path="res://Scripts/DynamicMusic.gd" id="16_43nax"]
@@ -33,35 +35,12 @@ colors = PackedColorArray(0.924369, 0.19816, 0.252588, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nhl5c"]
 gradient = SubResource("Gradient_q28l7")
 
-[sub_resource type="Gradient" id="Gradient_1c6gt"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.384314, 0.8, 0.145098, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_f1oke"]
-gradient = SubResource("Gradient_1c6gt")
-width = 32
-height = 32
-
-[sub_resource type="Gradient" id="Gradient_6pnel"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.383406, 0.798426, 0.143755, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_j0v77"]
-gradient = SubResource("Gradient_6pnel")
-
 [sub_resource type="Gradient" id="Gradient_vbo6e"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.821789, 0.821789, 0.821789, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_lrsc3"]
 gradient = SubResource("Gradient_vbo6e")
-
-[sub_resource type="Gradient" id="Gradient_g23c4"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.647261, 0.116715, 0.144658, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_oms63"]
-gradient = SubResource("Gradient_g23c4")
 
 [sub_resource type="Gradient" id="Gradient_vumdn"]
 offsets = PackedFloat32Array(1)
@@ -123,12 +102,13 @@ texture = ExtResource("2_y82fn")
 expand_mode = 3
 
 [node name="RatingAnimRect" type="TextureRect" parent="PortraitContainer/OpponentPortrait"]
+texture_filter = 1
 layout_mode = 1
-offset_left = -14.0
-offset_top = 26.0
-offset_right = 24.0
-offset_bottom = 77.0
-texture = SubResource("GradientTexture2D_f1oke")
+offset_left = -19.0
+offset_top = 33.0
+offset_right = 45.0
+offset_bottom = 97.0
+texture = ExtResource("3_hsgmq")
 expand_mode = 1
 
 [node name="PlayerPortrait" type="TextureRect" parent="PortraitContainer"]
@@ -141,6 +121,7 @@ expand_mode = 3
 flip_h = true
 
 [node name="Rhythm" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -215,6 +196,7 @@ position = Vector2(49, 416.5)
 anchors_preset = 0
 
 [node name="Dialogue" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -223,9 +205,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_tw8ck")
 dialogue_option_scene = ExtResource("6_gsqgo")
-good_rating_texture = SubResource("GradientTexture1D_j0v77")
+good_rating_texture = ExtResource("3_hsgmq")
 meh_rating_texture = SubResource("GradientTexture1D_lrsc3")
-bad_rating_texture = SubResource("GradientTexture1D_oms63")
+bad_rating_texture = ExtResource("13_nnqw2")
 
 [node name="NpcDialogueBox" parent="Dialogue" instance=ExtResource("12_ha5er")]
 layout_mode = 0
@@ -259,6 +241,7 @@ offset_right = 1089.0
 offset_bottom = 589.0
 
 [node name="Cutscene" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
