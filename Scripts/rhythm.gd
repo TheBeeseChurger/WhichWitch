@@ -10,9 +10,10 @@ extends Control
 @export var great_popup: PackedScene
 
 @onready var note_spawn_point: Marker2D = $ColorRect/NoteSpawnPoint
-@onready var target_center: Marker2D = $ColorRect/TargetCenter
-@onready var popup_center: Marker2D = $ColorRect/PopupCenter
+@onready var target_center: Marker2D = $ColorRect/ColorRect3/TargetCenter
+@onready var popup_center: Marker2D = $ColorRect/ColorRect3/PopupCenter
 @onready var notes_parent: Node = $Notes
+@onready var cleared_notes_parent: Node = $ClearedNotes
 @onready var game_screen: RhythmGameScreen = $".."
 @onready var dialogue: Dialogue = $"../Dialogue"
 @onready var dynamic_music_player: DynamicMusicPlayer = $"../DynamicMusic"
@@ -128,3 +129,6 @@ func spawn_note():
 		note.texture = note_textures[randi_range(0, len(note_textures)-1)]
 	notes_parent.add_child(note)
 	print("spawned note at ", note.global_position)
+
+func clear_anim(note: Sprite2D):
+	note.reparent(cleared_notes_parent)

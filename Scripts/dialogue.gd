@@ -63,7 +63,7 @@ func _process(delta: float) -> void:
 	if time_until_next_option <= 0:
 		if len(dialogue_options_queued) > 0:
 			spawn_random_option()
-			time_until_next_option = randf_range(0.25, 1.0)
+			time_until_next_option = randf_range(0.2, 1.0)
 		
 	respond_time_remaining -= delta
 	if respond_time_remaining <= 0:
@@ -81,7 +81,6 @@ func start_dialogue_mode():
 	if current_question_index >= len(questions):
 		visible = false
 		rhythm.current_note_speed = 0
-		rhythm.game_screen.dynamic_music_player.play_next_track()
 		cutscene.play_outro_cutscene()
 		return
 	
@@ -149,7 +148,7 @@ func place_option(option: Button, restore_option_index: int):
 	var fade_in_tween = get_tree().create_tween().tween_property(option, "modulate", Color.WHITE, 0.5)
 	await fade_in_tween.finished
 		
-	await get_tree().create_timer(randf_range(1.5, 5.0)).timeout
+	await get_tree().create_timer(randf_range(1.25, 4.0)).timeout
 	
 	if not is_instance_valid(option):
 		return
