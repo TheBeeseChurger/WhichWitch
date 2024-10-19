@@ -6,9 +6,8 @@ extends Control
 @export var meh_rating_texture: Texture2D
 @export var bad_rating_texture: Texture2D
 
-@onready var opponent_dialogue_box: DialogueBox = $OpponentDialogueBox
-
-@onready var respond_time_left_bar: TextureProgressBar = $OpponentDialogueBox/RespondTimeLeftBar
+@onready var npc_dialogue_box: DialogueBox = $NpcDialogueBox
+@onready var respond_time_left_bar: TextureProgressBar = $NpcDialogueBox/RespondTimeLeftBar
 @onready var random_popup_container: Control = $RandomPopupContainer
 @onready var rhythm: Rhythm = $"../Rhythm"
 @onready var rating_anim_rect: TextureRect = $"../PortraitContainer/OpponentPortrait/RatingAnimRect"
@@ -27,14 +26,15 @@ var dialogue_options_queued: Array[int]
 var time_until_next_option: float
 
 # true while in dialogue mode and not in rhythm mode
-var in_dialogue_mode = false 
+var in_dialogue_mode = false
 
 # time remaining to answer the current question
 var respond_time_remaining: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	opponent_dialogue_box.visible = false
+	visible = true
+	npc_dialogue_box.visible = false
 	
 	rating_anim_rect.modulate = Color(1,1,1,0)
 	
@@ -71,7 +71,7 @@ func start_dialogue_mode():
 	# choose a random question to ask
 	current_question = questions[randi_range(0, len(questions)-1)];
 		
-	opponent_dialogue_box.show_message(current_question["text"])
+	npc_dialogue_box.show_message(current_question["text"])
 	in_dialogue_mode = true
 	dialogue_options_queued = []
 	for i in range(len(current_question["replies"])):
@@ -144,7 +144,7 @@ func submit_dialogue(reply: Dictionary):
 		bad_rating()
 		var ignored_responses = dialogue["ignored_responses"]
 		var ignored_response = ignored_responses[randi_range(0, len(ignored_responses)-1)]
-		opponent_dialogue_box.show_message(ignored_response)
+		npc_dialogue_box.show_message(ignored_response)
 	else:
 		var rating = reply["rating"]
 		if rating == "very good":
@@ -159,7 +159,7 @@ func submit_dialogue(reply: Dictionary):
 			meh_rating()
 			
 		var response = reply["response"]
-		opponent_dialogue_box.show_message(response)
+		npc_dialogue_box.show_message(response)
 		
 	for child in random_popup_container.get_children():
 		child.queue_free()

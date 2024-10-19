@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=33 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://Sprites/3.png" id="2_y82fn"]
@@ -9,12 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://bjpoyliyupyqp" path="res://Scenes/UI/dialogue_option.tscn" id="6_gsqgo"]
 [ext_resource type="PackedScene" uid="uid://brdheh51l3qks" path="res://Scenes/UI/bad_popup.tscn" id="6_ju5jo"]
 [ext_resource type="PackedScene" uid="uid://y4luavrw6fox" path="res://Scenes/UI/okay_popup.tscn" id="7_arxmi"]
-[ext_resource type="StyleBox" uid="uid://fxyj8hn6d8id" path="res://Style/style_box_flat.tres" id="7_bldjm"]
-[ext_resource type="Script" path="res://Scripts/dialogue_box.gd" id="8_5k541"]
 [ext_resource type="PackedScene" uid="uid://cer4k85kawh0k" path="res://Scenes/UI/good_popup.tscn" id="8_58pgq"]
-[ext_resource type="LabelSettings" uid="uid://cb5ugextvxap5" path="res://Style/label_settings.tres" id="9_42hfe"]
 [ext_resource type="PackedScene" uid="uid://bml6s31gf1mpy" path="res://Scenes/UI/great_popup.tscn" id="9_ft756"]
+[ext_resource type="PackedScene" uid="uid://dtgldgmvfjpqr" path="res://Scenes/npc_dialogue_box.tscn" id="12_ha5er"]
 [ext_resource type="AudioStream" uid="uid://ccwcnbidkkjxf" path="res://Audio/tutorial pt 1.mp3" id="15_myd6t"]
+[ext_resource type="Script" path="res://Scripts/cutscene.gd" id="15_sro5w"]
 [ext_resource type="Script" path="res://Scripts/DynamicMusic.gd" id="16_43nax"]
 [ext_resource type="AudioStream" uid="uid://b7llm4ooid77e" path="res://Audio/tutorial pt2.mp3" id="17_7g7rx"]
 [ext_resource type="AudioStream" uid="uid://5j45eo3xsvp2" path="res://Audio/tutorial pt3.mp3" id="18_23yam"]
@@ -64,11 +63,12 @@ colors = PackedColorArray(0.647261, 0.116715, 0.144658, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_oms63"]
 gradient = SubResource("Gradient_g23c4")
 
-[sub_resource type="Gradient" id="Gradient_lv5lr"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+[sub_resource type="Gradient" id="Gradient_vumdn"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_sciba"]
-gradient = SubResource("Gradient_lv5lr")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bpxxe"]
+gradient = SubResource("Gradient_vumdn")
 
 [node name="RhythmGameScreen" type="Control"]
 layout_mode = 3
@@ -224,51 +224,29 @@ good_rating_texture = SubResource("GradientTexture1D_j0v77")
 meh_rating_texture = SubResource("GradientTexture1D_lrsc3")
 bad_rating_texture = SubResource("GradientTexture1D_oms63")
 
-[node name="OpponentDialogueBox" type="Panel" parent="Dialogue"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 55.0
-offset_top = -281.0
-offset_right = -596.0
-offset_bottom = -134.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = ExtResource("7_bldjm")
-script = ExtResource("8_5k541")
+[node name="NpcDialogueBox" parent="Dialogue" instance=ExtResource("12_ha5er")]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 402.0
+offset_right = 526.0
+offset_bottom = 549.0
 
-[node name="Label" type="Label" parent="Dialogue/OpponentDialogueBox"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = 18.0
-offset_right = -27.0
-offset_bottom = -19.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Blablablablablablablablabla"
-label_settings = ExtResource("9_42hfe")
-
-[node name="RespondTimeLeftBar" type="TextureProgressBar" parent="Dialogue/OpponentDialogueBox"]
+[node name="RespondTimeLeftBar" type="TextureProgressBar" parent="Dialogue/NpcDialogueBox"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 29.0
-offset_top = -26.0
-offset_right = -31.0
-offset_bottom = -15.0
+offset_top = -25.0
+offset_right = -35.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 step = 0.0
-value = 30.0
+value = 10.0
 nine_patch_stretch = true
-texture_progress = SubResource("GradientTexture1D_sciba")
+texture_progress = SubResource("GradientTexture1D_bpxxe")
 
 [node name="RandomPopupContainer" type="Control" parent="Dialogue"]
 anchors_preset = 0
@@ -277,9 +255,28 @@ offset_top = 112.0
 offset_right = 1089.0
 offset_bottom = 589.0
 
+[node name="Cutscene" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_sro5w")
+
+[node name="NpcDialogueBox" parent="Cutscene" instance=ExtResource("12_ha5er")]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 402.0
+offset_right = 526.0
+offset_bottom = 549.0
+
 [node name="DynamicMusic" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")
 audio_streams = Array[AudioStream]([ExtResource("15_myd6t"), ExtResource("17_7g7rx"), ExtResource("18_23yam"), ExtResource("19_rpv6v")])
 intensity_speeds = Array[float]([200.0, 300.0, 400.0, 500.0])
 divisions = Array[int]([4, 8, 4, 8])
 bpms = Array[float]([113.744, 113.946, 152.381, 152.866])
+
+[editable path="Dialogue/NpcDialogueBox"]
