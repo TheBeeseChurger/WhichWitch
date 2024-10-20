@@ -1,0 +1,53 @@
+{
+	"name": "Punk girl",
+	"intro_dialogue": [
+		["player", "Man! I'm too good at this!"],
+		["player", "Let's try talking to that girl over there!"],
+		["player", "She looks like a botanist witch."],
+		["player", "With that small witch cap, she must be a junior witch."],
+		["npc", ""]
+	],
+	"questions": [
+		{
+			"text": "This is a question's displayed text.",
+			"time": 8,
+			"replies": [
+				{
+					"text": "Good Option",
+					"response": "Good response",
+					"rating": "good"
+				},
+				{
+					"text": "Neutral Option",
+					"response": "Neutral response",
+					"rating": "meh"
+				},
+				{
+					"text": "Bad Option",
+					"response": "Bad response",
+					"rating": "bad"
+				},
+				{
+					"text": "Very Good Option",
+					"response": "Very Good response",
+					"rating": "very good"
+				},
+				{
+					"text": "Very Bad Option",
+					"response": "Very Bad response",
+					"rating": "very bad"
+				}
+			]
+		}
+	],
+	"ignored_responses": [
+		"This is an ignored response from an NPC.",
+		"This is another ignored response from an NPC.",
+		""
+	],
+	"outro_dialogue": [
+		["player", "This is an outro dialogue from the player."],
+		["npc", "This is another outro dialogue from the NPC."],
+		["", ""]
+	]
+}
