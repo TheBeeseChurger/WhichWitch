@@ -16,6 +16,7 @@ var dynamic_music_player: DynamicMusicPlayer
 @onready var dialogue_tutorial_panel: PanelContainer = $Dialogue/DialogueTutorialPanel
 
 @onready var death_screen: Control = $DeathScreen
+@onready var pause_menu: Control = $PauseMenu
 
 
 # How quickly to move through the noise
@@ -52,6 +53,7 @@ func _ready() -> void:
 	dialogue_tutorial_panel.visible = false
 	dim_color_rect.visible = false
 	death_screen.visible = false
+	pause_menu.visible = false
 
 func _process(delta: float) -> void:	
 	# Fade out the intensity over time
@@ -93,4 +95,13 @@ func retry_pressed():
 	get_tree().change_scene_to_file("res://Scenes/rhythm_game_screen.tscn")
 
 func home_pressed():
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/title-screen.tscn")
+
+func pause_opened():
+	get_tree().paused = true
+	pause_menu.visible = true
+	
+func pause_closed():
+	get_tree().paused = false
+	pause_menu.visible = false
