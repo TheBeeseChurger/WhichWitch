@@ -4,12 +4,11 @@
 		["player", "Man! I'm too good at this!"],
 		["player", "Let's try talking to that girl over there!"],
 		["player", "She looks like a botanist witch."],
-		["player", "With that small witch cap, she must be a junior witch."],
-		["npc", ""]
+		["player", "With that small witch cap, she must be a junior witch."]
 	],
 	"questions": [
 		{
-			"text": "This is a question's displayed text.",
+			"text": "This is a question by the punk girl.",
 			"time": 8,
 			"replies": [
 				{
@@ -26,28 +25,47 @@
 					"text": "Bad Option",
 					"response": "Bad response",
 					"rating": "bad"
+				}
+			]
+		},
+		{
+			"switchto": "boyfriend"
+		},
+		{
+			"text": "This is a question by the boyfriend.",
+			"time": 8,
+			"replies": [
+				{
+					"text": "Good Option",
+					"response": "Good response",
+					"rating": "good"
 				},
 				{
-					"text": "Very Good Option",
-					"response": "Very Good response",
-					"rating": "very good"
+					"text": "Neutral Option",
+					"response": "Neutral response",
+					"rating": "meh"
 				},
 				{
-					"text": "Very Bad Option",
-					"response": "Very Bad response",
-					"rating": "very bad"
+					"text": "Bad Option",
+					"response": "Bad response",
+					"rating": "bad"
 				}
 			]
 		}
 	],
-	"ignored_responses": [
-		"This is an ignored response from an NPC.",
-		"This is another ignored response from an NPC.",
-		""
-	],
+	"ignored_responses": {
+		"punkgirl": [
+			"This is an ignored response from an NPC.",
+			"This is another ignored response from an NPC.",
+			""
+		],
+		"boyfriend": [
+			"",
+			""
+		]
+	},
 	"outro_dialogue": [
-		["player", "This is an outro dialogue from the player."],
-		["npc", "This is another outro dialogue from the NPC."],
-		["", ""]
+		["punkgirl", "text"],
+		["boyfriend", "text"]
 	]
 }
