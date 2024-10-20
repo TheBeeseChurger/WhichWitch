@@ -130,6 +130,27 @@
 					"rating": "very good"
 				}
 			]
+		},
+		{
+			"text": "Man! That was too easy for you, huh?",
+			"time": 8,
+			"replies": [
+				{
+					"text": "Yeah. Too easy for me.",
+					"response": "Nice job!",
+					"rating": "good"
+				},
+				{
+					"text": "No. I'm so lost.",
+					"response": "Oh. Well you finished either way!",
+					"rating": "meh"
+				},
+				{
+					"text": "I'm ready, coach!",
+					"response": "That's what I'm talking about!",
+					"rating": "very good"
+				}
+			]
 		}
 	],
 	"ignored_responses": [

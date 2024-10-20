@@ -392,6 +392,27 @@
 					"rating": "meh"
 				}
 			]
+		},
+        {
+			"text": "Y-You did well..",
+			"time": 8,
+			"replies": [
+				{
+					"text": "...Wanna call it here?",
+					"response": "Definitely... I can't feel my tongue.",
+					"rating": "good"
+				},
+				{
+					"text": "Oh. Cool.",
+					"response": "....I'm too tired to burn you right now...",
+					"rating": "bad"
+				},
+				{
+					"text": "This songs sick, can we go again?",
+					"response": "Well.. I did make it myself... B-But...",
+					"rating": "very good"
+				}
+			]
 		}
 	],
 	"ignored_responses": [
