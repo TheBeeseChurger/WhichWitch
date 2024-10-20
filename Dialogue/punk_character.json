@@ -332,7 +332,15 @@
 		]
 	},
 	"outro_dialogue": [
-		["punkgirl", "text"],
-		["boyfriend", "text"]
+		["punkgirl", "Guess this is goodbye, friend. It was nice talking to you."],
+		["player", "Yeah. Nice talking to you."],
+		["punkgirl", "Ah right. Sorry I didn't tell you about my boyfriend."],
+		["punkgirl", "I didn't think he'd care that much. Guess you gave him a bit of competition."],
+		["boyfriend", "Hey! He didn't give me any trouble! I could've beat him easily.."],
+		["punkgirl", "Right..."],
+		["punkgirl", "Anyway..."],
+		["punkgirl", "You definitely helped me out. He might think twice about being all lazy with me."],
+		["punkgirl", "And worst come to worst, you helped me realize I'll need a new boyfriend soon."],
+		["punkgirl", "You're not that bad a guy. See you round."]
 	]
 }
