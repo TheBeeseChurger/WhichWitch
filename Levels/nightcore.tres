@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Level" load_steps=8 format=3 uid="uid://bcj2nxhmla31t"]
 
 [ext_resource type="Texture2D" uid="uid://bm7r6ina5wp4r" path="res://Sprites/nc 4.png" id="1_tqcs8"]
-[ext_resource type="Resource" uid="uid://n1sw5uh8ucwk" path="res://DynamicAudio/music-lvl-1.tres" id="1_xclto"]
+[ext_resource type="Resource" uid="uid://n1sw5uh8ucwk" path="res://DynamicAudio/nightcore-music.tres" id="1_xclto"]
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_xd3v5"]
 [ext_resource type="Texture2D" uid="uid://dty51gaedjo8e" path="res://Sprites/nc 2.png" id="3_86gm3"]
 [ext_resource type="Texture2D" uid="uid://ke74up2rmeab" path="res://Sprites/nc 3.png" id="4_p61rr"]

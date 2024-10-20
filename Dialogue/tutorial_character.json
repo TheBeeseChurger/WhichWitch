@@ -29,7 +29,7 @@
 	"questions": [
 		{
 			"text": "Hey!",
-			"time": 9999,
+			"time": 25,
 			"replies": [
 				{
 					"text": "Yo.",

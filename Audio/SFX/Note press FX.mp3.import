@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dccp1ya6f0h8y"
+path="res://.godot/imported/Note press FX.mp3-45645fe9abcd5e1aec6ee456986d7a31.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/Note press FX.mp3"
+dest_files=["res://.godot/imported/Note press FX.mp3-45645fe9abcd5e1aec6ee456986d7a31.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

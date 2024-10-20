@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://bjpoyliyupyqp"]
 
 [node name="DialogueOption" type="Button"]
+z_index = 2
 offset_right = 181.0
 offset_bottom = 65.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "Option #"

@@ -13,15 +13,18 @@ var dynamic_music_player: DynamicMusicPlayer
 @onready var player_portrait: TextureRect = $PortraitContainer/PlayerPortrait
 
 @onready var background: TextureRect = $Background
+@onready var dim_color_rect: ColorRect = $DimColorRect
 
+@onready var rhythm_tutorial_panel: PanelContainer = $Rhythm/RhythmTutorialPanel
+@onready var dialogue_tutorial_panel: PanelContainer = $Dialogue/DialogueTutorialPanel
 
 # How quickly to move through the noise
-const NOISE_SHAKE_SPEED: float = 30.0
+const NOISE_SHAKE_SPEED: float = 5.0
 # Noise returns values in the range (-1, 1)
 # So this is how much to multiply the returned value by
-const NOISE_SHAKE_STRENGTH: float = 60.0
+const NOISE_SHAKE_STRENGTH: float = 15.0
 # Multiplier for lerping the shake strength to zero
-const SHAKE_DECAY_RATE: float = 5.0
+const SHAKE_DECAY_RATE: float = 2.0
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
 
@@ -45,12 +48,12 @@ func _ready() -> void:
 	noise.seed = rand.randi()
 	# Period affects how quickly the noise changes values
 	noise.frequency = 0.5
-
-
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("rhythm_press"):
-		apply_noise_shake()
 	
+	rhythm_tutorial_panel.visible = false
+	dialogue_tutorial_panel.visible = false
+	dim_color_rect.visible = false
+
+func _process(delta: float) -> void:	
 	# Fade out the intensity over time
 	shake_strength = lerp(shake_strength, 0.0, SHAKE_DECAY_RATE * delta)
 

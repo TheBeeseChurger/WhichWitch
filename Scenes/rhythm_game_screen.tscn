@@ -1,12 +1,13 @@
-[gd_scene load_steps=34 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=36 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Resource" uid="uid://dvocg8glldoo7" path="res://Levels/tutorial.tres" id="2_anosn"]
-[ext_resource type="Texture2D" uid="uid://d2jh7t550a7l8" path="res://Sprites/3.png" id="2_y82fn"]
 [ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
 [ext_resource type="Texture2D" uid="uid://bsd2pjvg1s1my" path="res://Sprites/Tutorial Background V1.png" id="3_khtge"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_6yd2o"]
 [ext_resource type="Script" path="res://Scripts/rhythm.gd" id="4_gfr0l"]
+[ext_resource type="Texture2D" uid="uid://73d3u8b27nyb" path="res://Sprites/tut 3 fix.png" id="4_x3q3w"]
+[ext_resource type="Script" path="res://Scripts/CharacterPortrait.gd" id="5_70um0"]
 [ext_resource type="PackedScene" uid="uid://dcglolmwry002" path="res://Scenes/UI/miss_popup.tscn" id="5_gu8r3"]
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="5_tw8ck"]
 [ext_resource type="PackedScene" uid="uid://bjpoyliyupyqp" path="res://Scenes/UI/dialogue_option.tscn" id="6_gsqgo"]
@@ -20,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://b4l75ixqp7660" path="res://Sprites/PumpkinNote1.png" id="12_i0q81"]
 [ext_resource type="Texture2D" uid="uid://chgo4ti4m28t6" path="res://Sprites/cauldron-back.png" id="13_1sv17"]
 [ext_resource type="Texture2D" uid="uid://d2ufvqqxskipr" path="res://Sprites/BadArrow.png" id="13_nnqw2"]
+[ext_resource type="AudioStream" uid="uid://dccp1ya6f0h8y" path="res://Audio/SFX/Note press FX.mp3" id="15_6wcuw"]
 [ext_resource type="Script" path="res://Scripts/cutscene.gd" id="15_sro5w"]
 [ext_resource type="Texture2D" uid="uid://dmhn6jfs0bqm" path="res://Sprites/space-hint.png" id="15_w7unt"]
 [ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
@@ -74,35 +76,37 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_khtge")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="DimColorRect" type="ColorRect" parent="."]
 visible = false
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0156863, 0.0156863, 0.0470588, 0.580392)
+color = Color(0.0156863, 0.0156863, 0.0470588, 0.47451)
 
-[node name="PortraitContainer" type="MarginContainer" parent="."]
+[node name="PortraitContainer" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 150
-theme_override_constants/margin_bottom = 150
 
 [node name="OpponentPortrait" type="TextureRect" parent="PortraitContainer"]
-custom_minimum_size = Vector2(250, 400)
+texture_filter = 2
 layout_mode = 2
+offset_left = 150.0
+offset_top = 98.0
+offset_right = 432.0
+offset_bottom = 498.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
-texture = ExtResource("2_y82fn")
-expand_mode = 3
+texture = ExtResource("4_x3q3w")
+expand_mode = 1
+script = ExtResource("5_70um0")
 
 [node name="RatingAnimRect" type="TextureRect" parent="PortraitContainer/OpponentPortrait"]
 texture_filter = 1
@@ -115,14 +119,19 @@ texture = ExtResource("3_hsgmq")
 expand_mode = 1
 
 [node name="PlayerPortrait" type="TextureRect" parent="PortraitContainer"]
-custom_minimum_size = Vector2(250, 400)
 layout_mode = 2
+offset_left = 722.0
+offset_top = 98.0
+offset_right = 1004.0
+offset_bottom = 498.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 texture = ExtResource("6_wyxab")
-expand_mode = 3
+expand_mode = 1
+script = ExtResource("5_70um0")
 
 [node name="Rhythm" type="Control" parent="."]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,6 +147,7 @@ okay_popup = ExtResource("7_arxmi")
 good_popup = ExtResource("8_58pgq")
 great_popup = ExtResource("9_ft756")
 cauldron_splash_effect = ExtResource("16_wufbn")
+note_press_sound = ExtResource("15_6wcuw")
 
 [node name="ColorRect" type="ColorRect" parent="Rhythm"]
 layout_mode = 1
@@ -190,11 +200,13 @@ offset_right = 5.0
 offset_bottom = 15.5
 
 [node name="NoteTargetVisual" type="Sprite2D" parent="Rhythm/ColorRect/ColorRect3/TargetCenter"]
+z_index = 2
 texture_filter = 1
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_i0q81")
 
 [node name="SpaceInputHint" type="Sprite2D" parent="Rhythm/ColorRect/ColorRect3/TargetCenter"]
+z_index = 2
 texture_filter = 1
 position = Vector2(-70, 10.5)
 scale = Vector2(2, 2)
@@ -202,6 +214,9 @@ texture = ExtResource("15_w7unt")
 
 [node name="PopupCenter" type="Marker2D" parent="Rhythm/ColorRect/ColorRect3"]
 position = Vector2(49, 15.5)
+
+[node name="TutorialNoteHeightMarker" type="Marker2D" parent="Rhythm/ColorRect/ColorRect3"]
+position = Vector2(5, -193)
 
 [node name="NoteSpawnPoint" type="Marker2D" parent="Rhythm/ColorRect"]
 position = Vector2(5, 5)
@@ -216,6 +231,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("13_1sv17")
 
 [node name="Notes" type="Node2D" parent="Rhythm"]
+position = Vector2(576, -54)
 
 [node name="CauldronFront" type="Sprite2D" parent="Rhythm"]
 z_index = 1
@@ -226,6 +242,45 @@ texture = ExtResource("12_cikpx")
 
 [node name="CauldronSplashParticles" parent="Rhythm" instance=ExtResource("16_wufbn")]
 visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Rhythm"]
+process_mode = 3
+volume_db = 4.0
+
+[node name="RhythmTutorialPanel" type="PanelContainer" parent="Rhythm"]
+z_index = 2
+layout_mode = 0
+offset_left = 631.0
+offset_top = 144.0
+offset_right = 1020.0
+offset_bottom = 370.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Rhythm/RhythmTutorialPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="Rhythm/RhythmTutorialPanel/MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 18
+text = "Hit the space bar when the notes line up with the shape on the bottom.
+Hitting notes will heal you, and you will lose HP if you miss a note."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Rhythm/RhythmTutorialPanel/MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 0.792157)
+theme_override_font_sizes/font_size = 15
+text = "Press space to continue"
+vertical_alignment = 2
+autowrap_mode = 2
 
 [node name="Dialogue" type="Control" parent="."]
 layout_mode = 1
@@ -241,10 +296,12 @@ meh_rating_texture = SubResource("GradientTexture1D_lrsc3")
 bad_rating_texture = ExtResource("13_nnqw2")
 
 [node name="NpcDialogueBox" parent="Dialogue" instance=ExtResource("12_ha5er")]
+visible = false
+z_index = 2
 layout_mode = 0
 offset_left = 57.0
 offset_top = 402.0
-offset_right = 526.0
+offset_right = 463.0
 offset_bottom = 549.0
 
 [node name="RespondTimeLeftBar" type="TextureProgressBar" parent="Dialogue/NpcDialogueBox"]
@@ -266,16 +323,42 @@ texture_progress = SubResource("GradientTexture1D_bpxxe")
 
 [node name="RandomPopupContainer" type="Control" parent="Dialogue"]
 anchors_preset = 0
-offset_left = 613.0
-offset_top = 101.0
-offset_right = 1110.0
-offset_bottom = 589.0
+offset_left = 618.0
+offset_top = 93.0
+offset_right = 1117.0
+offset_bottom = 494.0
 
 [node name="ClickInputHint" type="Sprite2D" parent="Dialogue"]
+z_index = 2
 texture_filter = 1
-position = Vector2(1072, 467)
+position = Vector2(1064.5, 514.5)
 scale = Vector2(2, 2)
 texture = ExtResource("22_fioew")
+
+[node name="DialogueTutorialPanel" type="PanelContainer" parent="Dialogue"]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = 643.0
+offset_top = 489.0
+offset_right = 1017.0
+offset_bottom = 632.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Dialogue/DialogueTutorialPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="Dialogue/DialogueTutorialPanel/MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 17
+text = "Choose your reply to the other person's question. But be wary; some choices are better than others, and the choices won't stay on the screen forever!"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Cutscene" type="Control" parent="."]
 visible = false
