@@ -12,6 +12,7 @@
 
 [resource]
 script = ExtResource("1_omq3d")
+name = "tutorial"
 starting_speed = 150.0
 min_speed = 150.0
 min_speed_gain = 30.0
@@ -22,6 +23,7 @@ happy_sprite = ExtResource("4_jcd41")
 very_happy_sprite = ExtResource("4_jcd41")
 angry_sprite = ExtResource("1_bwpun")
 very_angry_sprite = ExtResource("1_bwpun")
+rank_thresholds = Array[int]([3000, 2600, 2300, 2000, 1500])
 next_level = ExtResource("2_qvc3k")
 dialogue_name = "tutorial_character"
 dynamic_music = ExtResource("1_nugtv")

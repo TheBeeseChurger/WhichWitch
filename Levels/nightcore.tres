@@ -7,14 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://dty51gaedjo8e" path="res://Sprites/nc 2.png" id="3_86gm3"]
 [ext_resource type="Texture2D" uid="uid://ke74up2rmeab" path="res://Sprites/nc 3.png" id="4_p61rr"]
 [ext_resource type="Texture2D" uid="uid://b4fbnxgq2q0di" path="res://Sprites/CandyCornNote2.png" id="5_ohebo"]
-[ext_resource type="Resource" uid="uid://dr6f3syd7ky2q" path="res://Levels/punkgirl.tres" id="5_sprse"]
 [ext_resource type="Texture2D" uid="uid://b8fm6xf4dbwam" path="res://Sprites/nc 5.png" id="6_0hhy6"]
 [ext_resource type="Texture2D" uid="uid://dab01vs4gvsvu" path="res://Sprites/CandyCornNote1.png" id="6_ipshr"]
+[ext_resource type="Resource" uid="uid://dr6f3syd7ky2q" path="res://Levels/punkgirl.tres" id="6_irpry"]
 [ext_resource type="Texture2D" uid="uid://do3bvmjkh27gm" path="res://Sprites/nc 1.png" id="7_cen55"]
 [ext_resource type="Texture2D" uid="uid://cbp51e1wdt04t" path="res://Sprites/CandyCornNote.png" id="7_hf4fp"]
 
 [resource]
 script = ExtResource("1_xd3v5")
+name = "nightcore"
 starting_speed = 240.0
 min_speed = 200.0
 min_speed_gain = 20.0
@@ -25,7 +26,7 @@ happy_sprite = ExtResource("3_86gm3")
 very_happy_sprite = ExtResource("7_cen55")
 angry_sprite = ExtResource("1_tqcs8")
 very_angry_sprite = ExtResource("6_0hhy6")
-next_level = ExtResource("5_sprse")
+next_level = ExtResource("6_irpry")
 dialogue_name = "nightcore_character"
 dynamic_music = ExtResource("2_ke3i8")
 background_texture = ExtResource("2_5qatn")

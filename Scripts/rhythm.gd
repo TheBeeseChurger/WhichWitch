@@ -27,6 +27,8 @@ extends Control
 @onready var space_input_hint: Sprite2D = $ColorRect/ColorRect3/TargetCenter/SpaceInputHint
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
+@onready var win_screen: WinScreen = $"../WinScreen"
+
 
 var current_note_speed: float = 0 # should be 0 during cutscenes to activate intro/outro track
 var notes_left: int
@@ -136,20 +138,25 @@ func rhythm_press():
 		if distance_from_target < max_note_distance*0.175:
 			hit_type = "great"
 			game_screen.gain_health(3)
+			win_screen.add_great()
 			hit_popup(great_popup)
 		elif distance_from_target < max_note_distance*0.4:
 			hit_type = "good"
+			win_screen.add_good()
 			game_screen.gain_health(2)
 			hit_popup(good_popup)
 		elif distance_from_target < max_note_distance*0.65:
 			hit_type = "okay"
 			game_screen.gain_health(1)
+			win_screen.add_okay()
 			hit_popup(okay_popup)
 		elif distance_from_target < max_note_distance:
 			hit_type = "bad"
+			win_screen.add_bad()
 			hit_popup(bad_popup)
 		elif distance_from_target < max_note_distance*2:
 			hit_type = "miss"
+			win_screen.add_miss()
 			game_screen.lose_health(6)
 			hit_popup(miss_popup)
 		
@@ -248,9 +255,37 @@ func spawn_note():
 		note.texture = note_textures[randi_range(0, len(note_textures)-1)]
 	notes_parent.add_child(note)
 	
+	
 	if not tutorial_shown:
-		note.z_index = 2
+		note.z_index = 3
 	#print("spawned note at ", note.global_position)
+	
+	var interval = eigth_length * current_note_speed
+	await get_tree().create_timer(0.05).timeout
+	push_back_while_overlapping(note, interval)
+
+func push_back_while_overlapping(note: Node2D, interval: float):
+	var overlaps: bool = true
+	var iterations: int = 50
+	while overlaps:
+		overlaps = false
+		for child: Node2D in notes_parent.get_children():
+			if note == child:
+				continue
+			
+			if abs(child.global_position.y - note.global_position.y) < 15:
+				overlaps = true
+				break
+		
+		if overlaps:
+			print("bump in pushback")
+			note.global_position.y -= interval
+			
+		iterations -= 1
+		if iterations <= 0:
+			print("Max bumps")
+			break
+	
 
 func clear_anim(note: Sprite2D):
 	note_hit_anim(note)

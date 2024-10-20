@@ -1,8 +1,8 @@
-[gd_scene load_steps=39 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=43 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
+[ext_resource type="Texture2D" uid="uid://daduyihra3ocv" path="res://Sprites/pumpkin girl bg.png" id="2_bxygy"]
 [ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
-[ext_resource type="Texture2D" uid="uid://bsd2pjvg1s1my" path="res://Sprites/Tutorial Background V1.png" id="3_khtge"]
 [ext_resource type="Texture2D" uid="uid://tcvtoi5b4qnv" path="res://Sprites/Player-Male-Death.png" id="3_rvi76"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_6yd2o"]
 [ext_resource type="Script" path="res://Scripts/rhythm.gd" id="4_gfr0l"]
@@ -27,10 +27,13 @@
 [ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
 [ext_resource type="PackedScene" uid="uid://cev7xee75236w" path="res://Scenes/UI/cauldron_splash_particles.tscn" id="16_wufbn"]
 [ext_resource type="Texture2D" uid="uid://i5h20aantn0h" path="res://Sprites/click-hint.png" id="22_fioew"]
+[ext_resource type="AudioStream" uid="uid://quv7mxwdudin" path="res://Audio/popup.mp3" id="25_tvtpm"]
 [ext_resource type="Texture2D" uid="uid://dun8m3812dgma" path="res://Sprites/HealthBarBG.png" id="26_mbxq6"]
+[ext_resource type="AudioStream" uid="uid://dyf70gl6quefk" path="res://Audio/SFX/Menu Select FX click.mp3" id="26_v6k5m"]
 [ext_resource type="Texture2D" uid="uid://dskr23imdxloc" path="res://Sprites/HealthBarFG.png" id="27_oywd7"]
 [ext_resource type="Texture2D" uid="uid://bo8giwxnr73gi" path="res://Sprites/HealthBarMG.png" id="28_4psyy"]
 [ext_resource type="Texture2D" uid="uid://du8xtpxxajqi7" path="res://Sprites/pause.png" id="31_0v4u7"]
+[ext_resource type="Script" path="res://Scripts/WinScreen.gd" id="32_cquky"]
 
 [sub_resource type="Gradient" id="Gradient_vbo6e"]
 offsets = PackedFloat32Array(0)
@@ -48,6 +51,11 @@ gradient = SubResource("Gradient_vumdn")
 
 [sub_resource type="LabelSettings" id="LabelSettings_0w5hp"]
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_2pesk"]
+font_size = 48
+outline_size = 12
+outline_color = Color(0, 0.426763, 0.878641, 1)
 
 [sub_resource type="InputEventKey" id="InputEventKey_5wcts"]
 device = -1
@@ -73,7 +81,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_khtge")
+texture = ExtResource("2_bxygy")
 
 [node name="DimColorRect" type="ColorRect" parent="."]
 visible = false
@@ -199,7 +207,6 @@ offset_right = 5.0
 offset_bottom = 15.5
 
 [node name="NoteTargetVisual" type="Sprite2D" parent="Rhythm/ColorRect/ColorRect3/TargetCenter"]
-z_index = 2
 texture_filter = 1
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_i0q81")
@@ -247,6 +254,7 @@ process_mode = 3
 volume_db = 4.0
 
 [node name="RhythmTutorialPanel" type="PanelContainer" parent="Rhythm"]
+visible = false
 z_index = 2
 layout_mode = 0
 offset_left = 631.0
@@ -358,6 +366,14 @@ theme_override_font_sizes/font_size = 17
 text = "Choose your reply to the other person's question. But be wary; some choices are better than others, and the choices won't stay on the screen forever!"
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="PopupSoundPlayer" type="AudioStreamPlayer" parent="Dialogue"]
+stream = ExtResource("25_tvtpm")
+volume_db = 2.0
+
+[node name="SelectSoundPlayer" type="AudioStreamPlayer" parent="Dialogue"]
+stream = ExtResource("26_v6k5m")
+volume_db = 2.0
 
 [node name="Cutscene" type="Control" parent="."]
 visible = false
@@ -472,6 +488,7 @@ script = ExtResource("5_70um0")
 
 [node name="PauseMenu" type="Control" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -536,6 +553,354 @@ label_settings = SubResource("LabelSettings_0w5hp")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="WinScreen" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("32_cquky")
+rank_colors = Array[Color]([Color(0.756716, 0.333034, 0.912361, 1), Color(0.19164, 0.65011, 0.855404, 1), Color(0.362194, 0.750576, 0.468946, 1), Color(0.839623, 0.751145, 0.17766, 1), Color(0.921983, 0.288641, 0.172402, 1), Color(0.497474, 0.497474, 0.497474, 1)])
+
+[node name="DimColorRect" type="ColorRect" parent="WinScreen"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0156863, 0.0156863, 0.0470588, 0.47451)
+
+[node name="Button" type="Button" parent="WinScreen"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -364.0
+offset_top = 67.0
+offset_right = -18.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Next Level"
+
+[node name="TitleButton" type="Button" parent="WinScreen"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = 222.0
+offset_right = -65.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Title Screen"
+
+[node name="Label" type="Label" parent="WinScreen"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -469.0
+offset_right = 469.0
+offset_bottom = 234.0
+grow_horizontal = 2
+text = "LEVEL CLEARED!"
+label_settings = SubResource("LabelSettings_0w5hp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinScreen"]
+layout_mode = 0
+offset_left = 698.0
+offset_top = 233.0
+offset_right = 895.0
+offset_bottom = 536.0
+
+[node name="RankRow" type="Control" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="RankForLabel" type="Label" parent="WinScreen/VBoxContainer/RankRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 78.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Rank"
+vertical_alignment = 1
+
+[node name="RankLabel" type="Label" parent="WinScreen/VBoxContainer/RankRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -33.5
+offset_bottom = 33.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "A"
+label_settings = SubResource("LabelSettings_2pesk")
+
+[node name="ScoreRow" type="Control" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="LabelFor" type="Label" parent="WinScreen/VBoxContainer/ScoreRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 70.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "Score"
+
+[node name="Label" type="Label" parent="WinScreen/VBoxContainer/ScoreRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "5678"
+
+[node name="AccuracyRow" type="Control" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="LabelFor" type="Label" parent="WinScreen/VBoxContainer/AccuracyRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 70.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "Accuracy
+"
+
+[node name="Label" type="Label" parent="WinScreen/VBoxContainer/AccuracyRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "56.78%"
+
+[node name="GreatRow" type="Control" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="LabelFor" type="Label" parent="WinScreen/VBoxContainer/GreatRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 70.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "Great"
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="WinScreen/VBoxContainer/GreatRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "50"
+vertical_alignment = 2
+
+[node name="GoodRow" type="Control" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="LabelFor" type="Label" parent="WinScreen/VBoxContainer/GoodRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 70.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "Good"
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="WinScreen/VBoxContainer/GoodRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "50"
+vertical_alignment = 2
+
+[node name="OkayRow" type="Control" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="LabelFor" type="Label" parent="WinScreen/VBoxContainer/OkayRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 70.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "Okay"
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="WinScreen/VBoxContainer/OkayRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "50"
+vertical_alignment = 2
+
+[node name="BadRow" type="Control" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="LabelFor" type="Label" parent="WinScreen/VBoxContainer/BadRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 70.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "Bad"
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="WinScreen/VBoxContainer/BadRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "50"
+vertical_alignment = 2
+
+[node name="MissRow" type="Control" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="LabelFor" type="Label" parent="WinScreen/VBoxContainer/MissRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 70.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "Miss"
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="WinScreen/VBoxContainer/MissRow"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "50"
+vertical_alignment = 2
+
 [node name="DynamicMusicPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")
 
@@ -561,6 +926,8 @@ volume_db = 2.0
 [connection signal="pressed" from="PauseMenu/VBoxContainer/ResumeButton" to="." method="pause_closed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/RetryButton" to="." method="retry_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/MainMenuButton" to="." method="home_pressed"]
+[connection signal="pressed" from="WinScreen/Button" to="." method="retry_pressed"]
+[connection signal="pressed" from="WinScreen/TitleButton" to="." method="home_pressed"]
 [connection signal="pressed" from="PauseButton" to="." method="pause_opened"]
 
 [editable path="Dialogue/NpcDialogueBox"]

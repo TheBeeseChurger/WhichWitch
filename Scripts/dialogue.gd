@@ -19,6 +19,8 @@ extends Control
 @onready var good_sound: AudioStream = preload("res://Audio/GOOD SOUND.mp3")
 @onready var bad_sound: AudioStream = preload("res://Audio/BAD SOUND V2.mp3")
 @onready var response_sound_player: AudioStreamPlayer = $"../ResponseSoundPlayer"
+@onready var popup_sound_player: AudioStreamPlayer = $PopupSoundPlayer
+@onready var select_sound_player: AudioStreamPlayer = $SelectSoundPlayer
 
 
 # Contains all dialogue
@@ -182,9 +184,13 @@ func place_option(option: Button, restore_option_index: int):
 		iteration_max -= 1
 		if iteration_max <= 0:
 			print("MAX ITERATIONS REACHED")
-			break
+			if is_instance_valid(option):
+				option.queue_free()
+			return
 	
 	#print("placed at ", random_x, ", ", random_y)
+	
+	popup_sound_player.play()
 	
 	option.position = Vector2(random_x, random_y)
 	option.modulate = Color(1,1,1,0)
@@ -211,6 +217,8 @@ func place_option(option: Button, restore_option_index: int):
 func submit_dialogue(reply: Dictionary):
 	respond_time_left_bar.value = 0
 	
+	select_sound_player.play()
+	
 	if not tutorial_shown:
 		tutorial_shown = true
 		game_screen.dim_color_rect.visible = false
@@ -219,7 +227,10 @@ func submit_dialogue(reply: Dictionary):
 	if reply.is_empty():
 		very_bad_rating()
 		var ignored_responses = dialogue["ignored_responses"]
+		if ignored_responses is Dictionary:
+			ignored_responses = ignored_responses[character_sprites_level.name]
 		var ignored_response = ignored_responses[randi_range(0, len(ignored_responses)-1)]
+		
 		npc_dialogue_box.show_message(ignored_response)
 	else:
 		var rating = reply["rating"]
@@ -258,6 +269,7 @@ func very_good_rating():
 	happiness_value += 3.0
 	game_screen.opponent_portrait.texture = character_sprites_level.very_happy_sprite
 	rating_anim(Vector2.UP)
+	game_screen.win_screen.points += 200
 	response_sound_player.stream = good_sound
 	response_sound_player.play()
 
@@ -267,6 +279,7 @@ func good_rating():
 	happiness_value += 1.5
 	game_screen.opponent_portrait.texture = character_sprites_level.happy_sprite
 	rating_anim(Vector2.UP*0.5)
+	game_screen.win_screen.points += 150
 	response_sound_player.stream = good_sound
 	response_sound_player.play()
 	
@@ -275,6 +288,7 @@ func meh_rating():
 	happiness_value *= 0.75
 	#rating_anim_rect.texture = meh_rating_texture
 	game_screen.opponent_portrait.texture = character_sprites_level.neutral_sprite
+	game_screen.win_screen.points += 100
 	#rating_anim(Vector2.ZERO)
 	
 func bad_rating():
@@ -283,6 +297,7 @@ func bad_rating():
 	rating_anim_rect.texture = bad_rating_texture
 	game_screen.opponent_portrait.texture = character_sprites_level.angry_sprite
 	rating_anim(Vector2.DOWN*0.5)
+	game_screen.win_screen.points += 50
 	response_sound_player.stream = bad_sound
 	response_sound_player.play()
 	

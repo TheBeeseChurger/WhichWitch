@@ -1,0 +1,96 @@
+class_name WinScreen
+extends Control
+
+@export var rank_colors: Array[Color]
+
+@onready var game_screen: RhythmGameScreen = $".."
+
+@onready var rank_label: Label = $VBoxContainer/RankRow/RankLabel
+@onready var score_label: Label = $VBoxContainer/ScoreRow/Label
+@onready var accuracy_label: Label = $VBoxContainer/AccuracyRow/Label
+@onready var great_label: Label = $VBoxContainer/GreatRow/Label
+@onready var good_label: Label = $VBoxContainer/GoodRow/Label
+@onready var okay_label: Label = $VBoxContainer/OkayRow/Label
+@onready var bad_label: Label = $VBoxContainer/BadRow/Label
+@onready var miss_label: Label = $VBoxContainer/MissRow/Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+var total_notes: int
+
+var points: int = 0
+
+var great := 0
+var good := 0
+var okay := 0
+var bad := 0
+var miss := 0
+
+func add_great():
+	total_notes += 1
+	great += 1
+	points += 40
+	
+func add_good():
+	total_notes += 1
+	good += 1
+	points += 30
+	
+func add_okay():
+	total_notes += 1
+	okay += 1
+	points += 20
+	
+func add_bad():
+	total_notes += 1
+	bad += 1
+	points += 10
+
+func add_miss():
+	total_notes += 1
+	miss += 1
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+	
+func show_win_screen():
+	visible = true
+	
+	var accuracy: float = (total_notes - miss) / float(total_notes)
+	
+	var thresholds = Level.current_level.rank_thresholds
+	var rank: String
+	var color: Color
+	if points >= thresholds[0]:
+		rank = "S"
+		color = rank_colors[0]
+	elif points >= thresholds[1]:
+		rank = "A"
+		color = rank_colors[1]
+	elif points >= thresholds[2]:
+		rank = "B"
+		color = rank_colors[2]
+	elif points >= thresholds[3]:
+		rank = "C"
+		color = rank_colors[3]
+	elif points >= thresholds[4]:
+		rank = "D"
+		color = rank_colors[4]
+	else:
+		rank = "F"
+		color = rank_colors[5]
+
+	rank_label.text = rank
+	rank_label.label_settings.outline_color = color
+	score_label.text = str(points)
+	accuracy_label.text = ('%.2f' % (accuracy*100)) + "%"
+	
+	great_label.text = str(great)
+	good_label.text = str(good)
+	okay_label.text = str(okay)
+	bad_label.text = str(bad)
+	miss_label.text = str(miss)

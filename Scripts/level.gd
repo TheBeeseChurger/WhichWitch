@@ -3,6 +3,7 @@ extends Resource
 
 static var current_level: Level
 
+@export var name: String
 @export var starting_speed: float = 300
 @export var min_speed: float = 200
 @export var min_speed_gain: float = 25 # amount min_speed increases by at the end of each round
@@ -15,6 +16,7 @@ static var current_level: Level
 @export var	angry_sprite: Texture
 @export var	very_angry_sprite: Texture
 
+@export var rank_thresholds: Array[int] = [7500, 5500, 4000, 3000, 2000]
 
 # level that comes after this level, if any.
 @export var next_level: Level
