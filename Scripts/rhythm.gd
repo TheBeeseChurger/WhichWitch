@@ -243,6 +243,9 @@ func spawn_note():
 	if note_textures and len(note_textures) > 0:
 		note.texture = note_textures[randi_range(0, len(note_textures)-1)]
 	notes_parent.add_child(note)
+	
+	if not tutorial_shown:
+		note.z_index = 2
 	#print("spawned note at ", note.global_position)
 
 func clear_anim(note: Sprite2D):

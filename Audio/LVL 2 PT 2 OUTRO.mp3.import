@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://x0m0lm6a5rvb"
+path="res://.godot/imported/LVL 2 PT 2 OUTRO.mp3-63daa6fecaec71fd4db383a6eb157da8.mp3str"
+
+[deps]
+
+source_file="res://Audio/LVL 2 PT 2 OUTRO.mp3"
+dest_files=["res://.godot/imported/LVL 2 PT 2 OUTRO.mp3-63daa6fecaec71fd4db383a6eb157da8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
