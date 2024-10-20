@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=34 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
@@ -26,6 +26,9 @@
 [ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
 [ext_resource type="PackedScene" uid="uid://cev7xee75236w" path="res://Scenes/UI/cauldron_splash_particles.tscn" id="16_wufbn"]
 [ext_resource type="Texture2D" uid="uid://i5h20aantn0h" path="res://Sprites/click-hint.png" id="22_fioew"]
+[ext_resource type="Texture2D" uid="uid://dun8m3812dgma" path="res://Sprites/HealthBarBG.png" id="26_mbxq6"]
+[ext_resource type="Texture2D" uid="uid://dskr23imdxloc" path="res://Sprites/HealthBarFG.png" id="27_oywd7"]
+[ext_resource type="Texture2D" uid="uid://bo8giwxnr73gi" path="res://Sprites/HealthBarMG.png" id="28_4psyy"]
 
 [sub_resource type="Gradient" id="Gradient_vbo6e"]
 offsets = PackedFloat32Array(0)
@@ -40,20 +43,6 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_bpxxe"]
 gradient = SubResource("Gradient_vumdn")
-
-[sub_resource type="Gradient" id="Gradient_8locq"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ypnh"]
-gradient = SubResource("Gradient_8locq")
-
-[sub_resource type="Gradient" id="Gradient_q28l7"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.924369, 0.19816, 0.252588, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nhl5c"]
-gradient = SubResource("Gradient_q28l7")
 
 [node name="GameScreen" type="Control"]
 layout_mode = 3
@@ -382,29 +371,24 @@ offset_top = 403.0
 offset_right = 1091.0
 offset_bottom = 550.0
 
-[node name="HealthMarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 45
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 45
-theme_override_constants/margin_bottom = 30
-
-[node name="HealthBar" type="TextureProgressBar" parent="HealthMarginContainer"]
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+layout_direction = 1
 layout_mode = 2
+offset_left = 45.0
+offset_top = 30.0
+offset_right = 1107.0
+offset_bottom = 62.0
 size_flags_vertical = 0
 step = 0.0
-value = 100.0
+value = 71.945
 nine_patch_stretch = true
-stretch_margin_top = 20
-stretch_margin_bottom = 20
-texture_under = SubResource("GradientTexture1D_8ypnh")
-texture_progress = SubResource("GradientTexture2D_nhl5c")
+stretch_margin_left = 20
+stretch_margin_right = 20
+texture_under = ExtResource("26_mbxq6")
+texture_over = ExtResource("27_oywd7")
+texture_progress = ExtResource("28_4psyy")
+tint_under = Color(0.117696, 0.139477, 0.164087, 1)
 
 [node name="DynamicMusicPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")

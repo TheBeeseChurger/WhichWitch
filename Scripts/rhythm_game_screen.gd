@@ -2,7 +2,7 @@ class_name RhythmGameScreen
 extends Control
 
 # Health is stored in this bar
-@onready var health_bar: TextureProgressBar = $HealthMarginContainer/HealthBar
+@onready var health_bar: TextureProgressBar = $HealthBar
 
 var dynamic_music_player: DynamicMusicPlayer
 
@@ -21,7 +21,7 @@ const NOISE_SHAKE_SPEED: float = 5.0
 # So this is how much to multiply the returned value by
 const NOISE_SHAKE_STRENGTH: float = 15.0
 # Multiplier for lerping the shake strength to zero
-const SHAKE_DECAY_RATE: float = 2.0
+const SHAKE_DECAY_RATE: float = 4.0
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
 
@@ -51,7 +51,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:	
 	# Fade out the intensity over time
-	shake_strength = lerp(shake_strength, 0.0, SHAKE_DECAY_RATE * delta)
+	shake_strength = move_toward(shake_strength, 0.0, NOISE_SHAKE_STRENGTH * SHAKE_DECAY_RATE * delta)
 
 	# Shake by adjusting camera.offset so we can move the camera around the level via it's position
 	position = get_noise_offset(delta)

@@ -215,7 +215,7 @@ func spawn_note():
 	while overlaps:
 		overlaps = false
 		for child: Node2D in notes_parent.get_children():
-			if abs(child.global_position.y - note.global_position.y) < 5:
+			if abs(child.global_position.y - note.global_position.y) < 20:
 				overlaps = true
 				break
 		

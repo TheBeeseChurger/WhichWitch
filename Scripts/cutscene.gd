@@ -99,7 +99,8 @@ func display_next_line():
 func transition_to_level(next_level: Level):
 	in_level_transition = true
 	var base_pos = rhythm.game_screen.opponent_portrait.position
-	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "position", base_pos + Vector2.LEFT * 450, 1.25)
+	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "base_position", base_pos + Vector2.LEFT * 450, 1.25)
+	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "bop_strength", 0.0, 1.0)
 	await get_tree().create_tween().tween_property(rhythm.game_screen.dynamic_music_player, "volume_db", -30, 1.5).finished
 	
 	Level.current_level = next_level
@@ -114,7 +115,8 @@ func transition_to_level(next_level: Level):
 	game_screen.opponent_portrait.texture = next_level.neutral_sprite
 	play_intro_cutscene()
 	
-	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "position", base_pos, 1.25)
+	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "base_position", base_pos, 1.25)
+	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "bop_strength", 1.0, 1.25)
 	await get_tree().create_tween().tween_property(rhythm.game_screen.dynamic_music_player, "volume_db", 0, 1.5).finished
 	in_level_transition = false
 	
