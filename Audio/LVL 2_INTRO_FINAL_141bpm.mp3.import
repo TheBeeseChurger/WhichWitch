@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ci8mulaitfvg5"
+path="res://.godot/imported/LVL 2_INTRO_FINAL_141bpm.mp3-d1cca4accddfbf74410d4030af5bde7c.mp3str"
+
+[deps]
+
+source_file="res://Audio/LVL 2_INTRO_FINAL_141bpm.mp3"
+dest_files=["res://.godot/imported/LVL 2_INTRO_FINAL_141bpm.mp3-d1cca4accddfbf74410d4030af5bde7c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

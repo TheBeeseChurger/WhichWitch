@@ -8,3 +8,4 @@ extends Resource
 @export var meausure_lengths: Array[float]
 @export var transition_audio_streams: Array[AudioStream]
 @export var transition_meausure_lengths: Array[float]
+@export var force_transition_at_end: Array[int]
