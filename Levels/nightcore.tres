@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bm7r6ina5wp4r" path="res://Sprites/nc 4.png" id="1_tqcs8"]
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_xd3v5"]
 [ext_resource type="Texture2D" uid="uid://cd3m5qwuxbctc" path="res://Sprites/nightcore girl bg.png" id="2_5qatn"]
-[ext_resource type="Resource" uid="uid://n1sw5uh8ucwk" path="res://DynamicAudio/nightcore-music.tres" id="2_ke3i8"]
 [ext_resource type="Texture2D" uid="uid://dty51gaedjo8e" path="res://Sprites/nc 2.png" id="3_86gm3"]
+[ext_resource type="Resource" uid="uid://clmesysauk6mp" path="res://DynamicAudio/nightcore-music-2.tres" id="3_gtp7q"]
 [ext_resource type="Texture2D" uid="uid://ke74up2rmeab" path="res://Sprites/nc 3.png" id="4_p61rr"]
 [ext_resource type="Texture2D" uid="uid://b4fbnxgq2q0di" path="res://Sprites/CandyCornNote2.png" id="5_ohebo"]
 [ext_resource type="Texture2D" uid="uid://b8fm6xf4dbwam" path="res://Sprites/nc 5.png" id="6_0hhy6"]
@@ -29,7 +29,7 @@ very_angry_sprite = ExtResource("6_0hhy6")
 rank_thresholds = Array[int]([7500, 5500, 4000, 3000, 2000])
 next_level = ExtResource("6_irpry")
 dialogue_name = "nightcore_character"
-dynamic_music = ExtResource("2_ke3i8")
+dynamic_music = ExtResource("3_gtp7q")
 background_texture = ExtResource("2_5qatn")
 note_textures = Array[Texture2D]([ExtResource("7_hf4fp")])
 note_hit_textures = Array[Texture2D]([ExtResource("5_ohebo")])

@@ -71,7 +71,7 @@ func display_next_line():
 			rhythm.start_rhythm_mode()
 		elif not in_level_transition:
 			game_screen.win_screen.show_win_screen()
-			if not Level.current_level.next_level:
+			if Level.current_level.name == "punkgirl":
 				game_screen.win_screen.next_button.visible = false
 				game_screen.win_screen.game_win_label.visible = true
 				

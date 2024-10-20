@@ -141,6 +141,8 @@ func start_dialogue_mode():
 		respond_time_remaining = current_question["time"]
 	else:
 		respond_time_remaining = 10.0
+		
+	npc_dialogue_box.linger_time = 9999
 	
 	respond_time_left_bar.max_value = respond_time_remaining / RhythmGameScreen.global_difficulty_mult
 	respond_time_left_bar.value = respond_time_left_bar.max_value
@@ -250,6 +252,7 @@ func submit_dialogue(reply: Dictionary):
 			
 		var response = reply["response"]
 		linger_time_remaining = 2.5
+		npc_dialogue_box.linger_time = 2.5
 		npc_dialogue_box.show_message(response)
 		
 	for child in random_popup_container.get_children():
