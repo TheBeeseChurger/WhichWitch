@@ -5,7 +5,7 @@ extends Control
 
 var level1: Level = preload("res://Levels/tutorial.tres")
 var level2: Level = preload("res://Levels/nightcore.tres")
-var level3: Level = preload("res://Levels/nightcore.tres") # metal
+var level3: Level = preload("res://Levels/punk.tres") # metal
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

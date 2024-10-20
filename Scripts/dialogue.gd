@@ -45,6 +45,8 @@ var happiness_value: float = 0
 
 var linger_time_remaining: float
 
+var character_sprites_level: Level
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = true
@@ -52,6 +54,8 @@ func _ready() -> void:
 	click_input_hint.visible = false
 	
 	rating_anim_rect.modulate = Color(1,1,1,0)
+	
+	character_sprites_level = Level.current_level
 	
 	load_dialog_from_file()
 
@@ -108,6 +112,10 @@ func start_dialogue_mode():
 	
 	visible = true
 	current_question = questions[current_question_index];
+	
+	if current_question.has("switchto"):
+		current_question_index += 1
+		current_question = questions[current_question_index];
 		
 	npc_dialogue_box.show_message(current_question["text"])
 	in_dialogue_mode = true
@@ -236,35 +244,35 @@ func very_good_rating():
 	rating_anim_rect.texture = good_rating_texture
 	rhythm.adjust_speed(-100)
 	happiness_value += 3.0
-	game_screen.opponent_portrait.texture = Level.current_level.very_happy_sprite
+	game_screen.opponent_portrait.texture = character_sprites_level.very_happy_sprite
 	rating_anim(Vector2.UP)
 
 func good_rating():
 	rating_anim_rect.texture = good_rating_texture
 	rhythm.adjust_speed(-50)
 	happiness_value += 1.5
-	game_screen.opponent_portrait.texture = Level.current_level.happy_sprite
+	game_screen.opponent_portrait.texture = character_sprites_level.happy_sprite
 	rating_anim(Vector2.UP*0.5)
 	
 func meh_rating():
 	rhythm.adjust_speed(0)
 	happiness_value *= 0.75
 	#rating_anim_rect.texture = meh_rating_texture
-	game_screen.opponent_portrait.texture = Level.current_level.neutral_sprite
+	game_screen.opponent_portrait.texture = character_sprites_level.neutral_sprite
 	#rating_anim(Vector2.ZERO)
 	
 func bad_rating():
 	rhythm.adjust_speed(50)
 	happiness_value -= 1.5
 	rating_anim_rect.texture = bad_rating_texture
-	game_screen.opponent_portrait.texture = Level.current_level.angry_sprite
+	game_screen.opponent_portrait.texture = character_sprites_level.angry_sprite
 	rating_anim(Vector2.DOWN*0.5)
 	
 func very_bad_rating():
 	rhythm.adjust_speed(100)
 	happiness_value -= 3.0
 	rating_anim_rect.texture = bad_rating_texture
-	game_screen.opponent_portrait.texture = Level.current_level.very_angry_sprite
+	game_screen.opponent_portrait.texture = character_sprites_level.very_angry_sprite
 	rating_anim(Vector2.DOWN)
 	
 func rating_anim(dir: Vector2):
@@ -280,12 +288,12 @@ func rating_anim(dir: Vector2):
 
 func show_current_happiness():
 	if happiness_value >= 4:
-		game_screen.opponent_portrait.texture = Level.current_level.very_happy_sprite
+		game_screen.opponent_portrait.texture = character_sprites_level.very_happy_sprite
 	elif happiness_value >= 2:
-		game_screen.opponent_portrait.texture = Level.current_level.happy_sprite
+		game_screen.opponent_portrait.texture = character_sprites_level.happy_sprite
 	elif happiness_value >= -2:
-		game_screen.opponent_portrait.texture = Level.current_level.neutral_sprite
+		game_screen.opponent_portrait.texture = character_sprites_level.neutral_sprite
 	elif happiness_value >= -4:
-		game_screen.opponent_portrait.texture = Level.current_level.angry_sprite
+		game_screen.opponent_portrait.texture = character_sprites_level.angry_sprite
 	else:
-		game_screen.opponent_portrait.texture = Level.current_level.very_angry_sprite
+		game_screen.opponent_portrait.texture = character_sprites_level.very_angry_sprite

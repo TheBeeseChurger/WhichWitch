@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Level" load_steps=10 format=3 uid="uid://dr6f3syd7ky2q"]
+[gd_resource type="Resource" script_class="Level" load_steps=12 format=3 uid="uid://dr6f3syd7ky2q"]
 
 [ext_resource type="Texture2D" uid="uid://lcbem7fhor8k" path="res://Sprites/plant girl 5.png" id="1_rjxbi"]
+[ext_resource type="Resource" uid="uid://g0lgdsks0ilt" path="res://DynamicAudio/punk_music.tres" id="2_4vuwn"]
 [ext_resource type="Texture2D" uid="uid://bvufxhg2ebfl" path="res://Sprites/plant girl 3.png" id="2_kppoo"]
+[ext_resource type="Texture2D" uid="uid://qxrg0dkpkxi6" path="res://Sprites/plant girl bg.png" id="2_kvc07"]
 [ext_resource type="Texture2D" uid="uid://p6hpbafybu02" path="res://Sprites/plant girl 4.png" id="3_j2mni"]
 [ext_resource type="Texture2D" uid="uid://c1g1y7p37ca0l" path="res://Sprites/AutumnMoonLeafNote2.png" id="4_18csw"]
 [ext_resource type="Script" path="res://Scripts/level.gd" id="5_a3t0l"]
@@ -23,6 +25,8 @@ very_happy_sprite = ExtResource("9_eg5an")
 angry_sprite = ExtResource("1_rjxbi")
 very_angry_sprite = ExtResource("8_1tj5n")
 dialogue_name = "punk_character"
+dynamic_music = ExtResource("2_4vuwn")
+background_texture = ExtResource("2_kvc07")
 note_textures = Array[Texture2D]([ExtResource("6_l4ihs")])
 note_hit_textures = Array[Texture2D]([ExtResource("4_18csw")])
 note_target_texture = ExtResource("5_mvnyk")
