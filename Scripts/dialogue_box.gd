@@ -4,6 +4,7 @@ extends Panel
 @export var characters_per_second: float = 40.0
 
 @export var linger_time = 2.5
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var showing: bool
 var full_message: String
@@ -42,6 +43,8 @@ func _process(delta: float) -> void:
 	# Update the text if we haven't reached the end
 	if current_index < full_message.length():
 		label.text = full_message.substr(0, min(chars_to_show, full_message.length()))
+		audio_stream_player.pitch_scale = randf_range(1.38, 1.42)
+		audio_stream_player.play()
 		current_index = chars_to_show
 	else:
 		if typing:

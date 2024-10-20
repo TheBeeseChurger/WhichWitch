@@ -16,6 +16,10 @@ extends Control
 @onready var click_input_hint: Sprite2D = $ClickInputHint
 @onready var game_screen: RhythmGameScreen = $".."
 
+@onready var good_sound: AudioStream = preload("res://Audio/GOOD SOUND.mp3")
+@onready var bad_sound: AudioStream = preload("res://Audio/BAD SOUND V2.mp3")
+@onready var response_sound_player: AudioStreamPlayer = $"../ResponseSoundPlayer"
+
 
 # Contains all dialogue
 var dialogue: Dictionary
@@ -254,6 +258,8 @@ func very_good_rating():
 	happiness_value += 3.0
 	game_screen.opponent_portrait.texture = character_sprites_level.very_happy_sprite
 	rating_anim(Vector2.UP)
+	response_sound_player.stream = good_sound
+	response_sound_player.play()
 
 func good_rating():
 	rating_anim_rect.texture = good_rating_texture
@@ -261,6 +267,8 @@ func good_rating():
 	happiness_value += 1.5
 	game_screen.opponent_portrait.texture = character_sprites_level.happy_sprite
 	rating_anim(Vector2.UP*0.5)
+	response_sound_player.stream = good_sound
+	response_sound_player.play()
 	
 func meh_rating():
 	rhythm.adjust_speed(0)
@@ -275,6 +283,8 @@ func bad_rating():
 	rating_anim_rect.texture = bad_rating_texture
 	game_screen.opponent_portrait.texture = character_sprites_level.angry_sprite
 	rating_anim(Vector2.DOWN*0.5)
+	response_sound_player.stream = bad_sound
+	response_sound_player.play()
 	
 func very_bad_rating():
 	rhythm.adjust_speed(100)
@@ -282,6 +292,8 @@ func very_bad_rating():
 	rating_anim_rect.texture = bad_rating_texture
 	game_screen.opponent_portrait.texture = character_sprites_level.very_angry_sprite
 	rating_anim(Vector2.DOWN)
+	response_sound_player.stream = bad_sound
+	response_sound_player.play()
 	
 func rating_anim(dir: Vector2):
 	var base_position = rating_anim_rect.position

@@ -1,4 +1,5 @@
 extends Control
+@onready var v_box_container: VBoxContainer = $VBoxContainer
 
 @onready var level_select: Control = $LevelSelect
 @onready var credits: Control = $Credits
@@ -21,9 +22,11 @@ func on_start_pressed():
 	play_level(level1)
 
 func on_select_pressed():
+	v_box_container.visible = false
 	level_select.visible = true
 	
 func on_select_back_pressed():
+	v_box_container.visible = true
 	level_select.visible = false
 
 func on_level_1_pressed():
@@ -41,7 +44,9 @@ func play_level(level: Level):
 	get_tree().change_scene_to_file("res://Scenes/rhythm_game_screen.tscn")
 
 func on_credits_pressed():
+	v_box_container.visible = false
 	credits.visible = true
 	
 func on_credits_back_pressed():
+	v_box_container.visible = true
 	credits.visible = false

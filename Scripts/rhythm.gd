@@ -11,6 +11,7 @@ extends Control
 @export var cauldron_splash_effect: PackedScene
 @export var note_press_sound: AudioStream
 
+@onready var note_miss_sound: AudioStream = preload("res://Audio/SFX/MISSSED NOTE.mp3")
 @onready var note_spawn_point: Marker2D = $ColorRect/NoteSpawnPoint
 @onready var target_center: Control = $ColorRect/ColorRect3/TargetCenter
 @onready var popup_center: Marker2D = $ColorRect/ColorRect3/PopupCenter
@@ -155,6 +156,9 @@ func rhythm_press():
 		if hit_type:
 			if hit_type == "miss":
 				note.queue_free()
+				audio_stream_player.stream = note_miss_sound
+				audio_stream_player.play()
+				game_screen.apply_noise_shake()
 			else:
 				audio_stream_player.stream = note_press_sound
 				audio_stream_player.play()
