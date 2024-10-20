@@ -4,26 +4,179 @@
 		["player", "Man! I'm too good at this!"],
 		["player", "Let's try talking to that girl over there!"],
 		["player", "She looks like a botanist witch."],
-		["player", "With that small witch cap, she must be a junior witch."]
+		["player", "With that small witch cap, she must be a junior witch."],
+		["player", "But why is she green?..."]
 	],
 	"questions": [
 		{
-			"text": "This is a question by the punk girl.",
-			"time": 8,
+			"text": "...Uh, hello?",
+			"time": 7,
 			"replies": [
 				{
-					"text": "Good Option",
-					"response": "Good response",
-					"rating": "good"
+					"text": "Hey, why are you green?",
+					"response": "Screw off, freak.",
+					"rating": "very bad"
 				},
 				{
-					"text": "Neutral Option",
-					"response": "Neutral response",
+					"text": "Yo. Wassup.",
+					"response": "Screw off, freak.",
+					"rating": "very bad"
+				},
+				{
+					"text": "Hi",
+					"response": "Not interested, dude..",
+					"rating": "bad"
+				}
+			]
+		},
+		{
+			"text": "Look. The fact that you're still here means you don't get it. Leave.",
+			"time": 7,
+			"replies": [
+				{
+					"text": "But I haven't said anything yet.",
+					"response": "You said hello technically...",
+					"rating": "bad"
+				},
+				{
+					"text": "Just give me a chance to talk to you at least.",
+					"response": "Fine.. But make it quick.",
 					"rating": "meh"
 				},
 				{
-					"text": "Bad Option",
-					"response": "Bad response",
+					"text": "But I want to know why you're green.",
+					"response": "I'm purposefully speeding up the song now.",
+					"rating": "very bad"
+				}
+			]
+		},
+		{
+			"text": "Urgh... You're lucky I can't leave right now. Okay. Fine. Let's talk. But I'm not making it easy on you.",
+			"time": 7,
+			"replies": [
+				{
+					"text": "Yay!",
+					"response": "Don't do that...",
+					"rating": "good"
+				},
+				{
+					"text": "Sweet, let's go.",
+					"response": "Oh.. Alright.",
+					"rating": "very good"
+				},
+				{
+					"text": "Try me. I can handle it.",
+					"response": "Trust me. I don't want to.",
+					"rating": "bad"
+				},
+				{
+					"text": "Well not if you don't want to.",
+					"response": "No. I'm bored anyway. Entertain me.",
+					"rating": "meh"
+				}
+			]
+		},
+		{
+			"text": "Got any good jokes?",
+			"time": 4,
+			"replies": [
+				{
+					"text": "No.",
+					"response": "Good. I don't really like them.",
+					"rating": "meh"
+				},
+				{
+					"text": "No. But I can hit notes on a beat.",
+					"response": "Well, let's find out if you can, cause I'm speeding it up again.",
+					"rating": "bad"
+				},
+				{
+					"text": "Why did the chicken...",
+					"response": "No. Just... Stop.",
+					"rating": "very bad"
+				},
+				{
+					"text": "Uhh... Not right now.",
+					"response": "Preetty lame, dude. Pretty lame.",
+					"rating": "bad"
+				}
+			]
+		},
+		{
+			"text": "Seen any guys around here in a red hoodie?",
+			"time": 4,
+			"replies": [
+				{
+					"text": "No?",
+					"response": "Eh, ok.",
+					"rating": "meh"
+				},
+				{
+					"text": "Oh yeah, saw him in the bathroom a minute ago.",
+					"response": "Slow freaking-.. Okay.",
+					"rating": "bad"
+				},
+				{
+					"text": "Red hoodies are lame.",
+					"response": "Agreed. You should see it.",
+					"rating": "good"
+				},
+				{
+					"text": "Never looked.",
+					"response": "At least you're honest.",
+					"rating": "meh"
+				}
+			]
+		},
+		{
+			"text": "What do you know about plants?",
+			"time": 4,
+			"replies": [
+				{
+					"text": "Not much beyond they breathe.",
+					"response": "Idiots...",
+					"rating": "bad"
+				},
+				{
+					"text": "Studied them for a while as a hobby.",
+					"response": "Oh nice.",
+					"rating": "good"
+				},
+				{
+					"text": "I know they don't make people green.",
+					"response": "Real funny...",
+					"rating": "meh"
+				}
+			]
+		},
+		{
+			"text": "Do you prefer magical beasts or magical plants?",
+			"time": 4,
+			"replies": [
+				{
+					"text": "Magical witches.",
+					"response": "Oh~ So you think you're something? That's cute.",
+					"rating": "good"
+				},
+				{
+					"text": "Magical beasts. Duh.",
+					"response": "Not earning yourself any points with me, buddy. Plants all the way.",
+					"rating": "bad"
+				},
+				{
+					"text": "I guess, magical plants.",
+					"response": "Doesn't sound believeable.. But ok.",
+					"rating": "meh"
+				}
+			]
+		},
+		{
+			"text": "Oh, nice work. You actually can keep up with me talking.",
+			"time": 25,
+			"replies": [
+				{
+					"text": "Yeah. Obviously-",
+					"response": "Oh no... Now he shows up?..",
 					"rating": "bad"
 				}
 			]
