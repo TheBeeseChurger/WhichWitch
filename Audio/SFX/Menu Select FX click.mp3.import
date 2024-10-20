@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dyf70gl6quefk"
+path="res://.godot/imported/Menu Select FX click.mp3-3000d21f43419ba2fdaf3556333c76b0.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/Menu Select FX click.mp3"
+dest_files=["res://.godot/imported/Menu Select FX click.mp3-3000d21f43419ba2fdaf3556333c76b0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

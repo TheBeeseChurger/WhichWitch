@@ -38,6 +38,8 @@ var in_dialogue_mode = false
 # time remaining to answer the current question
 var respond_time_remaining: float
 
+static var tutorial_shown: bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = true
@@ -78,6 +80,10 @@ func _process(delta: float) -> void:
 func start_dialogue_mode():
 	if in_dialogue_mode:
 		return
+		
+	if not tutorial_shown:
+		game_screen.dim_color_rect.visible = true
+		game_screen.dialogue_tutorial_panel.visible = true
 		
 	# choose the next question to ask
 	current_question_index += 1
@@ -171,6 +177,11 @@ func place_option(option: Button, restore_option_index: int):
 # empty dictionary for nothing selected (ignored opponent)
 func submit_dialogue(reply: Dictionary):
 	respond_time_left_bar.value = 0
+	
+	if not tutorial_shown:
+		tutorial_shown = true
+		game_screen.dim_color_rect.visible = false
+		game_screen.dialogue_tutorial_panel.visible = false
 	
 	if reply.is_empty():
 		very_bad_rating()

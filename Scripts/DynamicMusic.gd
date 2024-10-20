@@ -5,4 +5,5 @@ extends Resource
 @export var intensity_speeds: Array[float]
 @export var divisions: Array[int]
 @export var bpms: Array[float]
+@export var meausure_lengths: Array[float]
 @export var transition_audio_streams: Array[AudioStream]

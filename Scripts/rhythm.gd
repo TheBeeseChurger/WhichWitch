@@ -9,18 +9,22 @@ extends Control
 @export var good_popup: PackedScene
 @export var great_popup: PackedScene
 @export var cauldron_splash_effect: PackedScene
+@export var note_press_sound: AudioStream
 
 @onready var note_spawn_point: Marker2D = $ColorRect/NoteSpawnPoint
-@onready var target_center: Marker2D = $ColorRect/ColorRect3/TargetCenter
+@onready var target_center: Control = $ColorRect/ColorRect3/TargetCenter
 @onready var popup_center: Marker2D = $ColorRect/ColorRect3/PopupCenter
+@onready var tutorial_note_height_marker: Marker2D = $ColorRect/ColorRect3/TutorialNoteHeightMarker
 @onready var notes_parent: Node = $Notes
 @onready var cleared_notes_parent: Node = $ClearedNotes
 @onready var game_screen: RhythmGameScreen = $".."
 @onready var dialogue: Dialogue = $"../Dialogue"
 @onready var dynamic_music_player: DynamicMusicPlayer = $"../DynamicMusic"
 @onready var cauldron: Sprite2D = $CauldronFront
+@onready var note_target_visual: Sprite2D = $ColorRect/ColorRect3/TargetCenter/NoteTargetVisual
 
 @onready var space_input_hint: Sprite2D = $ColorRect/ColorRect3/TargetCenter/SpaceInputHint
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 var current_note_speed: float = 0 # should be 0 during cutscenes to activate intro/outro track
@@ -30,6 +34,8 @@ var in_rhythm_mode = false # true while in rhythm mode
 
 var min_speed: float = 200
 var max_speed: float = 600
+
+static var tutorial_shown: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,23 +47,46 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not in_rhythm_mode:
 		return
+		
+	if current_note_speed <= 0:
+		printerr("note speed was 0 or lower!!! bad!!!")
+		current_note_speed = 250
 	
 	if Input.is_action_just_pressed("rhythm_press"):
-		rhythm_press()
+		if not tutorial_shown and get_tree().paused:
+			tutorial_shown = true
+			get_tree().paused = false
+			note_target_visual.z_index = 0
+			game_screen.rhythm_tutorial_panel.visible = false
+			game_screen.dim_color_rect.visible = false
+		else:
+			rhythm_press()
+			
+	if get_tree().paused:
+		return
 	
 	for note: Node2D in notes_parent.get_children():
-		note.global_position.y += current_note_speed * delta
+		note.position.x = 0
+		note.position.y += current_note_speed * delta
+		
+		if not tutorial_shown and note.global_position.y >= tutorial_note_height_marker.global_position.y:
+			get_tree().paused = true
+			game_screen.rhythm_tutorial_panel.visible = true
+			game_screen.dim_color_rect.visible = true
+		
 		if note.global_position.y > target_center.global_position.y + max_note_distance:
 			game_screen.lose_health(6)
 			hit_popup(miss_popup)
 			note.queue_free()
 		
-	if notes_left > 0:
+	if notes_left > 0: 
 		time_until_next_note -= delta
 		if time_until_next_note < 0:
 			spawn_note()
-			time_until_next_note = randf_range(0.25, 1.0)
-			var next_note_time = Time.get_unix_time_from_system() + time_until_next_note
+			time_until_next_note = randf_range(0.25, 1.0) / (current_note_speed/250.0)
+			print("time until next note: ", time_until_next_note)
+			
+			#var next_note_time = Time.get_unix_time_from_system() + time_until_next_note
 			
 			# LEAVING QUANTIZING ATTEMPT FOR LATER too much math...
 			#var next_note_song_time_elapsed = next_note_time - dynamic_music.start_time
@@ -78,18 +107,22 @@ func start_rhythm_mode():
 		visible = true
 		space_input_hint.visible = true
 		in_rhythm_mode = true
-		notes_left = 5
+		notes_left = randi_range(8, 12)
+		
+		print("clearing ", notes_parent.get_child_count(), " nodes from notes parent")
+		for child in notes_parent.get_children():
+			child.queue_free()
 
 func rhythm_press():
 	var hit_type
 	for note: Node2D in notes_parent.get_children():
 		var distance_from_target = abs(note.global_position.y - target_center.global_position.y)
 			
-		if distance_from_target < max_note_distance*0.15:
+		if distance_from_target < max_note_distance*0.175:
 			hit_type = "great"
 			game_screen.gain_health(3)
 			hit_popup(great_popup)
-		elif distance_from_target < max_note_distance*0.35:
+		elif distance_from_target < max_note_distance*0.4:
 			hit_type = "good"
 			game_screen.gain_health(2)
 			hit_popup(good_popup)
@@ -109,6 +142,9 @@ func rhythm_press():
 			if hit_type == "miss":
 				note.queue_free()
 			else:
+				audio_stream_player.stream = note_press_sound
+				audio_stream_player.play()
+				game_screen.apply_noise_shake()
 				clear_anim(note)
 			return
 		
@@ -143,19 +179,52 @@ func splash_animation():
 func spawn_note():
 	var note: Sprite2D = note_scene.instantiate()
 	note.global_position = note_spawn_point.global_position
+	
+	var music_player := game_screen.dynamic_music_player
+	
+	# Song quantization
+	var distance_from_target = target_center.global_position.y - note.global_position.y
+	var seconds_until_on_target = distance_from_target / current_note_speed
+	
+	# Length of one subdivision to snap to
+	var beat_length = 60 / music_player.current_bpm # Eigth note
+	var total_beats = music_player.current_measure_length * 4
+	var inverse_t = (1-music_player.t)
+	var t_until_next_beat = (inverse_t * total_beats) - int(inverse_t * total_beats)
+	var seconds_until_next_beat = t_until_next_beat * beat_length
+	
+	#var rounded_seconds_to_nearest_beat = round(seconds_until_on_target / beat_length) * beat_length
+	var adjusted_distance_from_target = (seconds_until_on_target + seconds_until_next_beat + music_player.time_delay) * current_note_speed
+	note.global_position.y = target_center.global_position.y - adjusted_distance_from_target
+	
+	# check if there are any notes very close. if so, offset half a beat back
+	var overlaps: bool = true
+	while overlaps:
+		overlaps = false
+		for child: Node2D in notes_parent.get_children():
+			if abs(child.global_position.y - note.global_position.y) < 5:
+				overlaps = true
+				break
+		
+		if overlaps:
+			note.global_position.y -= beat_length * current_note_speed * 0.5
+	
+	print("spawned note at y=",note.global_position.y)
+	
+	# assign texture and add to notes parent node
 	var note_textures = game_screen.level.note_textures
 	if note_textures and len(note_textures) > 0:
 		note.texture = note_textures[randi_range(0, len(note_textures)-1)]
 	notes_parent.add_child(note)
-	print("spawned note at ", note.global_position)
+	#print("spawned note at ", note.global_position)
 
 func clear_anim(note: Sprite2D):
 	note_hit_anim(note)
 	
 	note.reparent(cleared_notes_parent)
 	
-	get_tree().create_tween().tween_property(note, "global_position", cauldron.global_position, 0.3)
-	get_tree().create_tween().tween_property(note, "rotation", note.rotation + deg_to_rad(randf_range(-30, 30)), 0.3).finished
+	get_tree().create_tween().tween_property(note, "global_position", cauldron.global_position, 0.3 / (current_note_speed/200.0))
+	get_tree().create_tween().tween_property(note, "rotation", note.rotation + deg_to_rad(randf_range(-30, 30)), 0.3 / (current_note_speed/200.0)).finished
 	
 	await get_tree().create_timer(0.15).timeout
 	
@@ -166,8 +235,9 @@ func clear_anim(note: Sprite2D):
 	note.queue_free()
 	
 func note_hit_anim(note: Sprite2D):
-	var note_hit = note.duplicate()
+	var note_hit: Sprite2D = note.duplicate()
 	cleared_notes_parent.add_child(note_hit)
+	note_hit.global_position = note.global_position
 	
 	if Level.current_level.note_hit_textures:
 		note_hit.texture = Level.current_level.note_hit_textures[0]

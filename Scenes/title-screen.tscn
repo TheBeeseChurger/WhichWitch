@@ -10,7 +10,7 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_mucrl"]
 font_size = 20
 
-[node name="Control" type="Control"]
+[node name="TitleScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,13 +48,17 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Play"
 
+[node name="LevelSelectButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Level Select"
+
 [node name="CreditsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Credits"
 
-[node name="Options" type="Control" parent="."]
-visible = false
+[node name="LevelSelect" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,7 +66,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Options"]
+[node name="TextureRect" type="TextureRect" parent="LevelSelect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,7 +75,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_s4gav")
 
-[node name="CreditsPanel" type="PanelContainer" parent="Options"]
+[node name="CreditsPanel" type="PanelContainer" parent="LevelSelect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -85,17 +89,40 @@ offset_bottom = 262.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Options/CreditsPanel"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Options/CreditsPanel/VBoxContainer2"]
+[node name="Label" type="Label" parent="LevelSelect/CreditsPanel"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "OPTIONS"
+text = "LEVEL SELECT"
 label_settings = SubResource("LabelSettings_41xqt")
 horizontal_alignment = 1
 
-[node name="CreditsBackButton" type="Button" parent="Options/CreditsPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelSelect/CreditsPanel"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Button" type="Button" parent="LevelSelect/CreditsPanel/HBoxContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Level 1"
+
+[node name="Button2" type="Button" parent="LevelSelect/CreditsPanel/HBoxContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Level 2"
+
+[node name="Button3" type="Button" parent="LevelSelect/CreditsPanel/HBoxContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Level 3"
+
+[node name="BackButton" type="Button" parent="LevelSelect/CreditsPanel"]
+custom_minimum_size = Vector2(180, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -104,7 +131,6 @@ theme_override_font_sizes/font_size = 24
 text = "Back"
 
 [node name="Credits" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -157,7 +183,8 @@ developed for SIUE cougar jam 2024
 label_settings = SubResource("LabelSettings_mucrl")
 horizontal_alignment = 1
 
-[node name="CreditsBackButton" type="Button" parent="Credits/CreditsPanel"]
+[node name="BackButton" type="Button" parent="Credits/CreditsPanel"]
+custom_minimum_size = Vector2(180, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -166,6 +193,10 @@ theme_override_font_sizes/font_size = 24
 text = "Back"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/LevelSelectButton" to="." method="on_select_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="on_credits_pressed"]
-[connection signal="pressed" from="Options/CreditsPanel/CreditsBackButton" to="." method="on_credits_back_pressed"]
-[connection signal="pressed" from="Credits/CreditsPanel/CreditsBackButton" to="." method="on_credits_back_pressed"]
+[connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button" to="." method="on_level_1_pressed"]
+[connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button2" to="." method="on_level_2_pressed"]
+[connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button3" to="." method="on_level_3_pressed"]
+[connection signal="pressed" from="LevelSelect/CreditsPanel/BackButton" to="." method="on_select_back_pressed"]
+[connection signal="pressed" from="Credits/CreditsPanel/BackButton" to="." method="on_credits_back_pressed"]
