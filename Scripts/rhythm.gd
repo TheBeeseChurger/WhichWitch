@@ -27,6 +27,8 @@ extends Control
 @onready var space_input_hint: Sprite2D = $ColorRect/ColorRect3/TargetCenter/SpaceInputHint
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
+@onready var win_screen: WinScreen = $"../WinScreen"
+
 
 var current_note_speed: float = 0 # should be 0 during cutscenes to activate intro/outro track
 var notes_left: int
@@ -136,20 +138,25 @@ func rhythm_press():
 		if distance_from_target < max_note_distance*0.175:
 			hit_type = "great"
 			game_screen.gain_health(3)
+			win_screen.add_great()
 			hit_popup(great_popup)
 		elif distance_from_target < max_note_distance*0.4:
 			hit_type = "good"
+			win_screen.add_good()
 			game_screen.gain_health(2)
 			hit_popup(good_popup)
 		elif distance_from_target < max_note_distance*0.65:
 			hit_type = "okay"
 			game_screen.gain_health(1)
+			win_screen.add_okay()
 			hit_popup(okay_popup)
 		elif distance_from_target < max_note_distance:
 			hit_type = "bad"
+			win_screen.add_bad()
 			hit_popup(bad_popup)
 		elif distance_from_target < max_note_distance*2:
 			hit_type = "miss"
+			win_screen.add_miss()
 			game_screen.lose_health(6)
 			hit_popup(miss_popup)
 		

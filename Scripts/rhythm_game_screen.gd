@@ -17,6 +17,7 @@ var dynamic_music_player: DynamicMusicPlayer
 
 @onready var death_screen: Control = $DeathScreen
 @onready var pause_menu: Control = $PauseMenu
+@onready var win_screen: WinScreen = $WinScreen
 
 
 # How quickly to move through the noise
@@ -54,6 +55,7 @@ func _ready() -> void:
 	dim_color_rect.visible = false
 	death_screen.visible = false
 	pause_menu.visible = false
+	win_screen.visible = false
 
 func _process(delta: float) -> void:	
 	# Fade out the intensity over time

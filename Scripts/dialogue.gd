@@ -227,7 +227,10 @@ func submit_dialogue(reply: Dictionary):
 	if reply.is_empty():
 		very_bad_rating()
 		var ignored_responses = dialogue["ignored_responses"]
+		if ignored_responses is Dictionary:
+			ignored_responses = ignored_responses[character_sprites_level.name]
 		var ignored_response = ignored_responses[randi_range(0, len(ignored_responses)-1)]
+		
 		npc_dialogue_box.show_message(ignored_response)
 	else:
 		var rating = reply["rating"]
@@ -266,6 +269,7 @@ func very_good_rating():
 	happiness_value += 3.0
 	game_screen.opponent_portrait.texture = character_sprites_level.very_happy_sprite
 	rating_anim(Vector2.UP)
+	game_screen.win_screen.points += 200
 	response_sound_player.stream = good_sound
 	response_sound_player.play()
 
@@ -275,6 +279,7 @@ func good_rating():
 	happiness_value += 1.5
 	game_screen.opponent_portrait.texture = character_sprites_level.happy_sprite
 	rating_anim(Vector2.UP*0.5)
+	game_screen.win_screen.points += 150
 	response_sound_player.stream = good_sound
 	response_sound_player.play()
 	
@@ -283,6 +288,7 @@ func meh_rating():
 	happiness_value *= 0.75
 	#rating_anim_rect.texture = meh_rating_texture
 	game_screen.opponent_portrait.texture = character_sprites_level.neutral_sprite
+	game_screen.win_screen.points += 100
 	#rating_anim(Vector2.ZERO)
 	
 func bad_rating():
@@ -291,6 +297,7 @@ func bad_rating():
 	rating_anim_rect.texture = bad_rating_texture
 	game_screen.opponent_portrait.texture = character_sprites_level.angry_sprite
 	rating_anim(Vector2.DOWN*0.5)
+	game_screen.win_screen.points += 50
 	response_sound_player.stream = bad_sound
 	response_sound_player.play()
 	

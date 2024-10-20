@@ -10,6 +10,7 @@
 
 [resource]
 script = ExtResource("9_fn1ob")
+name = "boyfriend"
 starting_speed = 150.0
 min_speed = 150.0
 min_speed_gain = 30.0
