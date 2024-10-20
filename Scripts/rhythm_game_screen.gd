@@ -6,14 +6,17 @@ extends Control
 
 var dynamic_music_player: DynamicMusicPlayer
 
-@onready var opponent_portrait: TextureRect = $PortraitContainer/OpponentPortrait
-@onready var player_portrait: TextureRect = $PortraitContainer/PlayerPortrait
+@onready var opponent_portrait: CharacterPortrait = $PortraitContainer/OpponentPortrait
+@onready var player_portrait: CharacterPortrait = $PortraitContainer/PlayerPortrait
 
 @onready var background: TextureRect = $Background
 @onready var dim_color_rect: ColorRect = $DimColorRect
 
 @onready var rhythm_tutorial_panel: PanelContainer = $Rhythm/RhythmTutorialPanel
 @onready var dialogue_tutorial_panel: PanelContainer = $Dialogue/DialogueTutorialPanel
+
+@onready var death_screen: Control = $DeathScreen
+
 
 # How quickly to move through the noise
 const NOISE_SHAKE_SPEED: float = 5.0
@@ -48,6 +51,7 @@ func _ready() -> void:
 	rhythm_tutorial_panel.visible = false
 	dialogue_tutorial_panel.visible = false
 	dim_color_rect.visible = false
+	death_screen.visible = false
 
 func _process(delta: float) -> void:	
 	# Fade out the intensity over time
@@ -73,3 +77,17 @@ func gain_health(amount: float):
 	
 func lose_health(amount: float):
 	health_bar.value -= amount
+	
+func death_animation():
+	dim_color_rect.visible = true
+	dim_color_rect.modulate = Color(1,1,1,0)
+	
+	dynamic_music_player.volume_db = -100
+	
+	death_screen.visible = true
+	
+	get_tree().paused = true
+	
+func retry_pressed():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/rhythm_game_screen.tscn")

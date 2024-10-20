@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv68aj0rxq0ia"
-path="res://.godot/imported/Female Main Character.png-37e7a26fb85069753084c51d7c802acf.ctex"
+uid="uid://tcvtoi5b4qnv"
+path="res://.godot/imported/Player-Male-Death.png-7c715943d170081752a9321faf02e513.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Female Main Character.png"
-dest_files=["res://.godot/imported/Female Main Character.png-37e7a26fb85069753084c51d7c802acf.ctex"]
+source_file="res://Sprites/Player-Male-Death.png"
+dest_files=["res://.godot/imported/Player-Male-Death.png-7c715943d170081752a9321faf02e513.ctex"]
 
 [params]
 

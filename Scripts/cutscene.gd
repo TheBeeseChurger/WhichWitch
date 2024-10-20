@@ -113,6 +113,7 @@ func transition_to_level(next_level: Level):
 	dialogue.current_question_index = -1
 	rhythm.game_screen.background.texture = next_level.background_texture
 	game_screen.opponent_portrait.texture = next_level.neutral_sprite
+	game_screen.health_bar.value = game_screen.health_bar.max_value
 	play_intro_cutscene()
 	
 	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "base_position", base_pos, 1.25)

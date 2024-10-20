@@ -35,6 +35,8 @@ var in_rhythm_mode = false # true while in rhythm mode
 var min_speed: float = 200
 var max_speed: float = 600
 
+var is_defeated: bool
+
 static var tutorial_shown: bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -45,6 +47,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if is_defeated:
+		return
+	
 	if not in_rhythm_mode:
 		return
 		
@@ -78,6 +83,12 @@ func _process(delta: float) -> void:
 			game_screen.lose_health(6)
 			hit_popup(miss_popup)
 			note.queue_free()
+			
+			if game_screen.health_bar.value <= 0:
+				is_defeated = true
+				notes_parent.queue_free()
+				game_screen.death_animation()
+				return
 		
 	if notes_left > 0: 
 		time_until_next_note -= delta
