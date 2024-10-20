@@ -70,13 +70,11 @@ func display_next_line():
 			game_screen.points_label.text = "0"
 			rhythm.start_rhythm_mode()
 		elif not in_level_transition:
-			var next_level = Level.current_level.next_level
-			if next_level:
-				#transition_to_level(next_level)
-				game_screen.win_screen.show_win_screen()
-			else:
-				dialogue.npc_dialogue_box.show_message("(There are no levels after this yet, thanks for playing!)")
-			pass
+			game_screen.win_screen.show_win_screen()
+			if not Level.current_level.next_level:
+				game_screen.win_screen.next_button.visible = false
+				game_screen.win_screen.game_win_label.visible = true
+				
 	else:
 		var dialogue_line = current_cutscene_lines[cutscene_index]
 		var speaker: String = dialogue_line[0]

@@ -142,7 +142,8 @@ func start_dialogue_mode():
 	else:
 		respond_time_remaining = 10.0
 	
-	respond_time_left_bar.max_value = respond_time_remaining
+	respond_time_left_bar.max_value = respond_time_remaining / RhythmGameScreen.global_difficulty_mult
+	respond_time_left_bar.value = respond_time_left_bar.max_value
 
 func spawn_random_option():
 	var i = randi_range(0, len(dialogue_options_queued)-1)
@@ -197,7 +198,7 @@ func place_option(option: Button, restore_option_index: int):
 	var fade_in_tween = get_tree().create_tween().tween_property(option, "modulate", Color.WHITE, 0.5)
 	await fade_in_tween.finished
 		
-	await get_tree().create_timer(randf_range(1.25, 4.0)).timeout
+	await get_tree().create_timer(randf_range(1.25, 4.0) / RhythmGameScreen.global_difficulty_mult).timeout
 	
 	if not is_instance_valid(option):
 		return

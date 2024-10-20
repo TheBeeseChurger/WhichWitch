@@ -13,6 +13,9 @@ extends Control
 @onready var okay_label: Label = $VBoxContainer/OkayRow/Label
 @onready var bad_label: Label = $VBoxContainer/BadRow/Label
 @onready var miss_label: Label = $VBoxContainer/MissRow/Label
+@onready var next_button: Button = $NextButton
+@onready var game_win_label: Label = $GameWinLabel
+
 
 
 # Called when the node enters the scene tree for the first time.

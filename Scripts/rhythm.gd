@@ -99,7 +99,7 @@ func _process(delta: float) -> void:
 		time_until_next_note -= delta
 		if time_until_next_note <= 0:
 			spawn_note()
-			time_until_next_note = randf_range(0.05, 0.95) / (current_note_speed/250.0)
+			time_until_next_note = (randf_range(0.05, 0.95) / (current_note_speed/250.0)) / RhythmGameScreen.global_difficulty_mult
 			print("time until next note: ", time_until_next_note)
 			
 			#var next_note_time = Time.get_unix_time_from_system() + time_until_next_note

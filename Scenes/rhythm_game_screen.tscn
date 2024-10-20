@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=45 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Texture2D" uid="uid://daduyihra3ocv" path="res://Sprites/pumpkin girl bg.png" id="2_bxygy"]
@@ -48,6 +48,8 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_bpxxe"]
 gradient = SubResource("Gradient_vumdn")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p35j0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tte7j"]
 font_color = Color(1, 1, 1, 0.807843)
@@ -348,13 +350,13 @@ scale = Vector2(2, 2)
 texture = ExtResource("22_fioew")
 
 [node name="DialogueTutorialPanel" type="PanelContainer" parent="Dialogue"]
-visible = false
 z_index = 2
 layout_mode = 0
 offset_left = 643.0
 offset_top = 489.0
 offset_right = 1017.0
 offset_bottom = 632.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p35j0")
 
 [node name="MarginContainer" type="MarginContainer" parent="Dialogue/DialogueTutorialPanel"]
 layout_mode = 2
@@ -415,7 +417,7 @@ offset_right = 1107.0
 offset_bottom = 62.0
 size_flags_vertical = 0
 step = 0.0
-value = 71.945
+value = 100.0
 nine_patch_stretch = true
 stretch_margin_left = 40
 stretch_margin_right = 40
@@ -574,6 +576,7 @@ vertical_alignment = 1
 
 [node name="WinScreen" type="Control" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -591,9 +594,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0156863, 0.0156863, 0.0470588, 0.47451)
+color = Color(0.0156863, 0.0156863, 0.0470588, 0.694118)
 
 [node name="NextButton" type="Button" parent="WinScreen"]
+visible = false
 z_index = 4
 layout_mode = 1
 anchors_preset = 8
@@ -936,6 +940,17 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 12
 text = "50"
 vertical_alignment = 2
+
+[node name="GameWinLabel" type="Label" parent="WinScreen"]
+z_index = 3
+layout_mode = 0
+offset_left = 243.0
+offset_top = 409.0
+offset_right = 532.0
+offset_bottom = 508.0
+text = "You win!
+Thanks for playing!"
+horizontal_alignment = 1
 
 [node name="DynamicMusicPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")
