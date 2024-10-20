@@ -1,185 +1,412 @@
 {
-	"name": "Nightcore girl",
-	"intro_dialogue": [
-		["npc", "*Walks past you cutely*"],
-		["npc", "Ugh... Ignore that..."],
-		["npc", "For some reason, that happens to me often. *says cutely*"],
-		["npc", "...."],
-		["npc", "See? It just doesn't go away..."],
-		["npc", "I swear..."],
-		["player", "Now's my chance! Let's introduce myself."]
-	],
-	"questions": [
-		{
-			"text": "*cutely looks at you*",
-			"time": 7,
-			"replies": [
-				{
-					"text": "Bro... Like... Stop...",
-					"response": "I FREAKING WOULD IF I COULD!!!",
-					"rating": "very bad"
-				},
-				{
-					"text": "Uh.. Hello... *says manly-ly*",
-					"response": "Great. Now it's happening to you.",
-					"rating": "meh"
-				},
-				{
-					"text": "Default Greetings Initiated *says robotically*",
-					"response": "BAHAHAHHAHA! Duuude, like great use of an awkward situation!",
-					"rating": "very good"
-				},
-				{
-					"text": "Slide up, wyd",
-					"response": "Uhhh... Nothing much, I guess.",
-					"rating": "meh"
-				},
-				{
-					"text": "Hey, Miss...",
-					"response": "Oh, nice to meet you. I'm a grad student here. Already got my witch hat, see?",
-					"rating": "good"
-				}
-			]
-		},
-		{
-			"text": "S-So uh... I don't usually get this far into a convo...",
-			"time": 7,
-			"replies": [
-				{
-					"text": "Me either. First time.",
-					"response": "Relatable...",
-					"rating": "meh"
-				},
-				{
-					"text": "Well, what are you looking at on your phone?",
-					"response": "O-Oh this thing? It doesn't really work anymore. I've burned it too many times.",
-					"rating": "good"
-				},
-				{
-					"text": "*silently watches you*",
-					"response": "That sounds creepy and it looks creepy too...",
-					"rating": "bad"
-				},
-				{
-					"text": "True.",
-					"response": "I don't hate this reply. But I feel like you could have done better. *says cutely*",
-					"rating": "bad"
-				}
-			]
-		},
-		{
-			"text": "O-Okay. I think I've stopped that weird thing from- *says cutely*. I DIDN'T EVEN FINISH MY SENTENCE!",
-			"time": 7,
-			"replies": [
-				{
-					"text": "Woah. Calm down.",
-					"response": "DON'T YOU TELL ME TO CALM DOWN!",
-					"rating": "very bad"
-				},
-				{
-					"text": "Do you need some help with that?",
-					"response": "YES, I WOULD. THANK YOU VERY MUCH.",
-					"rating": "meh"
-				},
-				{
-					"text": "Just burn it bro.",
-					"response": "...WHY DIDN'T I THINK OF THAT?!?!",
-					"rating": "very good"
-				},
-				{
-					"text": "Uhh...",
-					"response": "...ANGR",
-					"rating": "bad"
-				}
-			]
-		},
-		{
-			"text": "SCREW IT. LET'S TURN THE HEAT UP. WHAT DO YOU USUALLY SPEND TIME DOING?",
-			"time": 5,
-			"replies": [
-				{
-					"text": "Sleeping.",
-					"response": "Mid.",
-					"rating": "meh"
-				},
-				{
-					"text": "Lighting fires",
-					"response": "Nice!",
-					"rating": "good"
-				},
-				{
-					"text": "Talking to witches.",
-					"response": "Dude. Aren't you supposed to not tell that to a witch you're currently talking to?",
-					"rating": "bad"
-				},
-				{
-					"text": "Chronically Online",
-					"response": "You. I like you. We're friends now.",
-					"rating": "very good"
-				}
-			]
-		},
-		{
-			"text": "WHAT'S A WITCH'S BEST FRIEND?",
-			"time": 5,
-			"replies": [
-				{
-					"text": "A strong drink",
-					"response": "Man, I wish",
-					"rating": "good"
-				},
-				{
-					"text": "A witch's familiar",
-					"response": "I wouldn't know.. Never had one.",
-					"rating": "bad"
-				},
-				{
-					"text": "...",
-					"response": "I would have rather you wait out the time than choose this option.",
-					"rating": "bad"
-				},
-				{
-					"text": "A magic #2 pencil",
-					"response": "As a pro witch, I've never cheated in my life.",
-					"rating": "very good"
-				}
-			]
-		},
-		{
-			"text": "WHERE WILL YOU BE AT 9pm THIS SUNDAY?",
-			"time": 5,
-			"replies": [
-				{
-					"text": "Sleeping.",
-					"response": "At 9 at night??",
-					"rating": "bad"
-				},
-				{
-					"text": "Super busy, buddy.",
-					"response": "Oh... Ok.",
-					"rating": "very bad"
-				},
-				{
-					"text": "Nothing. At all.",
-					"response": "Ok.",
-					"rating": "meh"
-				},
-				{
-					"text": "With you.",
-					"response": "W-With me?",
-					"rating": "good"
-				}
-			]
-		}
-	],
-	"ignored_responses": [
-		"I am a pyromage for a reason... *says annoyedly*",
-		"Why? Every guy I talk to ends like this...",
-		"U-Uhm.. Nvm..."
-	],
-	"outro_dialogue": [
-		["player", "This is an outro dialogue from the player."],
-		["npc", "This is another outro dialogue from the NPC."],
-		["", ""]
-	]
+    "name": "Nightcore girl",
+    "intro_dialogue": [
+        ["npc", "*Walks past you cutely*"],
+        ["npc", "Ugh... Ignore that..."],
+        ["npc", "For some reason, that happens to me often. *says cutely*"],
+        ["npc", "...."],
+        ["npc", "See? It just doesn't go away..."],
+        ["npc", "I swear..."],
+        ["player", "Now's my chance! Let's introduce myself."]
+    ],
+    "questions": [
+        {
+            "text": "*cutely looks at you*",
+            "time": 7,
+            "replies": [
+                {
+                    "text": "Bro... Like... Stop...",
+                    "response": "I FREAKING WOULD IF I COULD!!!",
+                    "rating": "very bad"
+                },
+                {
+                    "text": "Uh.. Hello... *says manly-ly*",
+                    "response": "Great. Now it's happening to you.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Default Greetings Initiated *says robotically*",
+                    "response": "BAHAHAHHAHA! Duuude, like great use of an awkward situation!",
+                    "rating": "very good"
+                },
+                {
+                    "text": "Slide up, wyd",
+                    "response": "Uhhh... Nothing much, I guess.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Hey, Miss...",
+                    "response": "Oh, nice to meet you. I'm a grad student here. Already got my witch hat, see?",
+                    "rating": "good"
+                }
+            ]
+        },
+        {
+            "text": "S-So uh... I don't usually get this far into a convo...",
+            "time": 7,
+            "replies": [
+                {
+                    "text": "Me either. First time.",
+                    "response": "Relatable...",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Well, what are you looking at on your phone?",
+                    "response": "O-Oh this thing? It doesn't really work anymore. I've burned it too many times.",
+                    "rating": "good"
+                },
+                {
+                    "text": "*silently watches you*",
+                    "response": "That sounds creepy and it looks creepy too...",
+                    "rating": "bad"
+                },
+                {
+                    "text": "True.",
+                    "response": "I don't hate this reply. But I feel like you could have done better. *says cutely*",
+                    "rating": "bad"
+                }
+            ]
+        },
+        {
+            "text": "O-Okay. I think I've stopped that weird thing from- *says cutely*. I DIDN'T EVEN FINISH MY SENTENCE!",
+            "time": 7,
+            "replies": [
+                {
+                    "text": "Woah. Calm down.",
+                    "response": "DON'T YOU TELL ME TO CALM DOWN!",
+                    "rating": "very bad"
+                },
+                {
+                    "text": "Do you need some help with that?",
+                    "response": "YES, I WOULD. THANK YOU VERY MUCH.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Just burn it bro.",
+                    "response": "...WHY DIDN'T I THINK OF THAT?!?!",
+                    "rating": "very good"
+                },
+                {
+                    "text": "Uhh...",
+                    "response": "...ANGR",
+                    "rating": "bad"
+                }
+            ]
+        },
+        {
+            "text": "SCREW IT. LET'S TURN THE HEAT UP. WHAT DO YOU USUALLY SPEND TIME DOING?",
+            "time": 5,
+            "replies": [
+                {
+                    "text": "Sleeping.",
+                    "response": "Mid.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Lighting fires",
+                    "response": "Nice!",
+                    "rating": "good"
+                },
+                {
+                    "text": "Talking to witches.",
+                    "response": "Dude. Aren't you supposed to not tell that to a witch you're currently talking to?",
+                    "rating": "bad"
+                },
+                {
+                    "text": "Chronically Online",
+                    "response": "You. I like you. We're friends now.",
+                    "rating": "very good"
+                }
+            ]
+        },
+        {
+            "text": "WHAT'S A WITCH'S BEST FRIEND?",
+            "time": 5,
+            "replies": [
+                {
+                    "text": "A strong drink",
+                    "response": "Man, I wish",
+                    "rating": "good"
+                },
+                {
+                    "text": "A witch's familiar",
+                    "response": "I wouldn't know.. Never had one.",
+                    "rating": "bad"
+                },
+                {
+                    "text": "...",
+                    "response": "I would have rather you wait out the time than choose this option.",
+                    "rating": "bad"
+                },
+                {
+                    "text": "A magic #2 pencil",
+                    "response": "As a pro witch, I've never cheated in my life.",
+                    "rating": "very good"
+                }
+            ]
+        },
+        {
+            "text": "WHERE WILL YOU BE AT 9pm THIS SUNDAY?",
+            "time": 5,
+            "replies": [
+                {
+                    "text": "Sleeping.",
+                    "response": "At 9 at night??",
+                    "rating": "bad"
+                },
+                {
+                    "text": "Super busy, buddy.",
+                    "response": "Oh... Ok.",
+                    "rating": "very bad"
+                },
+                {
+                    "text": "Nothing. At all.",
+                    "response": "Ok.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "With you.",
+                    "response": "W-With me?",
+                    "rating": "good"
+                }
+            ]
+        },
+        {
+            "text": "Whew.. I'm out of breath. We've been talking for a while.",
+            "time": 8,
+            "replies": [
+                {
+                    "text": "...",
+                    "response": "Not gonna help a witch out?",
+                    "rating": "bad"
+                },
+                {
+                    "text": "...",
+                    "response": "T-That's a sign, buddy. Hint hint. Nudge nudge.",
+                    "rating": "bad"
+                },
+                {
+                    "text": "Let's go take a seat at that bench over there.",
+                    "response": "Thanks for the offer but I'll be fine after I breath a bit.",
+                    "rating": "good"
+                },
+                {
+                    "text": "Me too.. Talking to witches is hard work.",
+                    "response": "Tell me about it! I hate talking to my classmates.",
+                    "rating": "very good"
+                },
+                {
+                    "text": "Uhh... You know...",
+                    "response": "Shush. I know it already. I have a super special witch condition that makes me not able to talk to people well...",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Am I gonna do that again?",
+                    "response": "*laughs* Yeah. I'm not done with you yet.",
+                    "rating": "good"
+                }
+            ]
+        },
+        {
+            "text": "Wait! I-I think it's gone! I haven't really had anymore of those things!",
+            "time": 8,
+            "replies": [
+                {
+                    "text": "Oh yeah.. Didn't notice... Too busy talking.",
+                    "response": "Conversation pro over here.",
+                    "rating": "very good"
+                },
+                {
+                    "text": "...",
+                    "response": "Hey... Say something... Don't jinx me!",
+                    "rating": "bad"
+                },
+                {
+                    "text": "Maybe don't push your luck.",
+                    "response": "Wdym, bro? I'm practically a conversation god at this point!",
+                    "rating": "good"
+                },
+                {
+                    "text": "*says cutely*",
+                    "response": "....",
+                    "rating": "very bad"
+                },
+                {
+                    "text": "Just jinxed yourself, dude. Now it's gonna happen.",
+                    "response": "Crap... You're right!",
+                    "rating": "meh"
+                }
+            ]
+        },
+        {
+            "text": "Well either way- *stutters cutely* ... Please, just end my misery.",
+            "time": 8,
+            "replies": [
+                {
+                    "text": "...",
+                    "response": "That's it. Time for round 2!",
+                    "rating": "bad"
+                },
+                {
+                    "text": "...",
+                    "response": "Don't just judge me silently! I don't like this either.",
+                    "rating": "bad"
+                },
+                {
+                    "text": "I almost thought you were cool.",
+                    "response": "I could light you ablaze in seconds!",
+                    "rating": "very bad"
+                },
+                {
+                    "text": "I have no idea how to help you.",
+                    "response": "Ugh. *turns head angrily*",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Let's try talking a lot again.",
+                    "response": "Good idea! Let's start!",
+                    "rating": "good"
+                }
+            ]
+        },
+        {
+            "text": "SPEED ROUND! FAVORITE CAT!",
+            "time": 5,
+            "replies": [
+                {
+                    "text": "...",
+                    "response": "You gotta answer, buddy.",
+                    "rating": "bad"
+                },
+                {
+                    "text": "Calico!",
+                    "response": "How cute!",
+                    "rating": "good"
+                },
+                {
+                    "text": "I hate cats.",
+                    "response": "Blocked.",
+                    "rating": "very bad"
+                },
+                {
+                    "text": "Maine Coon!",
+                    "response": "Basic but acceptable.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Sphinx",
+                    "response": "Ugly little cat..",
+                    "rating": "bad"
+                },
+                {
+                    "text": "Tiger",
+                    "response": "Ah! I see what you did there!",
+                    "rating": "good"
+                }
+            ]
+        },
+        {
+            "text": "FAVORITE CLASS!",
+            "time": 5,
+            "replies": [
+                {
+                    "text": "...",
+                    "response": "Honestly. Understandable, have a nice day.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Potion Manipulation!",
+                    "response": "Eh. I liked it. Ig.",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Magical Beasts and Where to find them!",
+                    "response": "My. literal. favorite. class. and book!",
+                    "rating": "very good"
+                },
+                {
+                    "text": "Necromancy & Beyond",
+                    "response": "Weird choice..",
+                    "rating": "bad"
+                },
+                {
+                    "text": "Lunch",
+                    "response": "BWHAAAHAHAH",
+                    "rating": "good"
+                }
+            ]
+        },
+        {
+            "text": "FAVORITE FRUIT!",
+            "time": 8,
+            "replies": [
+                {
+                    "text": "...",
+                    "response": "Just stop! Is it really that hard to click any other option??",
+                    "rating": "very bad"
+                },
+                {
+                    "text": "Unicorn Cherries!",
+                    "response": "T-That's a crime...",
+                    "rating": "bad"
+                },
+                {
+                    "text": "Molten Applecores. No questions please.",
+                    "response": "OH... M-MOLTEN??!",
+                    "rating": "meh"
+                },
+                {
+                    "text": "Dragonfruit.",
+                    "response": "How basic... Not even a magical fruit.",
+                    "rating": "very bad"
+                },
+                {
+                    "text": "Wizard Melons.",
+                    "response": "I don't want to know what those are..",
+                    "rating": "bad"
+                },
+                {
+                    "text": "Bananas. Just plain old bananas.",
+                    "response": "Simple enough. Can't pass up a basic banana.",
+                    "rating": "good"
+                }
+            ]
+        },
+        {
+            "text": "F-FAVORITE... Favorite... uh... W-Witch? Idk",
+            "time": 8,
+            "replies": [
+                {
+                    "text": "...",
+                    "response": "That's not a good sign...",
+                    "rating": "bad"
+                },
+                {
+                    "text": "You. Duh.",
+                    "response": "O-Oh...",
+                    "rating": "very good"
+                },
+                {
+                    "text": "The first one I saw earlier.",
+                    "response": "W-Who? Oh, you mean Stemma? She's really nice so I understand...",
+                    "rating": "meh"
+                }
+            ]
+        }
+    ],
+    "ignored_responses": [
+        "I am a pyromage for a reason... *says annoyedly*",
+        "Why? Every guy I talk to ends like this...",
+        "U-Uhm.. Nvm ig..."
+    ],
+    "outro_dialogue": [
+        ["npc", "I can't say another word! I'm out of breath and exhausted..."],
+        ["npc", "This was nice though... I-It was nice to meet you and have a chat."],
+        ["npc", "Y-Your conversation skills are top-notch. Good luck talking to other witches."],
+        ["npc", "L-Let me know if you want to ever talk again..."],
+        ["player", "Wait. Isn't your thing gone? You're talking normally now."],
+        ["npc", "What? Wait.. Y-You're right! I don't have that weird bubble following me around anymore!"],
+        ["npc", "Th-This must be because of our talking! Thank you for helping me fix this problem even if it's temporary."],
+        ["npc", "Good luck! And thank you again for this talk!"]
+    ]
 }
