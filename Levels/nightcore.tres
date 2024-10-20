@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="Level" load_steps=8 format=3 uid="uid://bcj2nxhmla31t"]
+[gd_resource type="Resource" script_class="Level" load_steps=11 format=3 uid="uid://bcj2nxhmla31t"]
 
 [ext_resource type="Texture2D" uid="uid://bm7r6ina5wp4r" path="res://Sprites/nc 4.png" id="1_tqcs8"]
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_xd3v5"]
 [ext_resource type="Resource" uid="uid://n1sw5uh8ucwk" path="res://DynamicAudio/nightcore-music.tres" id="2_ke3i8"]
 [ext_resource type="Texture2D" uid="uid://dty51gaedjo8e" path="res://Sprites/nc 2.png" id="3_86gm3"]
 [ext_resource type="Texture2D" uid="uid://ke74up2rmeab" path="res://Sprites/nc 3.png" id="4_p61rr"]
+[ext_resource type="Texture2D" uid="uid://b4fbnxgq2q0di" path="res://Sprites/CandyCornNote2.png" id="5_ohebo"]
 [ext_resource type="Texture2D" uid="uid://b8fm6xf4dbwam" path="res://Sprites/nc 5.png" id="6_0hhy6"]
+[ext_resource type="Texture2D" uid="uid://dab01vs4gvsvu" path="res://Sprites/CandyCornNote1.png" id="6_ipshr"]
 [ext_resource type="Texture2D" uid="uid://do3bvmjkh27gm" path="res://Sprites/nc 1.png" id="7_cen55"]
+[ext_resource type="Texture2D" uid="uid://cbp51e1wdt04t" path="res://Sprites/CandyCornNote.png" id="7_hf4fp"]
 
 [resource]
 script = ExtResource("1_xd3v5")
@@ -22,5 +25,6 @@ angry_sprite = ExtResource("1_tqcs8")
 very_angry_sprite = ExtResource("6_0hhy6")
 dialogue_name = "nightcore_character"
 dynamic_music = ExtResource("2_ke3i8")
-note_textures = Array[Texture2D]([])
-note_hit_textures = Array[Texture2D]([])
+note_textures = Array[Texture2D]([ExtResource("7_hf4fp")])
+note_hit_textures = Array[Texture2D]([ExtResource("5_ohebo")])
+note_target_texture = ExtResource("6_ipshr")

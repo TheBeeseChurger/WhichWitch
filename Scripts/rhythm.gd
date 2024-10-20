@@ -44,6 +44,8 @@ func _ready() -> void:
 	visible = false
 	min_speed = Level.current_level.min_speed
 	max_speed = Level.current_level.max_speed
+	
+	note_target_visual.texture = Level.current_level.note_target_texture
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -91,3 +91,6 @@ func death_animation():
 func retry_pressed():
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/rhythm_game_screen.tscn")
+
+func home_pressed():
+	get_tree().change_scene_to_file("res://Scenes/title-screen.tscn")

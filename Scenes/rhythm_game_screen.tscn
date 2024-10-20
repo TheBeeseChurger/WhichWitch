@@ -74,56 +74,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0156863, 0.0156863, 0.0470588, 0.47451)
 
-[node name="DeathScreen" type="Control" parent="."]
-process_mode = 3
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DimColorRect" type="ColorRect" parent="DeathScreen"]
-z_index = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0156863, 0.0196078, 0.0196078, 1)
-
-[node name="Button" type="Button" parent="DeathScreen"]
-z_index = 4
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -364.0
-offset_top = 67.0
-offset_right = -18.0
-offset_bottom = 203.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Retry"
-
-[node name="PlayerPortrait" type="TextureRect" parent="DeathScreen"]
-z_index = 4
-layout_mode = 0
-offset_left = 722.0
-offset_top = 98.0
-offset_right = 1004.0
-offset_bottom = 498.0
-size_flags_horizontal = 8
-size_flags_vertical = 8
-texture = ExtResource("3_rvi76")
-expand_mode = 1
-script = ExtResource("5_70um0")
-
 [node name="PortraitContainer" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -441,9 +391,77 @@ texture_over = ExtResource("27_oywd7")
 texture_progress = ExtResource("28_4psyy")
 tint_under = Color(0.117696, 0.139477, 0.164087, 1)
 
+[node name="DeathScreen" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DimColorRect" type="ColorRect" parent="DeathScreen"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0156863, 0.0196078, 0.0196078, 1)
+
+[node name="Button" type="Button" parent="DeathScreen"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -364.0
+offset_top = 67.0
+offset_right = -18.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Retry"
+
+[node name="TitleButton" type="Button" parent="DeathScreen"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = 222.0
+offset_right = -65.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Title Screen"
+
+[node name="PlayerPortrait" type="TextureRect" parent="DeathScreen"]
+z_index = 4
+layout_mode = 0
+offset_left = 722.0
+offset_top = 98.0
+offset_right = 1004.0
+offset_bottom = 498.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("3_rvi76")
+expand_mode = 1
+script = ExtResource("5_70um0")
+
 [node name="DynamicMusicPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")
 
 [connection signal="pressed" from="DeathScreen/Button" to="." method="retry_pressed"]
+[connection signal="pressed" from="DeathScreen/TitleButton" to="." method="home_pressed"]
 
 [editable path="Dialogue/NpcDialogueBox"]
