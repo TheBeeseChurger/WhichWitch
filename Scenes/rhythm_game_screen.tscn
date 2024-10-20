@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=44 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Texture2D" uid="uid://daduyihra3ocv" path="res://Sprites/pumpkin girl bg.png" id="2_bxygy"]
@@ -27,7 +27,7 @@
 [ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
 [ext_resource type="PackedScene" uid="uid://cev7xee75236w" path="res://Scenes/UI/cauldron_splash_particles.tscn" id="16_wufbn"]
 [ext_resource type="Texture2D" uid="uid://i5h20aantn0h" path="res://Sprites/click-hint.png" id="22_fioew"]
-[ext_resource type="AudioStream" uid="uid://quv7mxwdudin" path="res://Audio/popup.mp3" id="25_tvtpm"]
+[ext_resource type="AudioStream" uid="uid://quv7mxwdudin" path="res://Audio/SFX/popup.mp3" id="25_tvtpm"]
 [ext_resource type="Texture2D" uid="uid://dun8m3812dgma" path="res://Sprites/HealthBarBG.png" id="26_mbxq6"]
 [ext_resource type="AudioStream" uid="uid://dyf70gl6quefk" path="res://Audio/SFX/Menu Select FX click.mp3" id="26_v6k5m"]
 [ext_resource type="Texture2D" uid="uid://dskr23imdxloc" path="res://Sprites/HealthBarFG.png" id="27_oywd7"]
@@ -49,11 +49,16 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_bpxxe"]
 gradient = SubResource("Gradient_vumdn")
 
+[sub_resource type="LabelSettings" id="LabelSettings_tte7j"]
+font_color = Color(1, 1, 1, 0.807843)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.454902)
+
 [sub_resource type="LabelSettings" id="LabelSettings_0w5hp"]
 font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_2pesk"]
-font_size = 48
+font_size = 36
 outline_size = 12
 outline_color = Color(0, 0.426763, 0.878641, 1)
 
@@ -419,6 +424,20 @@ texture_over = ExtResource("27_oywd7")
 texture_progress = ExtResource("28_4psyy")
 tint_under = Color(0.117696, 0.139477, 0.164087, 1)
 
+[node name="PointsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -41.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "5678"
+label_settings = SubResource("LabelSettings_tte7j")
+
 [node name="DeathScreen" type="Control" parent="."]
 process_mode = 3
 visible = false
@@ -555,7 +574,6 @@ vertical_alignment = 1
 
 [node name="WinScreen" type="Control" parent="."]
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -575,7 +593,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0156863, 0.0156863, 0.0470588, 0.47451)
 
-[node name="Button" type="Button" parent="WinScreen"]
+[node name="NextButton" type="Button" parent="WinScreen"]
 z_index = 4
 layout_mode = 1
 anchors_preset = 8
@@ -583,14 +601,32 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -364.0
+offset_left = -414.0
 offset_top = 67.0
-offset_right = -18.0
+offset_right = 44.0
 offset_bottom = 203.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "Next Level"
+
+[node name="RetryButton" type="Button" parent="WinScreen"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -437.0
+offset_top = 222.0
+offset_right = -205.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Retry
+"
 
 [node name="TitleButton" type="Button" parent="WinScreen"]
 z_index = 4
@@ -600,9 +636,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -316.0
+offset_left = -176.0
 offset_top = 222.0
-offset_right = -65.0
+offset_right = 68.0
 offset_bottom = 275.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -655,8 +691,8 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -67.0
-offset_top = -33.5
-offset_bottom = 33.5
+offset_top = -27.0
+offset_bottom = 34.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 48
@@ -926,7 +962,8 @@ volume_db = 2.0
 [connection signal="pressed" from="PauseMenu/VBoxContainer/ResumeButton" to="." method="pause_closed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/RetryButton" to="." method="retry_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/MainMenuButton" to="." method="home_pressed"]
-[connection signal="pressed" from="WinScreen/Button" to="." method="retry_pressed"]
+[connection signal="pressed" from="WinScreen/NextButton" to="WinScreen" method="next_level_pressed"]
+[connection signal="pressed" from="WinScreen/RetryButton" to="." method="retry_pressed"]
 [connection signal="pressed" from="WinScreen/TitleButton" to="." method="home_pressed"]
 [connection signal="pressed" from="PauseButton" to="." method="pause_opened"]
 

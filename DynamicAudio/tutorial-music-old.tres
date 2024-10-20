@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DynamicMusic" load_steps=8 format=3 uid="uid://r45v3m0c5ddm"]
+
+[ext_resource type="AudioStream" uid="uid://vmm45lie058r" path="res://Audio/tutorial transition_introloop.mp3" id="1_owqfo"]
+[ext_resource type="AudioStream" uid="uid://ccwcnbidkkjxf" path="res://Audio/tutorial pt1.mp3" id="2_a3vcy"]
+[ext_resource type="AudioStream" uid="uid://b7llm4ooid77e" path="res://Audio/tutorial pt2.mp3" id="3_03pj6"]
+[ext_resource type="AudioStream" uid="uid://5j45eo3xsvp2" path="res://Audio/tutorial pt3.mp3" id="4_4wbag"]
+[ext_resource type="AudioStream" uid="uid://xnlb7vso2u2s" path="res://Audio/tutorial pt4.mp3" id="5_7xnnl"]
+[ext_resource type="Script" path="res://Scripts/DynamicMusic.gd" id="6_muf8w"]
+[ext_resource type="AudioStream" uid="uid://c23omiapfmml8" path="res://Audio/tutorial speeding up transition.mp3" id="7_rd180"]
+
+[resource]
+script = ExtResource("6_muf8w")
+audio_streams = Array[AudioStream]([ExtResource("1_owqfo"), ExtResource("2_a3vcy"), ExtResource("3_03pj6"), ExtResource("4_4wbag"), ExtResource("5_7xnnl")])
+intensity_speeds = Array[float]([0.0, 175.0, 225.0, 275.0, 375.0])
+divisions = Array[int]([4, 4, 8, 4, 8])
+bpms = Array[float]([113.744, 113.744, 113.946, 152.381, 152.866])
+meausure_lengths = Array[float]([4.0, 4.0, 8.0, 4.0, 8.0])
+transition_audio_streams = Array[AudioStream]([null, null, null, ExtResource("7_rd180"), null])
+transition_meausure_lengths = Array[float]([0.0, 0.0, 0.0, 4.0, 0.0])
+force_transition_at_end = Array[int]([])

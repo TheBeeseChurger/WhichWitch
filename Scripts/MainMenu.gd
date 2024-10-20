@@ -12,6 +12,7 @@ var level3: Level = preload("res://Levels/punkgirl.tres") # metal
 func _ready() -> void:
 	credits.visible = false
 	level_select.visible = false
+	RhythmGameScreen.is_female = randf() >= 0.5
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
