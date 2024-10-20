@@ -28,3 +28,5 @@ static var current_level: Level
 @export var note_textures: Array[Texture2D]
 
 @export var note_hit_textures: Array[Texture2D]
+
+@export var note_target_texture: Texture2D

@@ -41,7 +41,9 @@ var respond_time_remaining: float
 static var tutorial_shown: bool = false
 
 # ranges from -5 to 5. -4 = very angry, -2 = angry, 0 = neutral, 2 = happy, 4 = very happy
-var happiness_value: int = 0
+var happiness_value: float = 0
+
+var linger_time_remaining: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -64,6 +66,12 @@ func load_dialog_from_file():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not npc_dialogue_box.typing and linger_time_remaining > 0:
+		linger_time_remaining -= delta
+		if linger_time_remaining <= 0:
+			npc_dialogue_box.visible = false
+			show_current_happiness()
+	
 	if not in_dialogue_mode:
 		return
 		
@@ -79,6 +87,8 @@ func _process(delta: float) -> void:
 		respond_time_remaining = 10000.0
 	else:
 		respond_time_left_bar.value = respond_time_remaining
+		
+	
 
 func start_dialogue_mode():
 	if in_dialogue_mode:
@@ -193,6 +203,7 @@ func submit_dialogue(reply: Dictionary):
 		npc_dialogue_box.show_message(ignored_response)
 	else:
 		var rating = reply["rating"]
+		happiness_value *= 0.875
 		if rating == "very good":
 			very_good_rating()
 		elif rating == "good":
@@ -203,8 +214,10 @@ func submit_dialogue(reply: Dictionary):
 			very_bad_rating()
 		else:
 			meh_rating()
+		happiness_value = clamp(happiness_value, -5, 5)
 			
 		var response = reply["response"]
+		linger_time_remaining = 2.5
 		npc_dialogue_box.show_message(response)
 		
 	for child in random_popup_container.get_children():
@@ -222,29 +235,34 @@ func submit_dialogue(reply: Dictionary):
 func very_good_rating():
 	rating_anim_rect.texture = good_rating_texture
 	rhythm.adjust_speed(-100)
+	happiness_value += 3.0
 	game_screen.opponent_portrait.texture = Level.current_level.very_happy_sprite
 	rating_anim(Vector2.UP)
 
 func good_rating():
 	rating_anim_rect.texture = good_rating_texture
 	rhythm.adjust_speed(-50)
+	happiness_value += 1.5
 	game_screen.opponent_portrait.texture = Level.current_level.happy_sprite
 	rating_anim(Vector2.UP*0.5)
 	
 func meh_rating():
 	rhythm.adjust_speed(0)
+	happiness_value *= 0.75
 	#rating_anim_rect.texture = meh_rating_texture
 	game_screen.opponent_portrait.texture = Level.current_level.neutral_sprite
 	#rating_anim(Vector2.ZERO)
 	
 func bad_rating():
 	rhythm.adjust_speed(50)
+	happiness_value -= 1.5
 	rating_anim_rect.texture = bad_rating_texture
 	game_screen.opponent_portrait.texture = Level.current_level.angry_sprite
 	rating_anim(Vector2.DOWN*0.5)
 	
 func very_bad_rating():
 	rhythm.adjust_speed(100)
+	happiness_value -= 3.0
 	rating_anim_rect.texture = bad_rating_texture
 	game_screen.opponent_portrait.texture = Level.current_level.very_angry_sprite
 	rating_anim(Vector2.DOWN)
@@ -260,4 +278,14 @@ func rating_anim(dir: Vector2):
 		rating_anim_rect.modulate = Color(1,1,1,0)
 		rating_anim_rect.position = base_position
 
-	
+func show_current_happiness():
+	if happiness_value >= 4:
+		game_screen.opponent_portrait.texture = Level.current_level.very_happy_sprite
+	elif happiness_value >= 2:
+		game_screen.opponent_portrait.texture = Level.current_level.happy_sprite
+	elif happiness_value >= -2:
+		game_screen.opponent_portrait.texture = Level.current_level.neutral_sprite
+	elif happiness_value >= -4:
+		game_screen.opponent_portrait.texture = Level.current_level.angry_sprite
+	else:
+		game_screen.opponent_portrait.texture = Level.current_level.very_angry_sprite

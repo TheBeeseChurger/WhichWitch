@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjbveed5ikkm2"
-path="res://.godot/imported/plant girl 1.png-fb3bbd4cc48dbda1117ed8581686ee0f.ctex"
+uid="uid://tcvtoi5b4qnv"
+path="res://.godot/imported/Player-Male-Death.png-7c715943d170081752a9321faf02e513.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/plant girl 1.png"
-dest_files=["res://.godot/imported/plant girl 1.png-fb3bbd4cc48dbda1117ed8581686ee0f.ctex"]
+source_file="res://Sprites/Player-Male-Death.png"
+dest_files=["res://.godot/imported/Player-Male-Death.png-7c715943d170081752a9321faf02e513.ctex"]
 
 [params]
 

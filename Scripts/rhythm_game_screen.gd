@@ -2,12 +2,12 @@ class_name RhythmGameScreen
 extends Control
 
 # Health is stored in this bar
-@onready var health_bar: TextureProgressBar = $HealthMarginContainer/HealthBar
+@onready var health_bar: TextureProgressBar = $HealthBar
 
 var dynamic_music_player: DynamicMusicPlayer
 
-@onready var opponent_portrait: TextureRect = $PortraitContainer/OpponentPortrait
-@onready var player_portrait: TextureRect = $PortraitContainer/PlayerPortrait
+@onready var opponent_portrait: CharacterPortrait = $PortraitContainer/OpponentPortrait
+@onready var player_portrait: CharacterPortrait = $PortraitContainer/PlayerPortrait
 
 @onready var background: TextureRect = $Background
 @onready var dim_color_rect: ColorRect = $DimColorRect
@@ -15,13 +15,16 @@ var dynamic_music_player: DynamicMusicPlayer
 @onready var rhythm_tutorial_panel: PanelContainer = $Rhythm/RhythmTutorialPanel
 @onready var dialogue_tutorial_panel: PanelContainer = $Dialogue/DialogueTutorialPanel
 
+@onready var death_screen: Control = $DeathScreen
+
+
 # How quickly to move through the noise
 const NOISE_SHAKE_SPEED: float = 5.0
 # Noise returns values in the range (-1, 1)
 # So this is how much to multiply the returned value by
 const NOISE_SHAKE_STRENGTH: float = 15.0
 # Multiplier for lerping the shake strength to zero
-const SHAKE_DECAY_RATE: float = 2.0
+const SHAKE_DECAY_RATE: float = 4.0
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
 
@@ -48,10 +51,11 @@ func _ready() -> void:
 	rhythm_tutorial_panel.visible = false
 	dialogue_tutorial_panel.visible = false
 	dim_color_rect.visible = false
+	death_screen.visible = false
 
 func _process(delta: float) -> void:	
 	# Fade out the intensity over time
-	shake_strength = lerp(shake_strength, 0.0, SHAKE_DECAY_RATE * delta)
+	shake_strength = move_toward(shake_strength, 0.0, NOISE_SHAKE_STRENGTH * SHAKE_DECAY_RATE * delta)
 
 	# Shake by adjusting camera.offset so we can move the camera around the level via it's position
 	position = get_noise_offset(delta)
@@ -73,3 +77,20 @@ func gain_health(amount: float):
 	
 func lose_health(amount: float):
 	health_bar.value -= amount
+	
+func death_animation():
+	dim_color_rect.visible = true
+	dim_color_rect.modulate = Color(1,1,1,0)
+	
+	dynamic_music_player.volume_db = -100
+	
+	death_screen.visible = true
+	
+	get_tree().paused = true
+	
+func retry_pressed():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/rhythm_game_screen.tscn")
+
+func home_pressed():
+	get_tree().change_scene_to_file("res://Scenes/title-screen.tscn")

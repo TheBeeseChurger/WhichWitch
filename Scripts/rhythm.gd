@@ -35,6 +35,8 @@ var in_rhythm_mode = false # true while in rhythm mode
 var min_speed: float = 200
 var max_speed: float = 600
 
+var is_defeated: bool
+
 static var tutorial_shown: bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -42,9 +44,14 @@ func _ready() -> void:
 	visible = false
 	min_speed = Level.current_level.min_speed
 	max_speed = Level.current_level.max_speed
+	
+	note_target_visual.texture = Level.current_level.note_target_texture
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if is_defeated:
+		return
+	
 	if not in_rhythm_mode:
 		return
 		
@@ -78,6 +85,12 @@ func _process(delta: float) -> void:
 			game_screen.lose_health(6)
 			hit_popup(miss_popup)
 			note.queue_free()
+			
+			if game_screen.health_bar.value <= 0:
+				is_defeated = true
+				notes_parent.queue_free()
+				game_screen.death_animation()
+				return
 		
 	if notes_left > 0: 
 		time_until_next_note -= delta
@@ -215,7 +228,7 @@ func spawn_note():
 	while overlaps:
 		overlaps = false
 		for child: Node2D in notes_parent.get_children():
-			if abs(child.global_position.y - note.global_position.y) < 5:
+			if abs(child.global_position.y - note.global_position.y) < 20:
 				overlaps = true
 				break
 		

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
 [ext_resource type="Texture2D" uid="uid://bsd2pjvg1s1my" path="res://Sprites/Tutorial Background V1.png" id="3_khtge"]
+[ext_resource type="Texture2D" uid="uid://tcvtoi5b4qnv" path="res://Sprites/Player-Male-Death.png" id="3_rvi76"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_6yd2o"]
 [ext_resource type="Script" path="res://Scripts/rhythm.gd" id="4_gfr0l"]
 [ext_resource type="Texture2D" uid="uid://73d3u8b27nyb" path="res://Sprites/tut 3 fix.png" id="4_x3q3w"]
@@ -11,7 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="5_tw8ck"]
 [ext_resource type="PackedScene" uid="uid://bjpoyliyupyqp" path="res://Scenes/UI/dialogue_option.tscn" id="6_gsqgo"]
 [ext_resource type="PackedScene" uid="uid://brdheh51l3qks" path="res://Scenes/UI/bad_popup.tscn" id="6_ju5jo"]
-[ext_resource type="Texture2D" uid="uid://bv68aj0rxq0ia" path="res://Female Main Character.png" id="6_wyxab"]
+[ext_resource type="Texture2D" uid="uid://ot6r6ctgl603" path="res://Sprites/Player-Male.png" id="7_2332d"]
 [ext_resource type="PackedScene" uid="uid://y4luavrw6fox" path="res://Scenes/UI/okay_popup.tscn" id="7_arxmi"]
 [ext_resource type="PackedScene" uid="uid://cer4k85kawh0k" path="res://Scenes/UI/good_popup.tscn" id="8_58pgq"]
 [ext_resource type="PackedScene" uid="uid://bml6s31gf1mpy" path="res://Scenes/UI/great_popup.tscn" id="9_ft756"]
@@ -26,6 +27,9 @@
 [ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
 [ext_resource type="PackedScene" uid="uid://cev7xee75236w" path="res://Scenes/UI/cauldron_splash_particles.tscn" id="16_wufbn"]
 [ext_resource type="Texture2D" uid="uid://i5h20aantn0h" path="res://Sprites/click-hint.png" id="22_fioew"]
+[ext_resource type="Texture2D" uid="uid://dun8m3812dgma" path="res://Sprites/HealthBarBG.png" id="26_mbxq6"]
+[ext_resource type="Texture2D" uid="uid://dskr23imdxloc" path="res://Sprites/HealthBarFG.png" id="27_oywd7"]
+[ext_resource type="Texture2D" uid="uid://bo8giwxnr73gi" path="res://Sprites/HealthBarMG.png" id="28_4psyy"]
 
 [sub_resource type="Gradient" id="Gradient_vbo6e"]
 offsets = PackedFloat32Array(0)
@@ -40,20 +44,6 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_bpxxe"]
 gradient = SubResource("Gradient_vumdn")
-
-[sub_resource type="Gradient" id="Gradient_8locq"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ypnh"]
-gradient = SubResource("Gradient_8locq")
-
-[sub_resource type="Gradient" id="Gradient_q28l7"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.924369, 0.19816, 0.252588, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nhl5c"]
-gradient = SubResource("Gradient_q28l7")
 
 [node name="GameScreen" type="Control"]
 layout_mode = 3
@@ -75,7 +65,6 @@ grow_vertical = 2
 texture = ExtResource("3_khtge")
 
 [node name="DimColorRect" type="ColorRect" parent="."]
-visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -124,7 +113,7 @@ offset_right = 1004.0
 offset_bottom = 498.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("6_wyxab")
+texture = ExtResource("7_2332d")
 expand_mode = 1
 script = ExtResource("5_70um0")
 
@@ -382,31 +371,97 @@ offset_top = 403.0
 offset_right = 1091.0
 offset_bottom = 550.0
 
-[node name="HealthMarginContainer" type="MarginContainer" parent="."]
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 48)
+layout_direction = 1
+layout_mode = 2
+offset_left = 45.0
+offset_top = 30.0
+offset_right = 1107.0
+offset_bottom = 62.0
+size_flags_vertical = 0
+step = 0.0
+value = 71.945
+nine_patch_stretch = true
+stretch_margin_left = 40
+stretch_margin_right = 40
+texture_under = ExtResource("26_mbxq6")
+texture_over = ExtResource("27_oywd7")
+texture_progress = ExtResource("28_4psyy")
+tint_under = Color(0.117696, 0.139477, 0.164087, 1)
+
+[node name="DeathScreen" type="Control" parent="."]
+process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 45
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 45
-theme_override_constants/margin_bottom = 30
 
-[node name="HealthBar" type="TextureProgressBar" parent="HealthMarginContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-step = 0.0
-value = 100.0
-nine_patch_stretch = true
-stretch_margin_top = 20
-stretch_margin_bottom = 20
-texture_under = SubResource("GradientTexture1D_8ypnh")
-texture_progress = SubResource("GradientTexture2D_nhl5c")
+[node name="DimColorRect" type="ColorRect" parent="DeathScreen"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0156863, 0.0196078, 0.0196078, 1)
+
+[node name="Button" type="Button" parent="DeathScreen"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -364.0
+offset_top = 67.0
+offset_right = -18.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Retry"
+
+[node name="TitleButton" type="Button" parent="DeathScreen"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = 222.0
+offset_right = -65.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Title Screen"
+
+[node name="PlayerPortrait" type="TextureRect" parent="DeathScreen"]
+z_index = 4
+layout_mode = 0
+offset_left = 722.0
+offset_top = 98.0
+offset_right = 1004.0
+offset_bottom = 498.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("3_rvi76")
+expand_mode = 1
+script = ExtResource("5_70um0")
 
 [node name="DynamicMusicPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_43nax")
+
+[connection signal="pressed" from="DeathScreen/Button" to="." method="retry_pressed"]
+[connection signal="pressed" from="DeathScreen/TitleButton" to="." method="home_pressed"]
 
 [editable path="Dialogue/NpcDialogueBox"]

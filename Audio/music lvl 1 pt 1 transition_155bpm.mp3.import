@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyq8hndahyrms"
+path="res://.godot/imported/music lvl 1 pt 1 transition_155bpm.mp3-ea0b41f990831315e76e9704df27a495.mp3str"
+
+[deps]
+
+source_file="res://Audio/music lvl 1 pt 1 transition_155bpm.mp3"
+dest_files=["res://.godot/imported/music lvl 1 pt 1 transition_155bpm.mp3-ea0b41f990831315e76e9704df27a495.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
