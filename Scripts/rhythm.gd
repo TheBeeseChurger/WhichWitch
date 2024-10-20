@@ -96,7 +96,7 @@ func _process(delta: float) -> void:
 		time_until_next_note -= delta
 		if time_until_next_note <= 0:
 			spawn_note()
-			time_until_next_note = randf_range(0.25, 1.0) / (current_note_speed/250.0)
+			time_until_next_note = randf_range(0.05, 0.95) / (current_note_speed/250.0)
 			print("time until next note: ", time_until_next_note)
 			
 			#var next_note_time = Time.get_unix_time_from_system() + time_until_next_note
@@ -228,7 +228,7 @@ func spawn_note():
 	while overlaps:
 		overlaps = false
 		for child: Node2D in notes_parent.get_children():
-			if abs(child.global_position.y - note.global_position.y) < 20:
+			if abs(child.global_position.y - note.global_position.y) < 15:
 				overlaps = true
 				break
 		

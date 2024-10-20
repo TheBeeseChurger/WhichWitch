@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
 	if time_until_next_option <= 0:
 		if len(dialogue_options_queued) > 0:
 			spawn_random_option()
-			time_until_next_option = randf_range(0.2, 1.0)
+			time_until_next_option = randf_range(0.25, 1.0)
 		
 	respond_time_remaining -= delta
 	if respond_time_remaining <= 0:
@@ -114,8 +114,16 @@ func start_dialogue_mode():
 	current_question = questions[current_question_index];
 	
 	if current_question.has("switchto"):
+		var to_character = current_question["switchto"]
 		current_question_index += 1
 		current_question = questions[current_question_index];
+		character_sprites_level = load("res://Levels/"+to_character+".tres")
+		
+	if current_question.has("audio_track"):
+		var track: int = current_question["audio_track"]
+		game_screen.dynamic_music_player.forced_transition = track
+		
+	show_current_happiness()
 		
 	npc_dialogue_box.show_message(current_question["text"])
 	in_dialogue_mode = true

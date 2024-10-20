@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dty51gaedjo8e" path="res://Sprites/nc 2.png" id="3_86gm3"]
 [ext_resource type="Texture2D" uid="uid://ke74up2rmeab" path="res://Sprites/nc 3.png" id="4_p61rr"]
 [ext_resource type="Texture2D" uid="uid://b4fbnxgq2q0di" path="res://Sprites/CandyCornNote2.png" id="5_ohebo"]
-[ext_resource type="Resource" uid="uid://dr6f3syd7ky2q" path="res://Levels/punk.tres" id="5_sprse"]
+[ext_resource type="Resource" uid="uid://dr6f3syd7ky2q" path="res://Levels/punkgirl.tres" id="5_sprse"]
 [ext_resource type="Texture2D" uid="uid://b8fm6xf4dbwam" path="res://Sprites/nc 5.png" id="6_0hhy6"]
 [ext_resource type="Texture2D" uid="uid://dab01vs4gvsvu" path="res://Sprites/CandyCornNote1.png" id="6_ipshr"]
 [ext_resource type="Texture2D" uid="uid://do3bvmjkh27gm" path="res://Sprites/nc 1.png" id="7_cen55"]

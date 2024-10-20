@@ -18,7 +18,9 @@ var t: float
 
 # -1 = no forced
 # -2 = will stop after current loop
-var forced_transition: int = -1
+var forced_transition: int = -1:
+	set(value):
+		forced_transition = value 
 
 #var time_begin
 var time_delay

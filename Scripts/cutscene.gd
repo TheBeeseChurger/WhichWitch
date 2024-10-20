@@ -22,7 +22,10 @@ var in_level_transition: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	play_intro_cutscene()
+	if not dialogue.character_sprites_level:
+		dialogue.character_sprites_level = Level.current_level
+	
+	call_deferred("play_intro_cutscene")
 	
 func play_intro_cutscene():
 	current_cutscene_lines = dialogue.dialogue["intro_dialogue"]
@@ -57,6 +60,7 @@ func _process(delta: float) -> void:
 	
 func display_next_line():
 	cutscene_index += 1
+	
 	linger_time_remaining = message_linger_time
 	if cutscene_index >= len(current_cutscene_lines):
 		if in_intro_cutscene:
@@ -74,26 +78,33 @@ func display_next_line():
 		var dialogue_line = current_cutscene_lines[cutscene_index]
 		var speaker: String = dialogue_line[0]
 		var message: String = dialogue_line[1]
+		
 		# if "npc" show on npc box, if "player" show on player box. not implemented yet
 		if speaker == "player":
 			npc_dialogue_box.visible = false
 			player_dialogue_box.show_message(message)
-		else:
+		elif speaker == "npc":
 			player_dialogue_box.visible = false
 			npc_dialogue_box.show_message(message)
+		else:
+			player_dialogue_box.visible = false
+			dialogue.character_sprites_level = load("res://Levels/"+speaker+".tres")
+			npc_dialogue_box.show_message(message)
 			
-		if len(dialogue_line) >= 3:
-			var emotion: String = dialogue_line[2]
+		if speaker != "player":
+			var emotion := "neutral"
+			if len(dialogue_line) >= 3:
+				emotion = dialogue_line[2]
 			if emotion == "very happy":
-				game_screen.opponent_portrait.texture = Level.current_level.very_happy_sprite
+				game_screen.opponent_portrait.texture = dialogue.character_sprites_level.very_happy_sprite
 			elif emotion == "happy":
-				game_screen.opponent_portrait.texture = Level.current_level.happy_sprite
+				game_screen.opponent_portrait.texture = dialogue.character_sprites_level.happy_sprite
 			if emotion == "angry":
-				game_screen.opponent_portrait.texture = Level.current_level.angry_sprite
+				game_screen.opponent_portrait.texture = dialogue.character_sprites_level.angry_sprite
 			if emotion == "very angry":
-				game_screen.opponent_portrait.texture = Level.current_level.very_angry_sprite
+				game_screen.opponent_portrait.texture = dialogue.character_sprites_level.very_angry_sprite
 			else:
-				game_screen.opponent_portrait.texture = Level.current_level.neutral_sprite
+				game_screen.opponent_portrait.texture = dialogue.character_sprites_level.neutral_sprite
 				
 		
 func transition_to_level(next_level: Level):
