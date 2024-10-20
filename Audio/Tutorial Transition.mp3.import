@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://3q7fveymaout"
+path="res://.godot/imported/Tutorial Transition.mp3-9a67d35b0aadba20974c1d8312d9b0d9.mp3str"
+
+[deps]
+
+source_file="res://Audio/Tutorial Transition.mp3"
+dest_files=["res://.godot/imported/Tutorial Transition.mp3-9a67d35b0aadba20974c1d8312d9b0d9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

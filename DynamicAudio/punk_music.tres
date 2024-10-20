@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DynamicMusic" load_steps=2 format=3 uid="uid://g0lgdsks0ilt"]
+
+[ext_resource type="Script" path="res://Scripts/DynamicMusic.gd" id="1_nyljo"]
+
+[resource]
+script = ExtResource("1_nyljo")
+audio_streams = Array[AudioStream]([])
+intensity_speeds = Array[float]([])
+divisions = Array[int]([])
+bpms = Array[float]([])
+meausure_lengths = Array[float]([])
+transition_audio_streams = Array[AudioStream]([])
+transition_meausure_lengths = Array[float]([])
