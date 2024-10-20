@@ -66,6 +66,8 @@ func display_next_line():
 		if in_intro_cutscene:
 			visible = false
 			rhythm.current_note_speed = Level.current_level.starting_speed
+			game_screen.points_label.visible = true
+			game_screen.points_label.text = "0"
 			rhythm.start_rhythm_mode()
 		elif not in_level_transition:
 			var next_level = Level.current_level.next_level

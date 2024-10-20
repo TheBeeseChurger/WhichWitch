@@ -18,6 +18,7 @@ var dynamic_music_player: DynamicMusicPlayer
 @onready var death_screen: Control = $DeathScreen
 @onready var pause_menu: Control = $PauseMenu
 @onready var win_screen: WinScreen = $WinScreen
+@onready var points_label: Label = $PointsLabel
 
 
 # How quickly to move through the noise
@@ -30,11 +31,20 @@ const SHAKE_DECAY_RATE: float = 4.0
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
 
+@onready var male_sprite = preload("res://Sprites/Player-Male.png")
+@onready var male_death_sprite = preload("res://Sprites/Player-Male-Death.png")
+@onready var female_sprite = preload("res://Sprites/Player-Female.png")
+@onready var female_death_sprite = preload("res://Sprites/Player-Female-Death.png")
+
 # Used to keep track of where we are in the noise
 # so that we can smoothly move through it
 var noise_i: float = 0.0
 
 var shake_strength: float = 0.0
+
+static var is_female: bool
+
+@onready var death_player_portrait: CharacterPortrait = $DeathScreen/PlayerPortrait
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,6 +53,9 @@ func _ready() -> void:
 	dynamic_music_player.dynamic_music = Level.current_level.dynamic_music
 	dynamic_music_player.play_next_track()
 	background.texture = Level.current_level.background_texture
+	
+	player_portrait.texture = female_sprite if is_female else male_sprite
+	death_player_portrait.texture = female_death_sprite if is_female else male_death_sprite
 	
 	rand.randomize()
 	# Randomize the generated noise
@@ -56,6 +69,7 @@ func _ready() -> void:
 	death_screen.visible = false
 	pause_menu.visible = false
 	win_screen.visible = false
+	points_label.visible = false
 
 func _process(delta: float) -> void:	
 	# Fade out the intensity over time

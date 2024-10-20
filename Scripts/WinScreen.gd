@@ -21,7 +21,10 @@ func _ready() -> void:
 
 var total_notes: int
 
-var points: int = 0
+var points: int = 0:
+	set(value):
+		points = value
+		game_screen.points_label.text = str(points)
 
 var great := 0
 var good := 0
@@ -94,3 +97,7 @@ func show_win_screen():
 	okay_label.text = str(okay)
 	bad_label.text = str(bad)
 	miss_label.text = str(miss)
+
+func next_level_pressed():
+	Level.current_level = Level.current_level.next_level
+	game_screen.retry_pressed()
