@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=33 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Resource" uid="uid://dvocg8glldoo7" path="res://Levels/tutorial.tres" id="2_anosn"]
@@ -20,10 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://chgo4ti4m28t6" path="res://Sprites/cauldron-back.png" id="13_1sv17"]
 [ext_resource type="Texture2D" uid="uid://d2ufvqqxskipr" path="res://Sprites/BadArrow.png" id="13_nnqw2"]
 [ext_resource type="Script" path="res://Scripts/cutscene.gd" id="15_sro5w"]
+[ext_resource type="Texture2D" uid="uid://dmhn6jfs0bqm" path="res://Sprites/space-hint.png" id="15_w7unt"]
 [ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
-
-[sub_resource type="Gradient" id="Gradient_pkw60"]
-colors = PackedColorArray(0.243137, 0.623529, 0.207843, 1, 0.517647, 0.764706, 0.345098, 1)
+[ext_resource type="PackedScene" uid="uid://cev7xee75236w" path="res://Scenes/UI/cauldron_splash_particles.tscn" id="16_wufbn"]
+[ext_resource type="Texture2D" uid="uid://i5h20aantn0h" path="res://Sprites/click-hint.png" id="22_fioew"]
 
 [sub_resource type="Gradient" id="Gradient_vbo6e"]
 offsets = PackedFloat32Array(0)
@@ -137,6 +137,7 @@ bad_popup = ExtResource("6_ju5jo")
 okay_popup = ExtResource("7_arxmi")
 good_popup = ExtResource("8_58pgq")
 great_popup = ExtResource("9_ft756")
+cauldron_splash_effect = ExtResource("16_wufbn")
 
 [node name="ColorRect" type="ColorRect" parent="Rhythm"]
 layout_mode = 1
@@ -189,6 +190,12 @@ texture_filter = 1
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_i0q81")
 
+[node name="SpaceInputHint" type="Sprite2D" parent="Rhythm/ColorRect/ColorRect3/TargetCenter"]
+texture_filter = 1
+position = Vector2(-70, 10.5)
+scale = Vector2(2, 2)
+texture = ExtResource("15_w7unt")
+
 [node name="PopupCenter" type="Marker2D" parent="Rhythm/ColorRect/ColorRect3"]
 position = Vector2(49, 15.5)
 
@@ -213,22 +220,8 @@ position = Vector2(576, 581)
 scale = Vector2(2, 2)
 texture = ExtResource("12_cikpx")
 
-[node name="CauldronSplashParticles" type="CPUParticles2D" parent="Rhythm"]
-position = Vector2(576, 561)
-scale = Vector2(2, 2)
-emitting = false
-amount = 20
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-emission_shape = 3
-emission_rect_extents = Vector2(20, 1)
-direction = Vector2(0, -1)
-initial_velocity_min = 167.16
-initial_velocity_max = 237.2
-scale_amount_min = 5.0
-scale_amount_max = 15.0
-color_ramp = SubResource("Gradient_pkw60")
+[node name="CauldronSplashParticles" parent="Rhythm" instance=ExtResource("16_wufbn")]
+visible = false
 
 [node name="Dialogue" type="Control" parent="."]
 layout_mode = 1
@@ -273,6 +266,12 @@ offset_left = 613.0
 offset_top = 101.0
 offset_right = 1110.0
 offset_bottom = 589.0
+
+[node name="ClickInputHint" type="Sprite2D" parent="Dialogue"]
+texture_filter = 1
+position = Vector2(1072, 467)
+scale = Vector2(2, 2)
+texture = ExtResource("22_fioew")
 
 [node name="Cutscene" type="Control" parent="."]
 visible = false
