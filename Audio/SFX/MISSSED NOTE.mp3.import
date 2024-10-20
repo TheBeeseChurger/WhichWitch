@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cxmfp5wwwfodo"
+path="res://.godot/imported/MISSSED NOTE.mp3-482d5d66ebf51e9f91c0a5af656792d6.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/MISSSED NOTE.mp3"
+dest_files=["res://.godot/imported/MISSSED NOTE.mp3-482d5d66ebf51e9f91c0a5af656792d6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

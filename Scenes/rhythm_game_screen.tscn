@@ -553,6 +553,9 @@ grow_vertical = 0
 shortcut = SubResource("Shortcut_f0830")
 icon = ExtResource("31_0v4u7")
 
+[node name="ResponseSoundPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = 2.0
+
 [connection signal="pressed" from="DeathScreen/Button" to="." method="retry_pressed"]
 [connection signal="pressed" from="DeathScreen/TitleButton" to="." method="home_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/ResumeButton" to="." method="pause_closed"]
