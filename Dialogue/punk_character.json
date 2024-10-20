@@ -55,13 +55,13 @@
 	],
 	"ignored_responses": {
 		"punkgirl": [
-			"This is an ignored response from an NPC.",
-			"This is another ignored response from an NPC.",
+			"This is an ignored response from punk girl.",
+			"This is another ignored response from punk girl.",
 			""
 		],
 		"boyfriend": [
-			"",
-			""
+			"This is an ignored response from the boyfriend.",
+			"This is another ignored response from the boyfriend."
 		]
 	},
 	"outro_dialogue": [
