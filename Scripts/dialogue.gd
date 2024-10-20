@@ -40,6 +40,9 @@ var respond_time_remaining: float
 
 static var tutorial_shown: bool = false
 
+# ranges from -5 to 5. -4 = very angry, -2 = angry, 0 = neutral, 2 = happy, 4 = very happy
+var happiness_value: int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = true

@@ -321,10 +321,10 @@ texture_progress = SubResource("GradientTexture1D_bpxxe")
 
 [node name="RandomPopupContainer" type="Control" parent="Dialogue"]
 anchors_preset = 0
-offset_left = 618.0
+offset_left = 615.0
 offset_top = 93.0
 offset_right = 1117.0
-offset_bottom = 494.0
+offset_bottom = 501.0
 
 [node name="ClickInputHint" type="Sprite2D" parent="Dialogue"]
 z_index = 2
