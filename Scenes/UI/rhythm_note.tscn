@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdv03821t1fbq"]
+[gd_scene load_steps=3 format=3 uid="uid://bdv03821t1fbq"]
 
 [ext_resource type="Texture2D" uid="uid://dr4xpua05ut5j" path="res://Sprites/PumpkinNote.png" id="1_ka1q1"]
+[ext_resource type="Script" path="res://Scripts/Note.gd" id="2_1tv1d"]
 
 [node name="RhythmNote" type="Sprite2D"]
 z_index = 2
 texture_filter = 1
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_ka1q1")
+script = ExtResource("2_1tv1d")

@@ -1,7 +1,6 @@
-[gd_scene load_steps=36 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=35 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
-[ext_resource type="Resource" uid="uid://dvocg8glldoo7" path="res://Levels/tutorial.tres" id="2_anosn"]
 [ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
 [ext_resource type="Texture2D" uid="uid://bsd2pjvg1s1my" path="res://Sprites/Tutorial Background V1.png" id="3_khtge"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_6yd2o"]
@@ -64,7 +63,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u1iya")
-level = ExtResource("2_anosn")
 
 [node name="Background" type="TextureRect" parent="."]
 z_index = -2

@@ -40,8 +40,8 @@ static var tutorial_shown: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
-	min_speed = game_screen.level.min_speed
-	max_speed = game_screen.level.max_speed
+	min_speed = Level.current_level.min_speed
+	max_speed = Level.current_level.max_speed
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 	
 	for note: Node2D in notes_parent.get_children():
 		note.position.x = 0
-		note.position.y += current_note_speed * delta
+		note.global_position.y += current_note_speed * delta
 		
 		if not tutorial_shown and note.global_position.y >= tutorial_note_height_marker.global_position.y:
 			get_tree().paused = true
@@ -81,7 +81,7 @@ func _process(delta: float) -> void:
 		
 	if notes_left > 0: 
 		time_until_next_note -= delta
-		if time_until_next_note < 0:
+		if time_until_next_note <= 0:
 			spawn_note()
 			time_until_next_note = randf_range(0.25, 1.0) / (current_note_speed/250.0)
 			print("time until next note: ", time_until_next_note)
@@ -108,6 +108,7 @@ func start_rhythm_mode():
 		space_input_hint.visible = true
 		in_rhythm_mode = true
 		notes_left = randi_range(8, 12)
+		time_until_next_note = 0
 		
 		print("clearing ", notes_parent.get_child_count(), " nodes from notes parent")
 		for child in notes_parent.get_children():
@@ -189,12 +190,24 @@ func spawn_note():
 	# Length of one subdivision to snap to
 	var beat_length = 60 / music_player.current_bpm # Eigth note
 	var total_beats = music_player.current_measure_length * 4
+	
+	var eigth_length = 30 / music_player.current_bpm # Eigth note
+	var total_eigths = music_player.current_measure_length * 8
+	
 	var inverse_t = (1-music_player.t)
-	var t_until_next_beat = (inverse_t * total_beats) - int(inverse_t * total_beats)
-	var seconds_until_next_beat = t_until_next_beat * beat_length
+	var t_until_next_subdiv: float
+	var seconds_until_next_subdiv: float
+	
+	# only snap back only to eigth if reasonably far from next beat
+	if (inverse_t > 0.8):
+		t_until_next_subdiv = (inverse_t * total_eigths) - int(inverse_t * total_eigths)
+		seconds_until_next_subdiv = t_until_next_subdiv * eigth_length
+	else:
+		t_until_next_subdiv = (inverse_t * total_beats) - int(inverse_t * total_beats)
+		seconds_until_next_subdiv = t_until_next_subdiv * beat_length
 	
 	#var rounded_seconds_to_nearest_beat = round(seconds_until_on_target / beat_length) * beat_length
-	var adjusted_distance_from_target = (seconds_until_on_target + seconds_until_next_beat + music_player.time_delay) * current_note_speed
+	var adjusted_distance_from_target = (seconds_until_on_target + seconds_until_next_subdiv) * current_note_speed
 	note.global_position.y = target_center.global_position.y - adjusted_distance_from_target
 	
 	# check if there are any notes very close. if so, offset half a beat back
@@ -207,12 +220,13 @@ func spawn_note():
 				break
 		
 		if overlaps:
-			note.global_position.y -= beat_length * current_note_speed * 0.5
+			print("bump")
+			note.global_position.y -= eigth_length * current_note_speed
 	
-	print("spawned note at y=",note.global_position.y)
+	#print("spawned note at y=",note.global_position.y)
 	
 	# assign texture and add to notes parent node
-	var note_textures = game_screen.level.note_textures
+	var note_textures = Level.current_level.note_textures
 	if note_textures and len(note_textures) > 0:
 		note.texture = note_textures[randi_range(0, len(note_textures)-1)]
 	notes_parent.add_child(note)

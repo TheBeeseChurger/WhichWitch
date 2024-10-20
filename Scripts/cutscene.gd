@@ -61,10 +61,10 @@ func display_next_line():
 	if cutscene_index >= len(current_cutscene_lines):
 		if in_intro_cutscene:
 			visible = false
-			rhythm.current_note_speed = rhythm.game_screen.level.starting_speed
+			rhythm.current_note_speed = Level.current_level.starting_speed
 			rhythm.start_rhythm_mode()
 		elif not in_level_transition:
-			var next_level = rhythm.game_screen.level.next_level
+			var next_level = Level.current_level.next_level
 			if next_level:
 				transition_to_level(next_level)
 			else:
@@ -102,7 +102,6 @@ func transition_to_level(next_level: Level):
 	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "position", base_pos + Vector2.LEFT * 450, 1.25)
 	await get_tree().create_tween().tween_property(rhythm.game_screen.dynamic_music_player, "volume_db", -30, 1.5).finished
 	
-	rhythm.game_screen.level = next_level
 	Level.current_level = next_level
 	rhythm.game_screen.dynamic_music_player.dynamic_music = next_level.dynamic_music
 	rhythm.game_screen.dynamic_music_player.current_track_index = -1

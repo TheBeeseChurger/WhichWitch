@@ -51,7 +51,7 @@ func _ready() -> void:
 	load_dialog_from_file()
 
 func load_dialog_from_file():
-	var dialogue_file = FileAccess.open("res://Dialogue/"+rhythm.game_screen.level.dialogue_name+".json", FileAccess.READ)
+	var dialogue_file = FileAccess.open("res://Dialogue/"+Level.current_level.dialogue_name+".json", FileAccess.READ)
 	var json_string = dialogue_file.get_as_text()
 	dialogue_file.close()
 	var json = JSON.new()
@@ -210,8 +210,8 @@ func submit_dialogue(reply: Dictionary):
 	click_input_hint.visible = false
 	in_dialogue_mode = false
 	
-	rhythm.min_speed += rhythm.game_screen.level.min_speed_gain
-	rhythm.max_speed += rhythm.game_screen.level.max_speed_gain
+	rhythm.min_speed += Level.current_level.min_speed_gain
+	rhythm.max_speed += Level.current_level.max_speed_gain
 	rhythm.adjust_speed(0)
 	
 	rhythm.start_rhythm_mode()

@@ -1,9 +1,6 @@
 class_name RhythmGameScreen
 extends Control
 
-# current level being played
-@export var level: Level
-
 # Health is stored in this bar
 @onready var health_bar: TextureProgressBar = $HealthMarginContainer/HealthBar
 
@@ -36,12 +33,11 @@ var shake_strength: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Level.current_level = level
-	opponent_portrait.texture = level.neutral_sprite
+	opponent_portrait.texture = Level.current_level.neutral_sprite
 	dynamic_music_player = $DynamicMusicPlayer
-	dynamic_music_player.dynamic_music = level.dynamic_music
+	dynamic_music_player.dynamic_music = Level.current_level.dynamic_music
 	dynamic_music_player.play_next_track()
-	background.texture = level.background_texture
+	background.texture = Level.current_level.background_texture
 	
 	rand.randomize()
 	# Randomize the generated noise
