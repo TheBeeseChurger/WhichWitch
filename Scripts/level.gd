@@ -9,6 +9,13 @@ static var current_level: Level
 @export var max_speed: float = 600
 @export var max_speed_gain: float = 0 # amount max_speed increases by at the end of each round
 
+@export var neutral_sprite: Texture
+@export var happy_sprite: Texture
+@export var very_happy_sprite: Texture
+@export var	angry_sprite: Texture
+@export var	very_angry_sprite: Texture
+
+
 # level that comes after this level, if any.
 @export var next_level: Level
 

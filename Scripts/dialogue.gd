@@ -14,6 +14,7 @@ extends Control
 @onready var cutscene: Cutscene = $"../Cutscene"
 
 @onready var click_input_hint: Sprite2D = $ClickInputHint
+@onready var game_screen: RhythmGameScreen = $".."
 
 
 # Contains all dialogue
@@ -207,26 +208,31 @@ func submit_dialogue(reply: Dictionary):
 func very_good_rating():
 	rating_anim_rect.texture = good_rating_texture
 	rhythm.adjust_speed(-100)
+	game_screen.opponent_portrait.texture = Level.current_level.very_happy_sprite
 	rating_anim(Vector2.UP)
 
 func good_rating():
 	rating_anim_rect.texture = good_rating_texture
 	rhythm.adjust_speed(-50)
+	game_screen.opponent_portrait.texture = Level.current_level.happy_sprite
 	rating_anim(Vector2.UP*0.5)
 	
 func meh_rating():
 	rhythm.adjust_speed(0)
 	rating_anim_rect.texture = meh_rating_texture
+	game_screen.opponent_portrait.texture = Level.current_level.neutral_sprite
 	rating_anim(Vector2.ZERO)
 	
 func bad_rating():
 	rhythm.adjust_speed(50)
 	rating_anim_rect.texture = bad_rating_texture
+	game_screen.opponent_portrait.texture = Level.current_level.angry_sprite
 	rating_anim(Vector2.DOWN*0.5)
 	
 func very_bad_rating():
 	rhythm.adjust_speed(100)
 	rating_anim_rect.texture = bad_rating_texture
+	game_screen.opponent_portrait.texture = Level.current_level.very_angry_sprite
 	rating_anim(Vector2.DOWN)
 	
 func rating_anim(dir: Vector2):
