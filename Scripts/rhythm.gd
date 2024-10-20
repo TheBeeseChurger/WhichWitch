@@ -11,7 +11,7 @@ extends Control
 @export var cauldron_splash_effect: PackedScene
 
 @onready var note_spawn_point: Marker2D = $ColorRect/NoteSpawnPoint
-@onready var target_center: Marker2D = $ColorRect/ColorRect3/TargetCenter
+@onready var target_center: Control = $ColorRect/ColorRect3/TargetCenter
 @onready var popup_center: Marker2D = $ColorRect/ColorRect3/PopupCenter
 @onready var notes_parent: Node = $Notes
 @onready var cleared_notes_parent: Node = $ClearedNotes
@@ -46,7 +46,8 @@ func _process(delta: float) -> void:
 		rhythm_press()
 	
 	for note: Node2D in notes_parent.get_children():
-		note.global_position.y += current_note_speed * delta
+		#note.position.x = 0
+		note.position.y += current_note_speed * delta
 		if note.global_position.y > target_center.global_position.y + max_note_distance:
 			game_screen.lose_health(6)
 			hit_popup(miss_popup)
@@ -85,11 +86,11 @@ func rhythm_press():
 	for note: Node2D in notes_parent.get_children():
 		var distance_from_target = abs(note.global_position.y - target_center.global_position.y)
 			
-		if distance_from_target < max_note_distance*0.15:
+		if distance_from_target < max_note_distance*0.175:
 			hit_type = "great"
 			game_screen.gain_health(3)
 			hit_popup(great_popup)
-		elif distance_from_target < max_note_distance*0.35:
+		elif distance_from_target < max_note_distance*0.4:
 			hit_type = "good"
 			game_screen.gain_health(2)
 			hit_popup(good_popup)
@@ -147,7 +148,7 @@ func spawn_note():
 	if note_textures and len(note_textures) > 0:
 		note.texture = note_textures[randi_range(0, len(note_textures)-1)]
 	notes_parent.add_child(note)
-	print("spawned note at ", note.global_position)
+	#print("spawned note at ", note.global_position)
 
 func clear_anim(note: Sprite2D):
 	note_hit_anim(note)

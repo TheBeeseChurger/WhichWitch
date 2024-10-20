@@ -182,8 +182,12 @@ offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TargetCenter" type="Marker2D" parent="Rhythm/ColorRect/ColorRect3"]
-position = Vector2(5, 15.5)
+[node name="TargetCenter" type="Control" parent="Rhythm/ColorRect/ColorRect3"]
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 15.5
+offset_right = 5.0
+offset_bottom = 15.5
 
 [node name="NoteTargetVisual" type="Sprite2D" parent="Rhythm/ColorRect/ColorRect3/TargetCenter"]
 texture_filter = 1
@@ -200,7 +204,7 @@ texture = ExtResource("15_w7unt")
 position = Vector2(49, 15.5)
 
 [node name="NoteSpawnPoint" type="Marker2D" parent="Rhythm/ColorRect"]
-position = Vector2(5, 16.5)
+position = Vector2(5, 5)
 
 [node name="ClearedNotes" type="Node2D" parent="Rhythm"]
 
