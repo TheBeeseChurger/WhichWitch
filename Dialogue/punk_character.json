@@ -97,7 +97,7 @@
 				},
 				{
 					"text": "Uhh... Not right now.",
-					"response": "Preetty lame, dude. Pretty lame.",
+					"response": "Preeetty lame, dude. Pretty lame.",
 					"rating": "bad"
 				}
 			]
@@ -171,7 +171,7 @@
 			]
 		},
 		{
-			"text": "Oh, nice work. You actually can keep up with me talking.",
+			"text": "Oh. You're... You're actually keeping up with me talking. I underestimated you.",
 			"time": 25,
 			"replies": [
 				{
@@ -185,22 +185,133 @@
 			"switchto": "boyfriend"
 		},
 		{
-			"text": "This is a question by the boyfriend.",
-			"time": 8,
+			"text": "Heh.",
+			"time": 5,
 			"replies": [
 				{
-					"text": "Good Option",
-					"response": "Good response",
+					"text": "Uhh... Who are you?",
+					"response": "I'm her boyfriend.",
+					"rating": "bad"
+				},
+				{
+					"text": "I already know where this is going...",
+					"response": "Oh really?",
+					"rating": "bad"
+				},
+				{
+					"text": "Man.. It was just getting good.",
+					"response": "Well, fun's over.",
+					"rating": "bad"
+				}
+			]
+		},
+		{
+			"text": "So you're talking to my girlfriend, huh?",
+			"time": 5,
+			"replies": [
+				{
+					"text": "N-No.",
+					"response": "Scared? How lame.",
+					"rating": "very bad"
+				},
+				{
+					"text": "Nope. Just talking to boost my conversation skills.",
+					"response": "Oh really now? What a terrible excuse..",
 					"rating": "good"
 				},
 				{
-					"text": "Neutral Option",
-					"response": "Neutral response",
+					"text": "Technically, yes.",
+					"response": "Don't \"Technically\" me, buddy.",
+					"rating": "bad"
+				}
+			]
+		},
+		{
+			"text": "You must think you're a tough guy if you're talking to a man's girl right in front of him.",
+			"time": 5,
+			"replies": [
+				{
+					"text": "Well, my image is a bit more muscular compared to yours..",
+					"response": "...Doesn't mean I can't win...",
 					"rating": "meh"
 				},
 				{
-					"text": "Bad Option",
-					"response": "Bad response",
+					"text": "I was just talking to witches to train myself.",
+					"response": "Then train on someone else!",
+					"rating": "very bad"
+				},
+				{
+					"text": "There's no need to be so hostile.",
+					"response": "Don't talk to my girl then.",
+					"rating": "bad"
+				}
+			]
+		},
+		{
+			"switchto": "punkgirl"
+		},
+		{
+			"text": "Just ignore him, babe. He's just someone that walked up to talk to me.",
+			"time": 5,
+			"replies": [
+				{
+					"text": "Yeah. Listen to her.",
+					"response": "See? He agrees.",
+					"rating": "very good"
+				},
+				{
+					"text": "I was only talking to her to get better at talking to witches.",
+					"response": "Which I would say you're already getting really good at.",
+					"rating": "good"
+				},
+				{
+					"text": "*sigh*",
+					"response": "Come on, he's not that bad, I swear, babe.",
+					"rating": "meh"
+				}
+			]
+		},
+		{
+			"switchto": "boyfriend"
+		},
+		{
+			"text": "Just... Just answer me this! Are you aiming to steal her from me?",
+			"time": 10,
+			"replies": [
+				{
+					"text": "No. But I understand the worry bro.",
+					"response": "Yeah, yeah...",
+					"rating": "good"
+				},
+				{
+					"text": "I don't really want her.",
+					"response": "Good. She's mine only.",
+					"rating": "meh"
+				},
+				{
+					"text": "Uh....",
+					"response": "Don't make me.",
+					"rating": "very bad"
+				}
+			]
+		},
+		{
+			"text": "Okay. Okay. Let's leave this weirdo alone, babe.",
+			"time": 10,
+			"replies": [
+				{
+					"text": "Have a nice night, I guess...",
+					"response": "Yeah yeah..",
+					"rating": "good"
+				},
+				{
+					"text": "Talk to ya later.",
+					"response": "....*Scowls*",
+					"rating": "very bad"
+				},
+				{
+					"text": "Maybe I should be more careful who I talk to next...",
+					"response": "Yeah.. You should.",
 					"rating": "bad"
 				}
 			]
@@ -208,13 +319,16 @@
 	],
 	"ignored_responses": {
 		"punkgirl": [
-			"This is an ignored response from punk girl.",
-			"This is another ignored response from punk girl.",
-			""
+			"If you're just gonna ignore me then walk away.",
+			"I know how to poison every food you'v ever eaten.",
+			"Dont. Ignore. Me.",
+			"Really?"
 		],
 		"boyfriend": [
-			"This is an ignored response from the boyfriend.",
-			"This is another ignored response from the boyfriend."
+			"This isn't something you can just walk away from.",
+			"Answer the question, bud.",
+			"Don't ignore me, bud.",
+			"Don't ignore me."
 		]
 	},
 	"outro_dialogue": [
