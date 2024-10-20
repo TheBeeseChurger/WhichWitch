@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://cev7xee75236w"]
+
+[sub_resource type="Gradient" id="Gradient_pkw60"]
+colors = PackedColorArray(0.243137, 0.623529, 0.207843, 1, 0.517647, 0.764706, 0.345098, 1)
+
+[node name="CauldronSplashParticles" type="CPUParticles2D"]
+position = Vector2(576, 561)
+scale = Vector2(2, 2)
+emitting = false
+amount = 10
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(10, 7)
+direction = Vector2(0, -1)
+spread = 30.0
+initial_velocity_min = 167.16
+initial_velocity_max = 237.2
+scale_amount_min = 3.0
+scale_amount_max = 7.0
+color_ramp = SubResource("Gradient_pkw60")
+
+[node name="CauldronSplashParticlesFront" type="CPUParticles2D" parent="."]
+z_index = 2
+position = Vector2(0.5, -5.5)
+emitting = false
+amount = 10
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(10, 3)
+direction = Vector2(0, -1)
+spread = 30.0
+initial_velocity_min = 167.16
+initial_velocity_max = 237.2
+scale_amount_min = 3.0
+scale_amount_max = 7.0
+color_ramp = SubResource("Gradient_pkw60")

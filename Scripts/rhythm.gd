@@ -8,6 +8,7 @@ extends Control
 @export var okay_popup: PackedScene
 @export var good_popup: PackedScene
 @export var great_popup: PackedScene
+@export var cauldron_splash_effect: PackedScene
 
 @onready var note_spawn_point: Marker2D = $ColorRect/NoteSpawnPoint
 @onready var target_center: Marker2D = $ColorRect/ColorRect3/TargetCenter
@@ -18,6 +19,9 @@ extends Control
 @onready var dialogue: Dialogue = $"../Dialogue"
 @onready var dynamic_music_player: DynamicMusicPlayer = $"../DynamicMusic"
 @onready var cauldron: Sprite2D = $CauldronFront
+
+@onready var space_input_hint: Sprite2D = $ColorRect/ColorRect3/TargetCenter/SpaceInputHint
+
 
 var current_note_speed: float = 0 # should be 0 during cutscenes to activate intro/outro track
 var notes_left: int
@@ -65,12 +69,14 @@ func _process(delta: float) -> void:
 			
 	if notes_left <= 0 and notes_parent.get_child_count() == 0:
 		in_rhythm_mode = false
+		space_input_hint.visible = false
 		dialogue.start_dialogue_mode()
 		return
 		
 func start_rhythm_mode():
 	if not in_rhythm_mode:
 		visible = true
+		space_input_hint.visible = true
 		in_rhythm_mode = true
 		notes_left = 5
 
@@ -125,6 +131,15 @@ func hit_popup(scene: PackedScene):
 	if is_instance_valid(popup):
 		popup.queue_free()
 
+func splash_animation():
+	var splash: CPUParticles2D = cauldron_splash_effect.instantiate()
+	splash.global_position = cauldron.global_position
+	splash.emitting = true
+	add_child(splash)
+	
+	await get_tree().create_timer(2.0).timeout
+	splash.queue_free()
+
 func spawn_note():
 	var note: Sprite2D = note_scene.instantiate()
 	note.global_position = note_spawn_point.global_position
@@ -140,7 +155,13 @@ func clear_anim(note: Sprite2D):
 	note.reparent(cleared_notes_parent)
 	
 	get_tree().create_tween().tween_property(note, "global_position", cauldron.global_position, 0.3)
-	await get_tree().create_tween().tween_property(note, "rotation", note.rotation + deg_to_rad(randf_range(-30, 30)), 0.3).finished
+	get_tree().create_tween().tween_property(note, "rotation", note.rotation + deg_to_rad(randf_range(-30, 30)), 0.3).finished
+	
+	await get_tree().create_timer(0.15).timeout
+	
+	splash_animation()
+	
+	await get_tree().create_timer(0.15).timeout
 	
 	note.queue_free()
 	

@@ -13,6 +13,8 @@ extends Control
 @onready var rating_anim_rect: TextureRect = $"../PortraitContainer/OpponentPortrait/RatingAnimRect"
 @onready var cutscene: Cutscene = $"../Cutscene"
 
+@onready var click_input_hint: Sprite2D = $ClickInputHint
+@onready var game_screen: RhythmGameScreen = $".."
 
 
 # Contains all dialogue
@@ -40,6 +42,7 @@ var respond_time_remaining: float
 func _ready() -> void:
 	visible = true
 	npc_dialogue_box.visible = false
+	click_input_hint.visible = false
 	
 	rating_anim_rect.modulate = Color(1,1,1,0)
 	
@@ -89,6 +92,7 @@ func start_dialogue_mode():
 		
 	npc_dialogue_box.show_message(current_question["text"])
 	in_dialogue_mode = true
+	click_input_hint.visible = true
 	dialogue_options_queued = []
 	for i in range(len(current_question["replies"])):
 		dialogue_options_queued.append(i)
@@ -192,6 +196,7 @@ func submit_dialogue(reply: Dictionary):
 	for child in random_popup_container.get_children():
 		child.queue_free()
 		
+	click_input_hint.visible = false
 	in_dialogue_mode = false
 	
 	rhythm.min_speed += rhythm.game_screen.level.min_speed_gain
@@ -203,26 +208,31 @@ func submit_dialogue(reply: Dictionary):
 func very_good_rating():
 	rating_anim_rect.texture = good_rating_texture
 	rhythm.adjust_speed(-100)
+	game_screen.opponent_portrait.texture = Level.current_level.very_happy_sprite
 	rating_anim(Vector2.UP)
 
 func good_rating():
 	rating_anim_rect.texture = good_rating_texture
 	rhythm.adjust_speed(-50)
+	game_screen.opponent_portrait.texture = Level.current_level.happy_sprite
 	rating_anim(Vector2.UP*0.5)
 	
 func meh_rating():
 	rhythm.adjust_speed(0)
-	rating_anim_rect.texture = meh_rating_texture
-	rating_anim(Vector2.ZERO)
+	#rating_anim_rect.texture = meh_rating_texture
+	game_screen.opponent_portrait.texture = Level.current_level.neutral_sprite
+	#rating_anim(Vector2.ZERO)
 	
 func bad_rating():
 	rhythm.adjust_speed(50)
 	rating_anim_rect.texture = bad_rating_texture
+	game_screen.opponent_portrait.texture = Level.current_level.angry_sprite
 	rating_anim(Vector2.DOWN*0.5)
 	
 func very_bad_rating():
 	rhythm.adjust_speed(100)
 	rating_anim_rect.texture = bad_rating_texture
+	game_screen.opponent_portrait.texture = Level.current_level.very_angry_sprite
 	rating_anim(Vector2.DOWN)
 	
 func rating_anim(dir: Vector2):

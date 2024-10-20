@@ -9,6 +9,8 @@ extends Control
 @onready var rhythm: Rhythm = $"../Rhythm"
 @onready var dialogue: Dialogue = $"../Dialogue"
 
+@onready var game_screen: RhythmGameScreen = $".."
+
 var current_cutscene_lines: Array
 var cutscene_index: int
 var linger_time_remaining: float
@@ -79,6 +81,20 @@ func display_next_line():
 		else:
 			player_dialogue_box.visible = false
 			npc_dialogue_box.show_message(message)
+			
+		if len(dialogue_line) >= 3:
+			var emotion: String = dialogue_line[2]
+			if emotion == "very happy":
+				game_screen.opponent_portrait.texture = Level.current_level.very_happy_sprite
+			elif emotion == "happy":
+				game_screen.opponent_portrait.texture = Level.current_level.happy_sprite
+			if emotion == "angry":
+				game_screen.opponent_portrait.texture = Level.current_level.angry_sprite
+			if emotion == "very angry":
+				game_screen.opponent_portrait.texture = Level.current_level.very_angry_sprite
+			else:
+				game_screen.opponent_portrait.texture = Level.current_level.neutral_sprite
+				
 		
 func transition_to_level(next_level: Level):
 	in_level_transition = true
@@ -96,6 +112,7 @@ func transition_to_level(next_level: Level):
 	dialogue.load_dialog_from_file()
 	dialogue.current_question_index = -1
 	rhythm.game_screen.background.texture = next_level.background_texture
+	game_screen.opponent_portrait.texture = next_level.neutral_sprite
 	play_intro_cutscene()
 	
 	get_tree().create_tween().tween_property(rhythm.game_screen.opponent_portrait, "position", base_pos, 1.25)
