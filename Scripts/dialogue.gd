@@ -19,6 +19,8 @@ extends Control
 @onready var good_sound: AudioStream = preload("res://Audio/GOOD SOUND.mp3")
 @onready var bad_sound: AudioStream = preload("res://Audio/BAD SOUND V2.mp3")
 @onready var response_sound_player: AudioStreamPlayer = $"../ResponseSoundPlayer"
+@onready var popup_sound_player: AudioStreamPlayer = $PopupSoundPlayer
+@onready var select_sound_player: AudioStreamPlayer = $SelectSoundPlayer
 
 
 # Contains all dialogue
@@ -182,9 +184,13 @@ func place_option(option: Button, restore_option_index: int):
 		iteration_max -= 1
 		if iteration_max <= 0:
 			print("MAX ITERATIONS REACHED")
-			break
+			if is_instance_valid(option):
+				option.queue_free()
+			return
 	
 	#print("placed at ", random_x, ", ", random_y)
+	
+	popup_sound_player.play()
 	
 	option.position = Vector2(random_x, random_y)
 	option.modulate = Color(1,1,1,0)
@@ -210,6 +216,8 @@ func place_option(option: Button, restore_option_index: int):
 # empty dictionary for nothing selected (ignored opponent)
 func submit_dialogue(reply: Dictionary):
 	respond_time_left_bar.value = 0
+	
+	select_sound_player.play()
 	
 	if not tutorial_shown:
 		tutorial_shown = true

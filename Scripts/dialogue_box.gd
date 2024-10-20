@@ -6,6 +6,7 @@ extends Panel
 @export var linger_time = 2.5
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
+
 var showing: bool
 var full_message: String
 var current_index: int = 0

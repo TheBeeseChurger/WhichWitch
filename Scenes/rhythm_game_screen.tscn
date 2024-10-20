@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=41 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Texture2D" uid="uid://c6vk2u1huq7b8" path="res://Sprites/GoodArrow.png" id="3_hsgmq"]
@@ -27,7 +27,9 @@
 [ext_resource type="Script" path="res://Scripts/DynamicMusicPlayer.gd" id="16_43nax"]
 [ext_resource type="PackedScene" uid="uid://cev7xee75236w" path="res://Scenes/UI/cauldron_splash_particles.tscn" id="16_wufbn"]
 [ext_resource type="Texture2D" uid="uid://i5h20aantn0h" path="res://Sprites/click-hint.png" id="22_fioew"]
+[ext_resource type="AudioStream" uid="uid://quv7mxwdudin" path="res://Audio/popup.mp3" id="25_tvtpm"]
 [ext_resource type="Texture2D" uid="uid://dun8m3812dgma" path="res://Sprites/HealthBarBG.png" id="26_mbxq6"]
+[ext_resource type="AudioStream" uid="uid://dyf70gl6quefk" path="res://Audio/SFX/Menu Select FX click.mp3" id="26_v6k5m"]
 [ext_resource type="Texture2D" uid="uid://dskr23imdxloc" path="res://Sprites/HealthBarFG.png" id="27_oywd7"]
 [ext_resource type="Texture2D" uid="uid://bo8giwxnr73gi" path="res://Sprites/HealthBarMG.png" id="28_4psyy"]
 [ext_resource type="Texture2D" uid="uid://du8xtpxxajqi7" path="res://Sprites/pause.png" id="31_0v4u7"]
@@ -358,6 +360,14 @@ theme_override_font_sizes/font_size = 17
 text = "Choose your reply to the other person's question. But be wary; some choices are better than others, and the choices won't stay on the screen forever!"
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="PopupSoundPlayer" type="AudioStreamPlayer" parent="Dialogue"]
+stream = ExtResource("25_tvtpm")
+volume_db = 2.0
+
+[node name="SelectSoundPlayer" type="AudioStreamPlayer" parent="Dialogue"]
+stream = ExtResource("26_v6k5m")
+volume_db = 2.0
 
 [node name="Cutscene" type="Control" parent="."]
 visible = false
