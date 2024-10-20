@@ -25,7 +25,7 @@ func _ready() -> void:
 	finished.connect(on_finished)
 	
 	#time_begin = Time.get_ticks_usec()
-	time_delay = AudioServer.get_time_to_next_mix() + AudioServer.get_output_latency()
+	time_delay = AudioServer.get_output_latency()
 	
 func _process(delta: float) -> void:
 	t = get_playback_position() / stream.get_length()
@@ -64,12 +64,13 @@ func play_next_track(play: bool = true):
 		if transition_stream and not in_transition_track:
 			stream = transition_stream
 			in_transition_track = true
+			current_measure_length = dynamic_music.transition_meausure_lengths[current_track_index]
 		else:
 			stream = dynamic_music.audio_streams[current_track_index]
 			in_transition_track = false
 			current_bpm = dynamic_music.bpms[current_track_index]		
-			
-		current_measure_length = dynamic_music.meausure_lengths[current_track_index]
+			current_measure_length = dynamic_music.meausure_lengths[current_track_index]
+		
 		start_time = Time.get_unix_time_from_system()
 		self.play()
 		return

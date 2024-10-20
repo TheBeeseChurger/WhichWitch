@@ -207,7 +207,7 @@ func spawn_note():
 		seconds_until_next_subdiv = t_until_next_subdiv * beat_length
 	
 	#var rounded_seconds_to_nearest_beat = round(seconds_until_on_target / beat_length) * beat_length
-	var adjusted_distance_from_target = (seconds_until_on_target + seconds_until_next_subdiv) * current_note_speed
+	var adjusted_distance_from_target = (seconds_until_on_target + seconds_until_next_subdiv + music_player.time_delay) * current_note_speed
 	note.global_position.y = target_center.global_position.y - adjusted_distance_from_target
 	
 	# check if there are any notes very close. if so, offset half a beat back
