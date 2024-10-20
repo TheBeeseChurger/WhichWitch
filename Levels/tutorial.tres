@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="Level" load_steps=8 format=3 uid="uid://dvocg8glldoo7"]
+[gd_resource type="Resource" script_class="Level" load_steps=9 format=3 uid="uid://dvocg8glldoo7"]
 
+[ext_resource type="Texture2D" uid="uid://lgwgqw0i4sqh" path="res://Sprites/tut 2 fix.png" id="1_bwpun"]
 [ext_resource type="Resource" uid="uid://chghd2hydv51e" path="res://DynamicAudio/tutorial-music.tres" id="1_nugtv"]
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_omq3d"]
 [ext_resource type="Texture2D" uid="uid://bsd2pjvg1s1my" path="res://Sprites/Tutorial Background V1.png" id="1_rg0r3"]
 [ext_resource type="Resource" uid="uid://bcj2nxhmla31t" path="res://Levels/nightcore.tres" id="2_qvc3k"]
-[ext_resource type="Texture2D" uid="uid://cmjlri3py7e1r" path="res://Sprites/tut 1.png" id="3_cdbo3"]
+[ext_resource type="Texture2D" uid="uid://73d3u8b27nyb" path="res://Sprites/tut 3 fix.png" id="4_jcd41"]
 [ext_resource type="Texture2D" uid="uid://4cr46tyg3vhq" path="res://Sprites/PumpkinNote2.png" id="5_21beh"]
 [ext_resource type="Texture2D" uid="uid://dr4xpua05ut5j" path="res://Sprites/PumpkinNote.png" id="6_f8l77"]
 
@@ -15,7 +16,11 @@ min_speed = 150.0
 min_speed_gain = 30.0
 max_speed = 600.0
 max_speed_gain = 0.0
-neutral_sprite = ExtResource("3_cdbo3")
+neutral_sprite = ExtResource("1_bwpun")
+happy_sprite = ExtResource("4_jcd41")
+very_happy_sprite = ExtResource("4_jcd41")
+angry_sprite = ExtResource("1_bwpun")
+very_angry_sprite = ExtResource("1_bwpun")
 next_level = ExtResource("2_qvc3k")
 dialogue_name = "tutorial_character"
 dynamic_music = ExtResource("1_nugtv")

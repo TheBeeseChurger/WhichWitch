@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cgqldht5h0lp7"]
+[gd_scene load_steps=34 format=3 uid="uid://cgqldht5h0lp7"]
 
 [ext_resource type="Script" path="res://Scripts/rhythm_game_screen.gd" id="1_u1iya"]
 [ext_resource type="Resource" uid="uid://dvocg8glldoo7" path="res://Levels/tutorial.tres" id="2_anosn"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="5_tw8ck"]
 [ext_resource type="PackedScene" uid="uid://bjpoyliyupyqp" path="res://Scenes/UI/dialogue_option.tscn" id="6_gsqgo"]
 [ext_resource type="PackedScene" uid="uid://brdheh51l3qks" path="res://Scenes/UI/bad_popup.tscn" id="6_ju5jo"]
+[ext_resource type="Texture2D" uid="uid://bv68aj0rxq0ia" path="res://Female Main Character.png" id="6_wyxab"]
 [ext_resource type="PackedScene" uid="uid://y4luavrw6fox" path="res://Scenes/UI/okay_popup.tscn" id="7_arxmi"]
 [ext_resource type="PackedScene" uid="uid://cer4k85kawh0k" path="res://Scenes/UI/good_popup.tscn" id="8_58pgq"]
 [ext_resource type="PackedScene" uid="uid://bml6s31gf1mpy" path="res://Scenes/UI/great_popup.tscn" id="9_ft756"]
@@ -118,9 +119,8 @@ custom_minimum_size = Vector2(250, 400)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("2_y82fn")
+texture = ExtResource("6_wyxab")
 expand_mode = 3
-flip_h = true
 
 [node name="Rhythm" type="Control" parent="."]
 layout_mode = 1

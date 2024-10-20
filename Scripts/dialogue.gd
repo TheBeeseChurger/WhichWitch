@@ -219,9 +219,9 @@ func good_rating():
 	
 func meh_rating():
 	rhythm.adjust_speed(0)
-	rating_anim_rect.texture = meh_rating_texture
+	#rating_anim_rect.texture = meh_rating_texture
 	game_screen.opponent_portrait.texture = Level.current_level.neutral_sprite
-	rating_anim(Vector2.ZERO)
+	#rating_anim(Vector2.ZERO)
 	
 func bad_rating():
 	rhythm.adjust_speed(50)
