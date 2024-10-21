@@ -5,3 +5,5 @@ A rhythm game made in 36 hours for the 2024 SIUE Game Jam. Combies rhythm and co
 Made with Godot 4.3.
 Character sprites were made using Krita.
 UI elements made with Aseprite.
+
+Play/download the game here: https://github.com/jackachulian/CougarJams2024
