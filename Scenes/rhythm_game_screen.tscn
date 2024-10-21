@@ -518,7 +518,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="DimColorRect" type="ColorRect" parent="PauseMenu"]
-z_index = 2
+z_index = 4
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -539,21 +539,21 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 
 [node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer"]
-z_index = 2
+z_index = 4
 custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Resume"
 
 [node name="RetryButton" type="Button" parent="PauseMenu/VBoxContainer"]
-z_index = 2
+z_index = 4
 custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Retry"
 
 [node name="MainMenuButton" type="Button" parent="PauseMenu/VBoxContainer"]
-z_index = 2
+z_index = 4
 custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
