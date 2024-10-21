@@ -20,6 +20,8 @@ var in_intro_cutscene: bool
 
 var in_level_transition: bool
 
+var level_ended: bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not dialogue.character_sprites_level:
@@ -38,10 +40,13 @@ func play_outro_cutscene():
 	in_intro_cutscene = false
 	current_cutscene_lines = dialogue.dialogue["outro_dialogue"]
 	cutscene_index = -1
+	dialogue.in_dialogue_mode = false
 	visible = true
 	display_next_line()
 	
 func _process(delta: float) -> void:
+	if level_ended:
+		return 
 	if not visible:
 		return
 	
@@ -59,6 +64,8 @@ func _process(delta: float) -> void:
 			display_next_line()
 	
 func display_next_line():
+	if level_ended:
+		return 
 	cutscene_index += 1
 	
 	linger_time_remaining = message_linger_time
@@ -70,10 +77,14 @@ func display_next_line():
 			game_screen.points_label.text = "0"
 			rhythm.start_rhythm_mode()
 		elif not in_level_transition:
+			level_ended = true
 			game_screen.win_screen.show_win_screen()
-			if Level.current_level.name == "punkgirl":
+			if not Level.current_level.next_level:
 				game_screen.win_screen.next_button.visible = false
 				game_screen.win_screen.game_win_label.visible = true
+			else:
+				game_screen.win_screen.next_button.visible = true
+				game_screen.win_screen.game_win_label.visible = false
 				
 	else:
 		var dialogue_line = current_cutscene_lines[cutscene_index]

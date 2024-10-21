@@ -15,16 +15,17 @@
 [resource]
 script = ExtResource("9_el2vm")
 name = "punkgirl"
-starting_speed = 200.0
+starting_speed = 300.0
 min_speed = 200.0
-min_speed_gain = 25.0
+min_speed_gain = 24.0
 max_speed = 600.0
-max_speed_gain = 15.0
+max_speed_gain = 10.0
 neutral_sprite = ExtResource("5_ai66j")
 happy_sprite = ExtResource("4_xsgqm")
 very_happy_sprite = ExtResource("11_c5l2w")
 angry_sprite = ExtResource("1_h6rtt")
 very_angry_sprite = ExtResource("10_lafhx")
+rank_thresholds = Array[int]([7000, 6000, 5000, 4250, 3500])
 dialogue_name = "punk_character"
 dynamic_music = ExtResource("3_iaiy0")
 background_texture = ExtResource("2_rwv0l")

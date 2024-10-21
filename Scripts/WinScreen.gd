@@ -16,6 +16,11 @@ extends Control
 @onready var next_button: Button = $NextButton
 @onready var game_win_label: Label = $GameWinLabel
 
+@onready var cutscene: Cutscene = $"../Cutscene"
+
+@onready var rhythm: Rhythm = $"../Rhythm"
+@onready var dialogue: Dialogue = $"../Dialogue"
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -65,6 +70,15 @@ func _process(delta: float) -> void:
 	
 func show_win_screen():
 	visible = true
+	
+	cutscene.npc_dialogue_box.visible = false
+	
+	game_screen.rhythm_tutorial_panel
+	
+	rhythm.set_process(false)
+	rhythm.in_rhythm_mode = false
+	cutscene.set_process(false)
+	dialogue.queue_free()
 	
 	var accuracy: float = (total_notes - miss) / float(total_notes)
 	

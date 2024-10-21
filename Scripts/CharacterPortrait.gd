@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 	var total_beats = game_screen.dynamic_music_player.current_measure_length * 2
 	var pulse_sine = abs(sin(game_screen.dynamic_music_player.t * total_beats * PI)) * bop_strength
 	
-	var y_add = pulse_sine*20
+	var y_add = pulse_sine*15
 	var x_add = pulse_sine*10
 	
 	size.y = 400 + y_add

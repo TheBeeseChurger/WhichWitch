@@ -67,6 +67,8 @@ func play_next_track(play: bool = true):
 	if forced_transition != -1:
 		if forced_transition == -2:
 			volume_db = -100
+			stop()
+			queue_free()
 			return
 		else:
 			next_track_index = forced_transition
@@ -96,6 +98,7 @@ func play_next_track(play: bool = true):
 		
 		start_time = Time.get_unix_time_from_system()
 		self.play()
+		time_delay = AudioServer.get_output_latency()
 		return
 	else:
 		#print("looped! current division: ", current_division)

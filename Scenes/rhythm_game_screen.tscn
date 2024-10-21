@@ -154,7 +154,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_gfr0l")
 note_scene = ExtResource("4_6yd2o")
-max_note_distance = 40.0
 miss_popup = ExtResource("5_gu8r3")
 bad_popup = ExtResource("6_ju5jo")
 okay_popup = ExtResource("7_arxmi")
@@ -297,6 +296,7 @@ vertical_alignment = 2
 autowrap_mode = 2
 
 [node name="Dialogue" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -36,9 +36,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -118.0
-offset_top = -60.0
+offset_top = -55.0
 offset_right = 118.0
-offset_bottom = 98.0
+offset_bottom = 161.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
@@ -57,6 +57,12 @@ text = "Level Select"
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Credits"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Quit"
 
 [node name="LevelSelect" type="Control" parent="."]
 visible = false
@@ -197,6 +203,7 @@ text = "Back"
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/LevelSelectButton" to="." method="on_select_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="on_quit_pressed"]
 [connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button" to="." method="on_level_1_pressed"]
 [connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button2" to="." method="on_level_2_pressed"]
 [connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button3" to="." method="on_level_3_pressed"]

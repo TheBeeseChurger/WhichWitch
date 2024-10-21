@@ -51,3 +51,6 @@ func on_credits_pressed():
 func on_credits_back_pressed():
 	v_box_container.visible = true
 	credits.visible = false
+	
+func on_quit_pressed():
+	get_tree().quit()

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bki06utw6tjlo"
+path="res://.godot/imported/lvl 1 intro transition to beat drop.mp3-689917540871ef0adab26a131a11ad50.mp3str"
+
+[deps]
+
+source_file="res://ACTUALLY FINAL/lvl 1 intro transition to beat drop.mp3"
+dest_files=["res://.godot/imported/lvl 1 intro transition to beat drop.mp3-689917540871ef0adab26a131a11ad50.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

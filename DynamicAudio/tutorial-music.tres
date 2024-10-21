@@ -9,10 +9,10 @@
 [resource]
 script = ExtResource("1_c6yew")
 audio_streams = Array[AudioStream]([ExtResource("1_jg0yk"), ExtResource("1_e0dks"), ExtResource("3_6dimt")])
-intensity_speeds = Array[float]([175.0, 275.0, 375.0])
+intensity_speeds = Array[float]([130.0, 200.0, 300.0])
 divisions = Array[int]([2, 2, 4])
 bpms = Array[float]([90.0, 90.0, 170.0])
 meausure_lengths = Array[float]([2.0, 2.0, 4.0])
 transition_audio_streams = Array[AudioStream]([null, null, ExtResource("5_nbh73")])
-transition_meausure_lengths = Array[float]([0.0, 0.0, 0.0, 4.0, 0.0])
+transition_meausure_lengths = Array[float]([0.0, 0.0, 1.0])
 force_transition_at_end = Array[int]([])

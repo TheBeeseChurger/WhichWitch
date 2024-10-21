@@ -2,7 +2,7 @@ class_name Rhythm
 extends Control
 
 @export var note_scene: PackedScene
-@export var max_note_distance: float = 50
+const max_note_distance: float = 55
 @export var miss_popup: PackedScene
 @export var bad_popup: PackedScene
 @export var okay_popup: PackedScene
@@ -88,6 +88,8 @@ func _process(delta: float) -> void:
 			game_screen.lose_health(6)
 			hit_popup(miss_popup)
 			note.queue_free()
+			audio_stream_player.stream = note_miss_sound
+			audio_stream_player.play()
 			
 			if game_screen.health_bar.value <= 0:
 				is_defeated = true
@@ -100,7 +102,7 @@ func _process(delta: float) -> void:
 		if time_until_next_note <= 0:
 			spawn_note()
 			time_until_next_note = (randf_range(0.05, 0.95) / (current_note_speed/250.0)) / RhythmGameScreen.global_difficulty_mult
-			print("time until next note: ", time_until_next_note)
+			#print("time until next note: ", time_until_next_note)
 			
 			#var next_note_time = Time.get_unix_time_from_system() + time_until_next_note
 			
@@ -135,17 +137,17 @@ func rhythm_press():
 	for note: Node2D in notes_parent.get_children():
 		var distance_from_target = abs(note.global_position.y - target_center.global_position.y)
 			
-		if distance_from_target < max_note_distance*0.175:
+		if distance_from_target < max_note_distance*0.225:
 			hit_type = "great"
 			game_screen.gain_health(3)
 			win_screen.add_great()
 			hit_popup(great_popup)
-		elif distance_from_target < max_note_distance*0.4:
+		elif distance_from_target < max_note_distance*0.45:
 			hit_type = "good"
 			win_screen.add_good()
 			game_screen.gain_health(2)
 			hit_popup(good_popup)
-		elif distance_from_target < max_note_distance*0.65:
+		elif distance_from_target < max_note_distance*0.7:
 			hit_type = "okay"
 			game_screen.gain_health(1)
 			win_screen.add_okay()
@@ -153,12 +155,18 @@ func rhythm_press():
 		elif distance_from_target < max_note_distance:
 			hit_type = "bad"
 			win_screen.add_bad()
+			game_screen.gain_health(0.5)
 			hit_popup(bad_popup)
 		elif distance_from_target < max_note_distance*2:
 			hit_type = "miss"
 			win_screen.add_miss()
 			game_screen.lose_health(6)
 			hit_popup(miss_popup)
+			if game_screen.health_bar.value <= 0:
+				is_defeated = true
+				notes_parent.queue_free()
+				game_screen.death_animation()
+				return
 		
 		if hit_type:
 			if hit_type == "miss":
@@ -223,14 +231,15 @@ func spawn_note():
 	var seconds_until_next_subdiv: float
 	
 	# only snap back only to eigth if reasonably far from next beat
-	if (inverse_t > 0.8):
-		t_until_next_subdiv = (inverse_t * total_eigths) - int(inverse_t * total_eigths)
-		seconds_until_next_subdiv = t_until_next_subdiv * eigth_length
-	else:
-		t_until_next_subdiv = (inverse_t * total_beats) - int(inverse_t * total_beats)
-		seconds_until_next_subdiv = t_until_next_subdiv * beat_length
+	#if (inverse_t > 0.8):
+		#t_until_next_subdiv = (inverse_t * total_eigths) - int(inverse_t * total_eigths)
+		#seconds_until_next_subdiv = t_until_next_subdiv * eigth_length
+	#else:
+	t_until_next_subdiv = (inverse_t * total_beats) - int(inverse_t * total_beats)
+	seconds_until_next_subdiv = t_until_next_subdiv * beat_length
 	
 	#var rounded_seconds_to_nearest_beat = round(seconds_until_on_target / beat_length) * beat_length
+	#  + music_player.time_delay*0.5
 	var adjusted_distance_from_target = (seconds_until_on_target + seconds_until_next_subdiv + music_player.time_delay) * current_note_speed
 	note.global_position.y = target_center.global_position.y - adjusted_distance_from_target
 	
@@ -270,10 +279,7 @@ func push_back_while_overlapping(note: Node2D, interval: float):
 	while overlaps:
 		overlaps = false
 		for child: Node2D in notes_parent.get_children():
-			if note == child:
-				continue
-			
-			if abs(child.global_position.y - note.global_position.y) < 15:
+			if note != child and abs(child.global_position.y - note.global_position.y) < 30:
 				overlaps = true
 				break
 		
@@ -291,6 +297,7 @@ func clear_anim(note: Sprite2D):
 	note_hit_anim(note)
 	
 	note.reparent(cleared_notes_parent)
+	note.z_index = 0
 	
 	get_tree().create_tween().tween_property(note, "global_position", cauldron.global_position, 0.3 / (current_note_speed/200.0))
 	get_tree().create_tween().tween_property(note, "rotation", note.rotation + deg_to_rad(randf_range(-30, 30)), 0.3 / (current_note_speed/200.0)).finished

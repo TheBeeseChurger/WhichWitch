@@ -182,7 +182,9 @@
 			]
 		},
 		{
-			"switchto": "boyfriend"
+			"audio_track": 2,
+			"switchto": "boyfriend",
+			"audio_play_next_instant": true
 		},
 		{
 			"text": "Heh.",
@@ -315,6 +317,9 @@
 					"rating": "bad"
 				}
 			]
+		},
+		{
+			"audio_track": 4
 		}
 	],
 	"ignored_responses": {

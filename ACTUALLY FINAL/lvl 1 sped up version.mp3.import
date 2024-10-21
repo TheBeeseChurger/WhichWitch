@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bsy8nwh0offdw"
+path="res://.godot/imported/lvl 1 sped up version.mp3-5503c37e4e539350c622a781881be487.mp3str"
+
+[deps]
+
+source_file="res://ACTUALLY FINAL/lvl 1 sped up version.mp3"
+dest_files=["res://.godot/imported/lvl 1 sped up version.mp3-5503c37e4e539350c622a781881be487.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

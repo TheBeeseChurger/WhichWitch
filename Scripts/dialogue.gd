@@ -53,6 +53,8 @@ var linger_time_remaining: float
 
 var character_sprites_level: Level
 
+var in_reply_mode: bool = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = true
@@ -81,9 +83,15 @@ func _process(delta: float) -> void:
 		if linger_time_remaining <= 0:
 			npc_dialogue_box.visible = false
 			show_current_happiness()
-	
+			
 	if not in_dialogue_mode:
 		return
+			
+	if not in_reply_mode and Input.is_action_just_pressed("rhythm_press"):
+		if npc_dialogue_box.typing:
+			npc_dialogue_box.show_full_line()
+		else:
+			start_dialogue_mode()
 		
 	time_until_next_option -= delta
 	if time_until_next_option <= 0:
@@ -99,11 +107,9 @@ func _process(delta: float) -> void:
 		respond_time_left_bar.value = respond_time_remaining
 		
 	
-
-func start_dialogue_mode():
-	if in_dialogue_mode:
-		return
-		
+func start_dialogue_mode():	
+	in_dialogue_mode = true
+	
 	if not tutorial_shown:
 		game_screen.dim_color_rect.visible = true
 		game_screen.dialogue_tutorial_panel.visible = true
@@ -119,33 +125,44 @@ func start_dialogue_mode():
 	visible = true
 	current_question = questions[current_question_index];
 	
-	if current_question.has("switchto"):
-		var to_character = current_question["switchto"]
-		current_question_index += 1
-		current_question = questions[current_question_index];
-		character_sprites_level = load("res://Levels/"+to_character+".tres")
-		
 	if current_question.has("audio_track"):
 		var track: int = current_question["audio_track"]
 		game_screen.dynamic_music_player.forced_transition = track
 		
+	if current_question.has("audio_play_next_instant") and current_question["audio_play_next_instant"]:
+		game_screen.dynamic_music_player.play_next_track()
+	
+	if current_question.has("switchto"):
+		var to_character = current_question["switchto"]
+		character_sprites_level = load("res://Levels/"+to_character+".tres")
+		
 	show_current_happiness()
 		
-	npc_dialogue_box.show_message(current_question["text"])
-	in_dialogue_mode = true
-	click_input_hint.visible = true
-	dialogue_options_queued = []
-	for i in range(len(current_question["replies"])):
-		dialogue_options_queued.append(i)
-	if current_question.has("time"):
-		respond_time_remaining = current_question["time"]
-	else:
-		respond_time_remaining = 10.0
+	if current_question.has("text"):
+		npc_dialogue_box.show_message(current_question["text"])
+		click_input_hint.visible = true
 		
-	npc_dialogue_box.linger_time = 9999
-	
-	respond_time_left_bar.max_value = respond_time_remaining / RhythmGameScreen.global_difficulty_mult
-	respond_time_left_bar.value = respond_time_left_bar.max_value
+		if current_question.has("replies"):
+			in_reply_mode = true
+			dialogue_options_queued = []
+			for i in range(len(current_question["replies"])):
+				dialogue_options_queued.append(i)
+			if current_question.has("time"):
+				respond_time_remaining = current_question["time"]
+			else:
+				respond_time_remaining = 10.0
+				
+			npc_dialogue_box.linger_time = 9999
+			
+			respond_time_remaining = respond_time_remaining / RhythmGameScreen.global_difficulty_mult
+			respond_time_left_bar.max_value = respond_time_remaining
+			respond_time_left_bar.value = respond_time_remaining
+		else:
+			in_reply_mode = false
+			npc_dialogue_box.linger_time = 1.75
+		
+	else:
+		start_dialogue_mode()
 
 func spawn_random_option():
 	var i = randi_range(0, len(dialogue_options_queued)-1)
@@ -200,7 +217,7 @@ func place_option(option: Button, restore_option_index: int):
 	var fade_in_tween = get_tree().create_tween().tween_property(option, "modulate", Color.WHITE, 0.5)
 	await fade_in_tween.finished
 		
-	await get_tree().create_timer(randf_range(1.25, 4.0) / RhythmGameScreen.global_difficulty_mult).timeout
+	await get_tree().create_timer(randf_range(2.25, 5.5) / RhythmGameScreen.global_difficulty_mult).timeout
 	
 	if not is_instance_valid(option):
 		return
@@ -251,7 +268,7 @@ func submit_dialogue(reply: Dictionary):
 		happiness_value = clamp(happiness_value, -5, 5)
 			
 		var response = reply["response"]
-		linger_time_remaining = 2.5
+		linger_time_remaining = 2.0
 		npc_dialogue_box.linger_time = 2.5
 		npc_dialogue_box.show_message(response)
 		
@@ -259,13 +276,18 @@ func submit_dialogue(reply: Dictionary):
 		child.queue_free()
 		
 	click_input_hint.visible = false
-	in_dialogue_mode = false
 	
 	rhythm.min_speed += Level.current_level.min_speed_gain
 	rhythm.max_speed += Level.current_level.max_speed_gain
 	rhythm.adjust_speed(0)
 	
-	rhythm.start_rhythm_mode()
+	if current_question.has("skip_rhythm") and current_question["skip_rhythm"]:
+		start_dialogue_mode()
+		in_reply_mode = false
+	else:
+		in_dialogue_mode = false
+		rhythm.start_rhythm_mode()
+	
 
 func very_good_rating():
 	rating_anim_rect.texture = good_rating_texture
@@ -280,7 +302,7 @@ func very_good_rating():
 func good_rating():
 	rating_anim_rect.texture = good_rating_texture
 	rhythm.adjust_speed(-50)
-	happiness_value += 1.5
+	happiness_value = min(happiness_value + 1.5, 3.75)
 	game_screen.opponent_portrait.texture = character_sprites_level.happy_sprite
 	rating_anim(Vector2.UP*0.5)
 	game_screen.win_screen.points += 150
@@ -289,7 +311,7 @@ func good_rating():
 	
 func meh_rating():
 	rhythm.adjust_speed(0)
-	happiness_value *= 0.75
+	happiness_value *= 0.7
 	#rating_anim_rect.texture = meh_rating_texture
 	game_screen.opponent_portrait.texture = character_sprites_level.neutral_sprite
 	game_screen.win_screen.points += 100
@@ -297,7 +319,7 @@ func meh_rating():
 	
 func bad_rating():
 	rhythm.adjust_speed(50)
-	happiness_value -= 1.5
+	happiness_value = max(happiness_value - 1.5, -3.75)
 	rating_anim_rect.texture = bad_rating_texture
 	game_screen.opponent_portrait.texture = character_sprites_level.angry_sprite
 	rating_anim(Vector2.DOWN*0.5)

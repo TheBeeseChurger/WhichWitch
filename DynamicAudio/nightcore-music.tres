@@ -11,7 +11,7 @@
 [resource]
 script = ExtResource("6_fpusr")
 audio_streams = Array[AudioStream]([ExtResource("1_2bngu"), ExtResource("2_gkj76"), ExtResource("3_cv4ax"), ExtResource("4_jqs6k"), ExtResource("5_7rp3c")])
-intensity_speeds = Array[float]([0.0, 275.0, 350.0, 450.0, 525.0])
+intensity_speeds = Array[float]([0.0, 200.0, 300.0, 400.0, 9999.0])
 divisions = Array[int]([1, 1, 2, 4, 4])
 bpms = Array[float]([155.0, 155.0, 155.0, 155.0, 177.0])
 meausure_lengths = Array[float]([4.0, 4.0, 8.0, 16.0, 16.0])
