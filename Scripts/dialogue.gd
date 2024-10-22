@@ -189,8 +189,8 @@ func place_option(option: Button, restore_option_index: int):
 	var iteration_max: int = 50
 	var intersects: bool = true
 	while intersects:
-		random_x = randi_range(0, random_popup_container.size.x - option.size.x)
-		random_y = randi_range(0, random_popup_container.size.y - option.size.y)
+		random_x = randf_range(0, random_popup_container.size.x - option.size.x)
+		random_y = randf_range(0, random_popup_container.size.y - option.size.y)
 		
 		var popup_rect = Rect2(Vector2(random_x, random_y), option.size)
 		
