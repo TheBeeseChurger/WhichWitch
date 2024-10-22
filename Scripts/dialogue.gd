@@ -295,7 +295,7 @@ func very_good_rating():
 	happiness_value += 3.0
 	game_screen.opponent_portrait.texture = character_sprites_level.very_happy_sprite
 	rating_anim(Vector2.UP)
-	game_screen.win_screen.points += 200
+	game_screen.win_screen.points += 300
 	response_sound_player.stream = good_sound
 	response_sound_player.play()
 
@@ -305,7 +305,7 @@ func good_rating():
 	happiness_value = min(happiness_value + 1.5, 3.75)
 	game_screen.opponent_portrait.texture = character_sprites_level.happy_sprite
 	rating_anim(Vector2.UP*0.5)
-	game_screen.win_screen.points += 150
+	game_screen.win_screen.points += 200
 	response_sound_player.stream = good_sound
 	response_sound_player.play()
 	
@@ -323,7 +323,6 @@ func bad_rating():
 	rating_anim_rect.texture = bad_rating_texture
 	game_screen.opponent_portrait.texture = character_sprites_level.angry_sprite
 	rating_anim(Vector2.DOWN*0.5)
-	game_screen.win_screen.points += 50
 	response_sound_player.stream = bad_sound
 	response_sound_player.play()
 	
