@@ -154,7 +154,7 @@ func start_dialogue_mode():
 				
 			npc_dialogue_box.linger_time = 9999
 			
-			respond_time_remaining = respond_time_remaining / RhythmGameScreen.global_difficulty_mult
+			respond_time_remaining = respond_time_remaining / Settings.get_difficulty_mult()
 			respond_time_left_bar.max_value = respond_time_remaining
 			respond_time_left_bar.value = respond_time_remaining
 		else:
@@ -189,8 +189,8 @@ func place_option(option: Button, restore_option_index: int):
 	var iteration_max: int = 50
 	var intersects: bool = true
 	while intersects:
-		random_x = randf_range(0, random_popup_container.size.x - option.size.x)
-		random_y = randf_range(0, random_popup_container.size.y - option.size.y)
+		random_x = randi_range(0, random_popup_container.size.x - option.size.x)
+		random_y = randi_range(0, random_popup_container.size.y - option.size.y)
 		
 		var popup_rect = Rect2(Vector2(random_x, random_y), option.size)
 		
@@ -217,7 +217,7 @@ func place_option(option: Button, restore_option_index: int):
 	var fade_in_tween = get_tree().create_tween().tween_property(option, "modulate", Color.WHITE, 0.5)
 	await fade_in_tween.finished
 		
-	await get_tree().create_timer(randf_range(2.25, 5.5) / RhythmGameScreen.global_difficulty_mult).timeout
+	await get_tree().create_timer(randf_range(2.25, 5.5) / Settings.get_difficulty_mult()).timeout
 	
 	if not is_instance_valid(option):
 		return
@@ -295,7 +295,7 @@ func very_good_rating():
 	happiness_value += 3.0
 	game_screen.opponent_portrait.texture = character_sprites_level.very_happy_sprite
 	rating_anim(Vector2.UP)
-	game_screen.win_screen.points += 300
+	game_screen.win_screen.points += 200
 	response_sound_player.stream = good_sound
 	response_sound_player.play()
 
@@ -305,7 +305,7 @@ func good_rating():
 	happiness_value = min(happiness_value + 1.5, 3.75)
 	game_screen.opponent_portrait.texture = character_sprites_level.happy_sprite
 	rating_anim(Vector2.UP*0.5)
-	game_screen.win_screen.points += 200
+	game_screen.win_screen.points += 150
 	response_sound_player.stream = good_sound
 	response_sound_player.play()
 	
@@ -323,6 +323,7 @@ func bad_rating():
 	rating_anim_rect.texture = bad_rating_texture
 	game_screen.opponent_portrait.texture = character_sprites_level.angry_sprite
 	rating_anim(Vector2.DOWN*0.5)
+	game_screen.win_screen.points += 50
 	response_sound_player.stream = bad_sound
 	response_sound_player.play()
 	

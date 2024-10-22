@@ -1,8 +1,6 @@
 class_name RhythmGameScreen
 extends Control
 
-static var global_difficulty_mult: float = 0.75
-
 # Health is stored in this bar
 @onready var health_bar: TextureProgressBar = $HealthBar
 

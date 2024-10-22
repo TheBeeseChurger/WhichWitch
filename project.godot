@@ -15,9 +15,12 @@ run/main_scene="res://Scenes/title-screen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Settings="*res://Scripts/settings.gd"
+
 [display]
 
-window/size/mode=4
 window/stretch/mode="canvas_items"
 
 [input]

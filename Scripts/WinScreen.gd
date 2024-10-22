@@ -8,7 +8,7 @@ extends Control
 @onready var rank_label: Label = $VBoxContainer/RankRow/RankLabel
 @onready var score_label: Label = $VBoxContainer/ScoreRow/Label
 @onready var accuracy_label: Label = $VBoxContainer/AccuracyRow/Label
-@onready var great_label: Label = $VBoxContainer/GreatRow/Label
+@onready var perfect_label: Label = $VBoxContainer/PerfectRow/Label
 @onready var good_label: Label = $VBoxContainer/GoodRow/Label
 @onready var okay_label: Label = $VBoxContainer/OkayRow/Label
 @onready var bad_label: Label = $VBoxContainer/BadRow/Label
@@ -34,15 +34,15 @@ var points: int = 0:
 		points = value
 		game_screen.points_label.text = str(points)
 
-var great := 0
+var perfect := 0
 var good := 0
 var okay := 0
 var bad := 0
 var miss := 0
 
-func add_great():
+func add_perfect():
 	total_notes += 1
-	great += 1
+	perfect += 1
 	points += 40
 	
 func add_good():
@@ -65,7 +65,7 @@ func add_miss():
 	miss += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	pass
 	
 func show_win_screen():
@@ -73,7 +73,7 @@ func show_win_screen():
 	
 	cutscene.npc_dialogue_box.visible = false
 	
-	#game_screen.rhythm_tutorial_panel
+	game_screen.rhythm_tutorial_panel
 	
 	rhythm.set_process(false)
 	rhythm.in_rhythm_mode = false
@@ -109,7 +109,7 @@ func show_win_screen():
 	score_label.text = str(points)
 	accuracy_label.text = ('%.2f' % (accuracy*100)) + "%"
 	
-	great_label.text = str(great)
+	perfect_label.text = str(perfect)
 	good_label.text = str(good)
 	okay_label.text = str(okay)
 	bad_label.text = str(bad)

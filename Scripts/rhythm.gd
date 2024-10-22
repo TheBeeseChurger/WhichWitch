@@ -2,12 +2,12 @@ class_name Rhythm
 extends Control
 
 @export var note_scene: PackedScene
-const max_note_distance: float = 55
+var max_note_distance: float = 30
 @export var miss_popup: PackedScene
 @export var bad_popup: PackedScene
 @export var okay_popup: PackedScene
 @export var good_popup: PackedScene
-@export var great_popup: PackedScene
+@export var perfect_popup: PackedScene
 @export var cauldron_splash_effect: PackedScene
 @export var note_press_sound: AudioStream
 
@@ -20,7 +20,7 @@ const max_note_distance: float = 55
 @onready var cleared_notes_parent: Node = $ClearedNotes
 @onready var game_screen: RhythmGameScreen = $".."
 @onready var dialogue: Dialogue = $"../Dialogue"
-@onready var dynamic_music_player: DynamicMusicPlayer = $"../DynamicMusicPlayer"
+@onready var dynamic_music_player: DynamicMusicPlayer = $"../DynamicMusic"
 @onready var cauldron: Sprite2D = $CauldronFront
 @onready var note_target_visual: Sprite2D = $ColorRect/ColorRect3/TargetCenter/NoteTargetVisual
 
@@ -29,6 +29,11 @@ const max_note_distance: float = 55
 
 @onready var win_screen: WinScreen = $"../WinScreen"
 
+var note_distance_multiplier : Dictionary = {
+	"perfect" : 0.2,
+	"good" : 0.45,
+	"okay" : 0.7
+}
 
 var current_note_speed: float = 0 # should be 0 during cutscenes to activate intro/outro track
 var notes_left: int
@@ -36,7 +41,7 @@ var time_until_next_note: float
 var in_rhythm_mode = false # true while in rhythm mode
 
 var min_speed: float = 200
-var max_speed: float = 600
+var max_speed: float = 1000
 
 var is_defeated: bool
 
@@ -47,6 +52,8 @@ func _ready() -> void:
 	visible = false
 	min_speed = Level.current_level.min_speed
 	max_speed = Level.current_level.max_speed
+	
+	# max_note_distance = something based on diffulty
 	
 	note_target_visual.texture = Level.current_level.note_target_texture
 
@@ -101,7 +108,7 @@ func _process(delta: float) -> void:
 		time_until_next_note -= delta
 		if time_until_next_note <= 0:
 			spawn_note()
-			time_until_next_note = (randf_range(0.05, 0.95) / (current_note_speed/250.0)) / RhythmGameScreen.global_difficulty_mult
+			time_until_next_note = (randf_range(0.05, 0.95) / (current_note_speed/250.0)) / Settings.difficulty_mult
 			#print("time until next note: ", time_until_next_note)
 			
 			#var next_note_time = Time.get_unix_time_from_system() + time_until_next_note
@@ -137,11 +144,11 @@ func rhythm_press():
 	for note: Node2D in notes_parent.get_children():
 		var distance_from_target = abs(note.global_position.y - target_center.global_position.y)
 			
-		if distance_from_target < max_note_distance*0.225:
-			hit_type = "great"
+		if distance_from_target < max_note_distance*note_distance_multiplier["perfect"]:
+			hit_type = "perfect"
 			game_screen.gain_health(3)
-			win_screen.add_great()
-			hit_popup(great_popup)
+			win_screen.add_perfect()
+			hit_popup(perfect_popup)
 		elif distance_from_target < max_note_distance*0.45:
 			hit_type = "good"
 			win_screen.add_good()
@@ -224,7 +231,7 @@ func spawn_note():
 	var total_beats = music_player.current_measure_length * 4
 	
 	var eigth_length = 30 / music_player.current_bpm # Eigth note
-	#var total_eigths = music_player.current_measure_length * 8
+	var total_eigths = music_player.current_measure_length * 8
 	
 	var inverse_t = (1-music_player.t)
 	var t_until_next_subdiv: float
@@ -300,7 +307,7 @@ func clear_anim(note: Sprite2D):
 	note.z_index = 0
 	
 	get_tree().create_tween().tween_property(note, "global_position", cauldron.global_position, 0.3 / (current_note_speed/200.0))
-	#get_tree().create_tween().tween_property(note, "rotation", note.rotation + deg_to_rad(randf_range(-30, 30)), 0.3 / (current_note_speed/200.0)).finished
+	get_tree().create_tween().tween_property(note, "rotation", note.rotation + deg_to_rad(randf_range(-30, 30)), 0.3 / (current_note_speed/200.0)).finished
 	
 	await get_tree().create_timer(0.15).timeout
 	

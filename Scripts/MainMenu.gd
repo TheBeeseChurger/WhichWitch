@@ -3,6 +3,7 @@ extends Control
 
 @onready var level_select: Control = $LevelSelect
 @onready var credits: Control = $Credits
+@onready var difficulty_button : Button = $VBoxContainer/DifficultyButton
 
 var level1: Level = preload("res://Levels/tutorial.tres")
 var level2: Level = preload("res://Levels/nightcore.tres")
@@ -13,9 +14,11 @@ func _ready() -> void:
 	credits.visible = false
 	level_select.visible = false
 	RhythmGameScreen.is_female = randf() >= 0.5
+	
+	difficulty_button.text = "Difficulty: " + Settings.get_difficulty_string()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	pass
 
 func on_start_pressed():
@@ -54,3 +57,7 @@ func on_credits_back_pressed():
 	
 func on_quit_pressed():
 	get_tree().quit()
+
+func on_difficulty_pressed() -> void:
+	Settings.bump_difficulty()
+	difficulty_button.text = "Difficulty: " + Settings.get_difficulty_string()
