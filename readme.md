@@ -6,4 +6,4 @@ Made with Godot 4.3.
 Character sprites were made using Krita.
 UI elements made with Aseprite.
 
-Play/download the game here: https://github.com/jackachulian/CougarJams2024
+Play/download the game here: https://jackachulian.itch.io/which-witch
