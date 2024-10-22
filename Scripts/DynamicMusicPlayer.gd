@@ -33,7 +33,7 @@ func _ready() -> void:
 	#time_begin = Time.get_ticks_usec()
 	time_delay = AudioServer.get_output_latency()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	t = get_playback_position() / stream.get_length()
 	
 	if in_transition_track:
@@ -44,8 +44,8 @@ func _process(delta: float) -> void:
 		var new_division = floor(t * total_divisions)
 		
 		if new_division > current_division:
-			var play = new_division >= total_divisions
-			play_next_track(play)
+			var play_track = new_division >= total_divisions
+			play_next_track(play_track)
 			if new_division >= total_divisions:
 				new_division -= total_divisions
 			
@@ -55,7 +55,7 @@ func on_finished():
 	play_next_track(true)
 
 # play next track if a transition needs to happen. if not, keep playing the current track
-func play_next_track(play: bool = true):
+func play_next_track(_play: bool = true):
 	var next_track_index = len(dynamic_music.intensity_speeds)-1
 	
 	for i in range(0, len(dynamic_music.intensity_speeds)):

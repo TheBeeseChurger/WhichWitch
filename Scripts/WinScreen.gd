@@ -65,7 +65,7 @@ func add_miss():
 	miss += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 func show_win_screen():
@@ -73,7 +73,7 @@ func show_win_screen():
 	
 	cutscene.npc_dialogue_box.visible = false
 	
-	game_screen.rhythm_tutorial_panel
+	#game_screen.rhythm_tutorial_panel
 	
 	rhythm.set_process(false)
 	rhythm.in_rhythm_mode = false

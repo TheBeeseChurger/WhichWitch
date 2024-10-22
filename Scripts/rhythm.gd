@@ -231,7 +231,7 @@ func spawn_note():
 	var total_beats = music_player.current_measure_length * 4
 	
 	var eigth_length = 30 / music_player.current_bpm # Eigth note
-	var total_eigths = music_player.current_measure_length * 8
+	#var total_eigths = music_player.current_measure_length * 8
 	
 	var inverse_t = (1-music_player.t)
 	var t_until_next_subdiv: float
@@ -307,7 +307,7 @@ func clear_anim(note: Sprite2D):
 	note.z_index = 0
 	
 	get_tree().create_tween().tween_property(note, "global_position", cauldron.global_position, 0.3 / (current_note_speed/200.0))
-	get_tree().create_tween().tween_property(note, "rotation", note.rotation + deg_to_rad(randf_range(-30, 30)), 0.3 / (current_note_speed/200.0)).finished
+	#get_tree().create_tween().tween_property(note, "rotation", note.rotation + deg_to_rad(randf_range(-30, 30)), 0.3 / (current_note_speed/200.0)).finished
 	
 	await get_tree().create_timer(0.15).timeout
 	

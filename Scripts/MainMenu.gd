@@ -18,7 +18,7 @@ func _ready() -> void:
 	difficulty_button.text = "Difficulty: " + Settings.get_difficulty_string()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func on_start_pressed():
