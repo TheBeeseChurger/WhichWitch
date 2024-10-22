@@ -9,7 +9,7 @@ outline_color = Color(0, 0, 0, 1)
 [node name="Label" type="Label"]
 offset_right = 69.0
 offset_bottom = 28.0
-text = "GREAT!"
+text = "PERFECT!"
 label_settings = SubResource("LabelSettings_dygwn")
 horizontal_alignment = 1
 vertical_alignment = 1
