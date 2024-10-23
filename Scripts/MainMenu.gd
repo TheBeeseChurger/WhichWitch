@@ -33,6 +33,9 @@ func on_select_pressed():
 func on_select_back_pressed():
 	v_box_container.visible = true
 	level_select.visible = false
+	
+func on_select_god_pressed():
+	pass
 
 func on_level_1_pressed():
 	Rhythm.tutorial_shown = true
