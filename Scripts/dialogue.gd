@@ -154,7 +154,7 @@ func start_dialogue_mode():
 				
 			npc_dialogue_box.linger_time = 9999
 			
-			respond_time_remaining = respond_time_remaining / Settings.get_difficulty_mult()
+			respond_time_remaining = respond_time_remaining / Settings.current_difficulty_mult()
 			respond_time_left_bar.max_value = respond_time_remaining
 			respond_time_left_bar.value = respond_time_remaining
 		else:
@@ -217,7 +217,7 @@ func place_option(option: Button, restore_option_index: int):
 	var fade_in_tween = get_tree().create_tween().tween_property(option, "modulate", Color.WHITE, 0.5)
 	await fade_in_tween.finished
 		
-	await get_tree().create_timer(randf_range(2.25, 5.5) / Settings.get_difficulty_mult()).timeout
+	await get_tree().create_timer(randf_range(2.25, 7.5) / Settings.current_difficulty_mult()).timeout
 	
 	if not is_instance_valid(option):
 		return
