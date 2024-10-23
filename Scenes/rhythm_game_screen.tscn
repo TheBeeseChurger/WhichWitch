@@ -134,9 +134,9 @@ expand_mode = 1
 
 [node name="PlayerPortrait" type="TextureRect" parent="PortraitContainer"]
 layout_mode = 2
-offset_left = 722.0
+offset_left = 665.185
 offset_top = 98.0
-offset_right = 1004.0
+offset_right = 1016.18
 offset_bottom = 498.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -577,6 +577,7 @@ vertical_alignment = 1
 
 [node name="WinScreen" type="Control" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

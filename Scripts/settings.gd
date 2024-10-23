@@ -1,13 +1,21 @@
 extends Node
 enum DifficultyType {Easy = 0, Normal = 1, Hard = 2}
 
-var difficulty : DifficultyType = DifficultyType.Normal
-var difficulty_mult: float = .75
+static var difficulty : DifficultyType = DifficultyType.Normal
+
+var difficulty_mult : Dictionary = {
+	"Easy" : 0.75,
+	"Normal" : 1,
+	"Hard" : 1.5
+}
+static func current_difficulty_mult():
+	return Settings.difficulty_mult[get_difficulty_string()]
 
 func set_difficulty(newDifficulty: DifficultyType) -> void:
 	difficulty = newDifficulty
 	update_difficulty_mult()
 	print(difficulty)
+
 
 func get_difficulty() -> int:
 	return int(difficulty)
@@ -19,7 +27,7 @@ func bump_difficulty(bumpAmount: int = 1) -> int:
 	
 	return newVal
 
-func get_difficulty_string() -> String:
+static func get_difficulty_string() -> String:
 	match(difficulty):
 		DifficultyType.Easy:
 			return "Easy"
@@ -28,9 +36,6 @@ func get_difficulty_string() -> String:
 		_:
 			difficulty = DifficultyType.Normal
 			return "Normal"
-
-func get_difficulty_mult() -> float:
-	return difficulty_mult
 
 func update_difficulty_mult() -> float:
 	match(difficulty):

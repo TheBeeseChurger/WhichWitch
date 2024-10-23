@@ -29,11 +29,26 @@ var max_note_distance: float = 30
 
 @onready var win_screen: WinScreen = $"../WinScreen"
 
-var note_distance_multiplier : Dictionary = {
-	"perfect" : 0.2,
-	"good" : 0.45,
-	"okay" : 0.7
+var note_distance_multipliers : Dictionary = {
+	"Easy" : {
+		"perfect" : 0.3,
+		"good" : 0.6,
+		"okay" : 0.7
+	},
+	"Normal" : {
+		"perfect" : 0.2,
+		"good" : 0.45,
+		"okay" : 0.7
+	},
+	"Hard" : {
+		"perfect" : 0.14,
+		"good" : 0.2,
+		"okay" : 0.5
+	},
 }
+#var difficulty_mult = []
+
+var note_distance_multiplier : Dictionary
 
 var current_note_speed: float = 0 # should be 0 during cutscenes to activate intro/outro track
 var notes_left: int
@@ -53,7 +68,7 @@ func _ready() -> void:
 	min_speed = Level.current_level.min_speed
 	max_speed = Level.current_level.max_speed
 	
-	# max_note_distance = something based on diffulty
+	note_distance_multiplier = note_distance_multipliers[Settings.get_difficulty_string()]
 	
 	note_target_visual.texture = Level.current_level.note_target_texture
 
@@ -92,7 +107,7 @@ func _process(delta: float) -> void:
 			game_screen.dim_color_rect.visible = true
 		
 		if note.global_position.y > target_center.global_position.y + max_note_distance:
-			game_screen.lose_health(6)
+			game_screen.lose_health(20)
 			hit_popup(miss_popup)
 			note.queue_free()
 			audio_stream_player.stream = note_miss_sound
@@ -108,7 +123,7 @@ func _process(delta: float) -> void:
 		time_until_next_note -= delta
 		if time_until_next_note <= 0:
 			spawn_note()
-			time_until_next_note = (randf_range(0.05, 0.95) / (current_note_speed/250.0)) / Settings.difficulty_mult
+			time_until_next_note = (randf_range(0.05, 0.95) / (current_note_speed/250.0)) / Settings.current_difficulty_mult()
 			#print("time until next note: ", time_until_next_note)
 			
 			#var next_note_time = Time.get_unix_time_from_system() + time_until_next_note
@@ -146,28 +161,28 @@ func rhythm_press():
 			
 		if distance_from_target < max_note_distance*note_distance_multiplier["perfect"]:
 			hit_type = "perfect"
-			game_screen.gain_health(3)
+			game_screen.gain_health(20)
 			win_screen.add_perfect()
 			hit_popup(perfect_popup)
 		elif distance_from_target < max_note_distance*0.45:
 			hit_type = "good"
 			win_screen.add_good()
-			game_screen.gain_health(2)
+			game_screen.gain_health(10)
 			hit_popup(good_popup)
 		elif distance_from_target < max_note_distance*0.7:
 			hit_type = "okay"
-			game_screen.gain_health(1)
+			game_screen.gain_health(5)
 			win_screen.add_okay()
 			hit_popup(okay_popup)
 		elif distance_from_target < max_note_distance:
 			hit_type = "bad"
 			win_screen.add_bad()
-			game_screen.gain_health(0.5)
+			game_screen.lose_health(5)
 			hit_popup(bad_popup)
 		elif distance_from_target < max_note_distance*2:
 			hit_type = "miss"
 			win_screen.add_miss()
-			game_screen.lose_health(6)
+			game_screen.lose_health(20)
 			hit_popup(miss_popup)
 			if game_screen.health_bar.value <= 0:
 				is_defeated = true
@@ -278,7 +293,8 @@ func spawn_note():
 	
 	var interval = eigth_length * current_note_speed
 	await get_tree().create_timer(0.05).timeout
-	push_back_while_overlapping(note, interval)
+	if is_instance_valid(self):
+		push_back_while_overlapping(note, interval)
 
 func push_back_while_overlapping(note: Node2D, interval: float):
 	var overlaps: bool = true

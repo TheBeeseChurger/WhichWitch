@@ -3,6 +3,9 @@ extends TextureRect
 
 @onready var game_screen: RhythmGameScreen = $"../.."
 
+@onready var width = size.x
+@onready var height = size.y
+
 var base_position
 var bop_strength: float = 1
 
@@ -16,8 +19,8 @@ func _process(_delta: float) -> void:
 	var y_add = pulse_sine*15
 	var x_add = pulse_sine*10
 	
-	size.y = 400 + y_add
-	size.x = 282 + x_add
+	size.y = height + y_add
+	size.x = width + x_add
 	
 	position.y = base_position.y - y_add
 	position.x = base_position.x - x_add / 2
