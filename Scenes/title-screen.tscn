@@ -230,5 +230,5 @@ text = "Back"
 [connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button3" to="." method="on_level_3_pressed"]
 [connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button4" to="." method="on_test_level_pressed"]
 [connection signal="pressed" from="LevelSelect/CreditsPanel/BackButton" to="." method="on_select_back_pressed"]
-[connection signal="pressed" from="LevelSelect/CreditsPanel/GodButton" to="." method="on_select_back_pressed"]
+[connection signal="pressed" from="LevelSelect/CreditsPanel/GodButton" to="." method="on_select_god_pressed"]
 [connection signal="pressed" from="Credits/CreditsPanel/BackButton" to="." method="on_credits_back_pressed"]
