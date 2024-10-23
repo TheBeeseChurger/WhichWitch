@@ -29,6 +29,7 @@
 	"questions": [
 		{
 			"text": "Hey!",
+			"comment": "This question will have no timer.",
 			"time": 25,
 			"replies": [
 				{
@@ -50,6 +51,7 @@
 		},
 		{
 			"text": "So, how was your day?",
+			"comment": "This question will have no timer.",
 			"time": 8,
 			"replies": [
 				{

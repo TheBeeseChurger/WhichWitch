@@ -20,7 +20,7 @@ var max_note_distance: float = 30
 @onready var cleared_notes_parent: Node = $ClearedNotes
 @onready var game_screen: RhythmGameScreen = $".."
 @onready var dialogue: Dialogue = $"../Dialogue"
-@onready var dynamic_music_player: DynamicMusicPlayer = $"../DynamicMusic"
+#@onready var dynamic_music_player: DynamicMusicPlayer = $"../DynamicMusic"
 @onready var cauldron: Sprite2D = $CauldronFront
 @onready var note_target_visual: Sprite2D = $ColorRect/ColorRect3/TargetCenter/NoteTargetVisual
 

@@ -13,7 +13,7 @@ func get_difficulty() -> int:
 	return int(difficulty)
 	
 func bump_difficulty(bumpAmount: int = 1) -> int:
-	var newVal : int = (int(difficulty) + bumpAmount) % DifficultyType.values().size()
+	var newVal: int = (int(difficulty) + bumpAmount) % DifficultyType.values().size()
 	difficulty = DifficultyType.values()[newVal]
 	update_difficulty_mult()
 	
