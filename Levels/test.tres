@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Level" load_steps=8 format=3 uid="uid://cllri4v1bwwkh"]
+
+[ext_resource type="Texture2D" uid="uid://dgb4l4ns6br5k" path="res://Sprites/boyfriend.png" id="1_084j7"]
+[ext_resource type="Texture2D" uid="uid://qxrg0dkpkxi6" path="res://Sprites/plant girl bg.png" id="2_3g0do"]
+[ext_resource type="Resource" uid="uid://r45v3m0c5ddm" path="res://DynamicAudio/tutorial-music-old.tres" id="3_y2hsm"]
+[ext_resource type="Texture2D" uid="uid://b4fbnxgq2q0di" path="res://Sprites/CandyCornNote2.png" id="4_a7uyc"]
+[ext_resource type="Texture2D" uid="uid://dab01vs4gvsvu" path="res://Sprites/CandyCornNote1.png" id="5_5qpft"]
+[ext_resource type="Texture2D" uid="uid://cbp51e1wdt04t" path="res://Sprites/CandyCornNote.png" id="6_wb0jp"]
+[ext_resource type="Script" path="res://Scripts/level.gd" id="7_4oysq"]
+
+[resource]
+script = ExtResource("7_4oysq")
+name = "test_character"
+starting_speed = 150.0
+min_speed = 150.0
+min_speed_gain = 30.0
+max_speed = 600.0
+max_speed_gain = 20.0
+neutral_sprite = ExtResource("1_084j7")
+happy_sprite = ExtResource("1_084j7")
+very_happy_sprite = ExtResource("1_084j7")
+angry_sprite = ExtResource("1_084j7")
+very_angry_sprite = ExtResource("1_084j7")
+rank_thresholds = Array[int]([2705, 1145, 580, 300, 100])
+dialogue_name = "test_character"
+dynamic_music = ExtResource("3_y2hsm")
+background_texture = ExtResource("2_3g0do")
+note_textures = Array[Texture2D]([ExtResource("6_wb0jp")])
+note_hit_textures = Array[Texture2D]([ExtResource("4_a7uyc")])
+note_target_texture = ExtResource("5_5qpft")

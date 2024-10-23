@@ -2,8 +2,7 @@
 	"name": "NPC name",
 	"intro_dialogue": [
 		["player", "This is intro dialogue from the player."],
-		["npc", "This is another intro dialogue from the NPC."],
-		["", ""]
+		["npc", "This is another intro dialogue from the NPC."]
 	],
 	"questions": [
 		{
@@ -45,7 +44,6 @@
 	],
 	"outro_dialogue": [
 		["player", "This is an outro dialogue from the player."],
-		["npc", "This is another outro dialogue from the NPC."],
-		["", ""]
+		["npc", "This is another outro dialogue from the NPC."]
 	]
 }
