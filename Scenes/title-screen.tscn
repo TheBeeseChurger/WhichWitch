@@ -69,7 +69,6 @@ theme_override_font_sizes/font_size = 24
 text = "Quit"
 
 [node name="LevelSelect" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,6 +130,12 @@ custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Level 3"
+
+[node name="Button4" type="Button" parent="LevelSelect/CreditsPanel/HBoxContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Test Level"
 
 [node name="BackButton" type="Button" parent="LevelSelect/CreditsPanel"]
 custom_minimum_size = Vector2(180, 60)
@@ -212,5 +217,6 @@ text = "Back"
 [connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button" to="." method="on_level_1_pressed"]
 [connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button2" to="." method="on_level_2_pressed"]
 [connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button3" to="." method="on_level_3_pressed"]
+[connection signal="pressed" from="LevelSelect/CreditsPanel/HBoxContainer/Button4" to="." method="on_test_level_pressed"]
 [connection signal="pressed" from="LevelSelect/CreditsPanel/BackButton" to="." method="on_select_back_pressed"]
 [connection signal="pressed" from="Credits/CreditsPanel/BackButton" to="." method="on_credits_back_pressed"]
