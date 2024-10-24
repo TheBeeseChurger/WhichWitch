@@ -294,7 +294,7 @@ func spawn_note():
 	
 	var interval = eigth_length * current_note_speed
 	await get_tree().create_timer(0.05).timeout
-	if is_instance_valid(self):
+	if is_instance_valid(self) and is_instance_valid(note):
 		push_back_while_overlapping(note, interval)
 
 func push_back_while_overlapping(note: Node2D, interval: float):
