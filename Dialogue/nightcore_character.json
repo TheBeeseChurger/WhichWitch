@@ -5,9 +5,10 @@
 		["npc", "Ugh... Ignore that..."],
 		["npc", "For some reason, that happens to me often. *says cutely*"],
 		["npc", "...."],
-		["npc", "See? It just doesn't go away..."],
-		["npc", "It's so cringy... I wanna dissapear..."],
-		["player", "Now's my chance! Let's introduce myself."]
+		["npc", "I DIDNT EVEN SAY THAT IN A CUTE WAY!!!"],
+		["npc", "It just doesn't go away..."],
+		["npc", "It's so cringy... Ugh, I wanna disappear..."],
+		["player", "Maybe I should go talk to that girl..."]
 	],
 	"questions": [
 		{
