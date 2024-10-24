@@ -109,6 +109,7 @@ func _process(delta: float) -> void:
 		if note.global_position.y > target_center.global_position.y + max_note_distance:
 			game_screen.lose_health(20)
 			hit_popup(miss_popup)
+			win_screen.add_miss()
 			note.queue_free()
 			audio_stream_player.stream = note_miss_sound
 			audio_stream_player.play()

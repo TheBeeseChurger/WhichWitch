@@ -10,6 +10,7 @@ var level2: Level = preload("res://Levels/nightcore.tres")
 var level3: Level = preload("res://Levels/punkgirl.tres")
 var test_level: Level = preload("res://Levels/test.tres")
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	credits.visible = false
@@ -33,9 +34,6 @@ func on_select_pressed():
 func on_select_back_pressed():
 	v_box_container.visible = true
 	level_select.visible = false
-	
-func on_select_god_pressed():
-	pass
 
 func on_level_1_pressed():
 	Rhythm.tutorial_shown = true

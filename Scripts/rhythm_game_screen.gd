@@ -43,6 +43,7 @@ var noise_i: float = 0.0
 var shake_strength: float = 0.0
 
 static var is_female: bool
+static var is_god_mode: bool = false
 
 @onready var death_player_portrait: CharacterPortrait = $DeathScreen/PlayerPortrait
 
@@ -91,10 +92,12 @@ func apply_noise_shake() -> void:
 	shake_strength = NOISE_SHAKE_STRENGTH
 	
 func gain_health(amount: float):
-	health_bar.value += amount
+	if !is_god_mode:
+		health_bar.value += amount
 	
 func lose_health(amount: float):
-	health_bar.value -= amount
+	if !is_god_mode:
+		health_bar.value -= amount
 	
 func death_animation():
 	dim_color_rect.visible = true
@@ -113,6 +116,9 @@ func retry_pressed():
 func home_pressed():
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/title-screen.tscn")
+	
+func on_god_mode_toggled(toggled_on: bool):
+	RhythmGameScreen.is_god_mode = toggled_on
 
 func pause_opened():
 	get_tree().paused = true
