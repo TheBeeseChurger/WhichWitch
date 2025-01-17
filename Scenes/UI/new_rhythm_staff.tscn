@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dhvtyenehd8lh"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(8, 60)
+offset_left = -4.0
+offset_top = -30.0
+offset_right = 4.0
+offset_bottom = 30.0
+pivot_offset = Vector2(4, 30)
+color = Color(1, 1, 1, 0.416)

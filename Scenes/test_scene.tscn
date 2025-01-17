@@ -1,0 +1,181 @@
+[gd_scene load_steps=4 format=3 uid="uid://sulmamk4r8nm"]
+
+[ext_resource type="Script" path="res://Scripts/new_rhythm_prototype.gd" id="1_i04jc"]
+[ext_resource type="PackedScene" uid="uid://qk60p7yoh15h" path="res://Scenes/UI/new_rhythm_measure.tscn" id="2_1tcbj"]
+[ext_resource type="PackedScene" uid="uid://dhvtyenehd8lh" path="res://Scenes/UI/new_rhythm_staff.tscn" id="3_x1m5k"]
+
+[node name="TestScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RhythmPrototype" type="Control" parent="."]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i04jc")
+measure_bar_scene = ExtResource("2_1tcbj")
+staff_bar_scene = ExtResource("3_x1m5k")
+
+[node name="BG" type="ColorRect" parent="RhythmPrototype"]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -170.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="NoteBar1" type="ColorRect" parent="RhythmPrototype"]
+custom_minimum_size = Vector2(10, 1250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -414.0
+offset_right = 5.0
+offset_bottom = 836.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5708
+pivot_offset = Vector2(5, 625)
+color = Color(1, 1, 1, 0.301961)
+
+[node name="NoteSpawnPoint" type="Marker2D" parent="RhythmPrototype/NoteBar1"]
+position = Vector2(5, 5)
+
+[node name="HitSpot" type="Control" parent="RhythmPrototype/NoteBar1"]
+custom_minimum_size = Vector2(10, 80)
+anchors_preset = 0
+offset_top = 925.0
+offset_right = 10.0
+offset_bottom = 1005.0
+
+[node name="OkaySection" type="ColorRect" parent="RhythmPrototype/NoteBar1/HitSpot"]
+custom_minimum_size = Vector2(10, 80)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.75, 0.75, 0.75, 1)
+
+[node name="PerfectSection" type="ColorRect" parent="RhythmPrototype/NoteBar1/HitSpot"]
+custom_minimum_size = Vector2(10, 28)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -14.0
+offset_right = 5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TargetCenter" type="Control" parent="RhythmPrototype/NoteBar1/HitSpot/PerfectSection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Notes" type="Marker2D" parent="RhythmPrototype/NoteBar1"]
+position = Vector2(5, 0)
+gizmo_extents = 16.3
+
+[node name="NoteBar2" type="ColorRect" parent="RhythmPrototype"]
+custom_minimum_size = Vector2(10, 1250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -354.0
+offset_right = 5.0
+offset_bottom = 896.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5708
+pivot_offset = Vector2(5, 625)
+color = Color(1, 1, 1, 0.301961)
+
+[node name="NoteSpawnPoint" type="Marker2D" parent="RhythmPrototype/NoteBar2"]
+position = Vector2(5, 5)
+
+[node name="HitSpot" type="Control" parent="RhythmPrototype/NoteBar2"]
+custom_minimum_size = Vector2(10, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = 300.0
+offset_right = 5.0
+offset_bottom = 380.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OkaySection" type="ColorRect" parent="RhythmPrototype/NoteBar2/HitSpot"]
+custom_minimum_size = Vector2(10, 80)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.75, 0.75, 0.75, 1)
+
+[node name="PerfectSection" type="ColorRect" parent="RhythmPrototype/NoteBar2/HitSpot"]
+custom_minimum_size = Vector2(10, 28)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -14.0
+offset_right = 5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TargetCenter" type="Control" parent="RhythmPrototype/NoteBar2/HitSpot/PerfectSection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Notes" type="Marker2D" parent="RhythmPrototype/NoteBar2"]
+position = Vector2(5, 0)
+gizmo_extents = 16.3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
