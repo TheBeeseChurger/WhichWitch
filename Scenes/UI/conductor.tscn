@@ -7,5 +7,4 @@
 stream = ExtResource("1_f4i8r")
 script = ExtResource("1_6fijg")
 song_bpm = 141.0
-song_speed = 564.0
 travel_dist = 920.0
