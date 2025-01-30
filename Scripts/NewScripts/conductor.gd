@@ -58,7 +58,7 @@ signal quarter_beat;
 
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
-	pass
+	set_process(is_playing);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame
 func _process(_delta: float) -> void:
@@ -78,13 +78,13 @@ func _process(_delta: float) -> void:
 	
 	if (old_beat != (ceil(song_pos_in_beats) if song_pos_in_beats > 0 else floor(song_pos_in_beats))):
 		beat.emit();
-		print("beat emitted at " + String.num(song_pos_in_beats));
+		#print("beat emitted at " + String.num(song_pos_in_beats));
 	if (old_half != (ceil(song_pos_in_beats * 2) if song_pos_in_beats > 0 else floor(song_pos_in_beats * 2))):
 		half_beat.emit();
-		print("half beat emitted at " + String.num(song_pos_in_beats));
+		#print("half beat emitted at " + String.num(song_pos_in_beats));
 	if (old_quarter != (ceil(song_pos_in_beats * 4) if song_pos_in_beats > 0 else floor(song_pos_in_beats * 4))):
 		quarter_beat.emit();
-		print("quarter beat emitted at " + String.num(song_pos_in_beats));
+		#print("quarter beat emitted at " + String.num(song_pos_in_beats));
 	
 	if (!music_player.is_playing() && song_pos > 0.0):
 		music_player.play(song_pos);

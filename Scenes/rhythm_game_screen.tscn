@@ -383,7 +383,6 @@ stream = ExtResource("26_v6k5m")
 volume_db = 2.0
 
 [node name="Cutscene" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -509,6 +508,7 @@ script = ExtResource("5_70um0")
 
 [node name="PauseMenu" type="Control" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

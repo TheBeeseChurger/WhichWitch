@@ -19,13 +19,13 @@ extends Control
 
 
 #An array of each staff's node for spawning notes under
-@onready var notes_parent: Array = [$NoteBar1/Notes, $NoteBar2/Notes];
+@onready var notes_parent: Array = [$BG/NoteBar1/Notes, $BG/NoteBar2/Notes];
 
 #An array of each staff's node's spawn location
-@onready var note_spawn: Array = [$NoteBar1/NoteSpawnPoint, $NoteBar2/NoteSpawnPoint];
+@onready var note_spawn: Array = [$BG/NoteBar1/NoteSpawnPoint, $BG/NoteBar2/NoteSpawnPoint];
 
 #An array of each staff's hit indicator location
-@onready var hit_spot: Array = [$NoteBar1/HitSpot, $NoteBar2/HitSpot];
+@onready var hit_spot: Array = [$BG/NoteBar1/HitSpot, $BG/NoteBar2/HitSpot];
 
 #An array of each staff's current hit indicator's button state
 var is_button_pressed: Array = [false, false];
@@ -95,6 +95,7 @@ func _process(delta: float) -> void:
 	move_notes(delta);
 	
 
+#Bar and staff spawn manager
 func bg_spawner():
 	if (beat_count >= 4):
 		spawn_staff_note(0);
@@ -110,6 +111,7 @@ func bg_spawner():
 	beat_count = beat_count + 1;
 	
 
+#Note spawn manager
 func note_spawner():
 	if (curr_beat_map_1.length() == 0):
 		read_next_beat(1);
@@ -134,6 +136,7 @@ func note_spawner():
 		curr_beat_map_2 = "";
 	
 
+#Bar spawn function
 func spawn_measure_note(staff: int):
 	var note = measure_bar_scene.instantiate();
 	note.position = note_spawn[staff].position;
@@ -141,6 +144,7 @@ func spawn_measure_note(staff: int):
 	notes_parent[staff].add_child(note);
 	
 
+#Staff spawn function
 func spawn_staff_note(staff: int):
 	var note = staff_bar_scene.instantiate();
 	note.position = note_spawn[staff].position;
@@ -148,12 +152,14 @@ func spawn_staff_note(staff: int):
 	notes_parent[staff].add_child(note);
 	
 
+#Note spawn function
 func spawn_note(staff: int):
 	var note = note_scene.instantiate();
 	note.position = note_spawn[staff].position;
 	note.rotation_degrees = -90;
 	notes_parent[staff].add_child(note);
 
+#Move all spawned objects based off song speed
 func move_notes(delta: float):
 	for i in range(0,2):
 		for note in notes_parent[i].get_children():
@@ -161,6 +167,7 @@ func move_notes(delta: float):
 			note.position.y += 300 * (Conductor.song_speed / 100) * delta;
 	
 
+#Input manager
 func staff_inputs() -> void:
 	if (Input.is_action_just_pressed("proto_rhythm_press_1")):
 		toggle_hitspot(0);
@@ -177,6 +184,7 @@ func staff_inputs() -> void:
 		is_button_pressed[1] = false;
 	
 
+#Hit indicator toggle function
 func toggle_hitspot(hitspot: int):
 	var perf = hit_spot[hitspot].get_node("PerfectSection");
 	var okay = hit_spot[hitspot].get_node("OkaySection");
@@ -185,12 +193,14 @@ func toggle_hitspot(hitspot: int):
 	okay.color = okay.color.inverted();
 	
 
+#Song initialization function
 func init_song() -> void:
 	song_file = FileAccess.open(song_file_raw, FileAccess.READ);
 	
 	song_beat_maps_1 = song_file.get_csv_line(" ");
 	song_beat_maps_2 = song_file.get_csv_line(" ");
 
+#Read next beat from Beat Map or refill Beat Map
 func read_next_beat(staff: int):
 	if (staff == 1):
 		if (song_beat_maps_1.is_empty()):
