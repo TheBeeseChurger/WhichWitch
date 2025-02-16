@@ -9,23 +9,23 @@ extends TextureRect
 #
 
 #Original width of portrait
-@onready var base_width = size.x
+@onready var base_width = size.x;
 
 #Original height of portrait
-@onready var base_height = size.y
+@onready var base_height = size.y;
 
 #Original position of portrait
-@onready var base_position = position
+@onready var base_position = position;
 
 
 #Strength of the bop effect
-var bop_strength: float = 1
+var bop_strength: float = 0.4;
 
 #--------------------------------------------------------
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	var pulse = sin(Conductor.song_speed * PI) * bop_strength;
+func _process(_delta: float) -> void:
+	var pulse = abs(sin(((Conductor.song_bpm / 60.0) / 2 * Conductor.song_pos) * PI)) * bop_strength;
 	
 	var y_add = pulse * 15;
 	var x_add = pulse * 10;

@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://sulmamk4r8nm"]
+[gd_scene load_steps=15 format=3 uid="uid://sulmamk4r8nm"]
 
+[ext_resource type="Texture2D" uid="uid://73d3u8b27nyb" path="res://Sprites/tut 3 fix.png" id="1_g5tnx"]
 [ext_resource type="Script" path="res://Scripts/NewScripts/new_rhythm_prototype.gd" id="1_i04jc"]
 [ext_resource type="PackedScene" uid="uid://qk60p7yoh15h" path="res://Scenes/UI/new_rhythm_measure.tscn" id="2_1tcbj"]
+[ext_resource type="Texture2D" uid="uid://bv68aj0rxq0ia" path="res://Sprites/Player-Female.png" id="3_kk1q3"]
 [ext_resource type="PackedScene" uid="uid://dhvtyenehd8lh" path="res://Scenes/UI/new_rhythm_staff.tscn" id="3_x1m5k"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_lwj1u"]
 [ext_resource type="Script" path="res://Scripts/NewScripts/new_character_portrait.gd" id="5_7j8hs"]
+[ext_resource type="Script" path="res://Scenes/beat_shower.gd" id="8_jge7h"]
+[ext_resource type="Texture2D" uid="uid://b4l75ixqp7660" path="res://Sprites/PumpkinNote1.png" id="8_ju8tw"]
+[ext_resource type="Texture2D" uid="uid://dun8m3812dgma" path="res://Sprites/HealthBarBG.png" id="9_uivdg"]
+[ext_resource type="Texture2D" uid="uid://dskr23imdxloc" path="res://Sprites/HealthBarFG.png" id="10_lilrn"]
+[ext_resource type="Texture2D" uid="uid://bo8giwxnr73gi" path="res://Sprites/HealthBarMG.png" id="11_68mq8"]
+[ext_resource type="Texture2D" uid="uid://daduyihra3ocv" path="res://Sprites/pumpkin girl bg.png" id="12_e3dg0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rem2q"]
+font_color = Color(1, 1, 1, 0.807843)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.454902)
 
 [node name="TestScene" type="Control"]
 layout_mode = 3
@@ -13,6 +26,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PortraitContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OpponentPortrait" type="TextureRect" parent="PortraitContainer"]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 31.0
+offset_right = 483.0
+offset_bottom = 505.0
+texture = ExtResource("1_g5tnx")
+expand_mode = 1
+script = ExtResource("5_7j8hs")
+
+[node name="PlayerPortrait" type="TextureRect" parent="PortraitContainer"]
+layout_mode = 0
+offset_left = 657.0
+offset_top = 17.0
+offset_right = 1024.0
+offset_bottom = 497.0
+texture = ExtResource("3_kk1q3")
+script = ExtResource("5_7j8hs")
 
 [node name="RhythmPrototype" type="Control" parent="."]
 custom_minimum_size = Vector2(1152, 170)
@@ -39,7 +79,7 @@ anchor_bottom = 1.0
 offset_top = -170.0
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(0.162066, 0.162066, 0.162066, 1)
+color = Color(0.156863, 0.156863, 0.156863, 1)
 
 [node name="NoteBar1" type="ColorRect" parent="RhythmPrototype/BG"]
 custom_minimum_size = Vector2(10, 1250)
@@ -104,7 +144,22 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="NoteTargetVisual" type="Sprite2D" parent="RhythmPrototype/BG/NoteBar1/HitSpot/PerfectSection"]
+texture_filter = 1
+position = Vector2(5, 14)
+rotation = 4.71239
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_ju8tw")
+
 [node name="Notes" type="Marker2D" parent="RhythmPrototype/BG/NoteBar1"]
+position = Vector2(5, 0)
+gizmo_extents = 16.3
+
+[node name="Bars" type="Marker2D" parent="RhythmPrototype/BG/NoteBar1"]
+position = Vector2(5, 0)
+gizmo_extents = 16.3
+
+[node name="LostNotes" type="Marker2D" parent="RhythmPrototype/BG/NoteBar1"]
 position = Vector2(5, 0)
 gizmo_extents = 16.3
 
@@ -179,28 +234,90 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="NoteTargetVisual" type="Sprite2D" parent="RhythmPrototype/BG/NoteBar2/HitSpot/PerfectSection"]
+texture_filter = 1
+position = Vector2(5, 14)
+rotation = 4.71239
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_ju8tw")
+
 [node name="Notes" type="Marker2D" parent="RhythmPrototype/BG/NoteBar2"]
 position = Vector2(5, 0)
 gizmo_extents = 16.3
 
-[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Bars" type="Marker2D" parent="RhythmPrototype/BG/NoteBar2"]
+position = Vector2(5, 0)
+gizmo_extents = 16.3
 
-[node name="PortraitContainer" type="Control" parent="."]
+[node name="LostNotes" type="Marker2D" parent="RhythmPrototype/BG/NoteBar2"]
+position = Vector2(5, 0)
+gizmo_extents = 16.3
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 10
+
+[node name="BeatTestSquare" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1097.0
+offset_top = 10.0
+offset_right = 1137.0
+offset_bottom = 50.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("8_jge7h")
+
+[node name="PointsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -67.0
+offset_top = -28.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "5678"
+label_settings = SubResource("LabelSettings_rem2q")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 48)
+layout_direction = 1
+layout_mode = 0
+offset_left = 10.0
+offset_top = 445.0
+offset_right = 401.0
+offset_bottom = 493.0
+size_flags_vertical = 0
+max_value = 1.0
+step = 0.0
+value = 1.0
+nine_patch_stretch = true
+stretch_margin_left = 40
+stretch_margin_right = 40
+texture_under = ExtResource("9_uivdg")
+texture_over = ExtResource("10_lilrn")
+texture_progress = ExtResource("11_68mq8")
+tint_under = Color(0.117696, 0.139477, 0.164087, 1)
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("12_e3dg0")
 
-[node name="OpponentPortrait" type="TextureRect" parent="PortraitContainer"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_7j8hs")
-
-[node name="PlayerPortrait" type="TextureRect" parent="PortraitContainer"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_7j8hs")
+[node name="GodModeLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -26.0
+offset_right = 128.0
+offset_bottom = -3.0
+grow_vertical = 0
+text = "-IN GOD MODE-"
