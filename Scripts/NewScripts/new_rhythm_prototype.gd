@@ -19,28 +19,28 @@ extends Control
 
 
 #An array of each staff's node for spawning notes under
-@onready var notes_parent: Array = [$BG/NoteBar1/Notes, $BG/NoteBar2/Notes];
+@onready var notes_parent: Array = [$BG/NoteBar1/Notes, $BG/NoteBar2/Notes, $BG/NoteBar3/Notes, $BG/NoteBar4/Notes];
 
 #An array of each staff's node for spawning bars under
-@onready var bars_parent: Array = [$BG/NoteBar1/Bars, $BG/NoteBar2/Bars];
+@onready var bars_parent: Array = [$BG/NoteBar1/Bars, $BG/NoteBar2/Bars, $BG/NoteBar3/Bars, $BG/NoteBar4/Bars];
 
 #An array of each staff's node for losing notes under
-@onready var lost_notes_parent: Array = [$BG/NoteBar1/LostNotes, $BG/NoteBar2/LostNotes];
+@onready var lost_notes_parent: Array = [$BG/NoteBar1/LostNotes, $BG/NoteBar2/LostNotes, $BG/NoteBar3/LostNotes, $BG/NoteBar4/LostNotes];
 
 #An array of each staff's node's spawn location
-@onready var note_spawn: Array = [$BG/NoteBar1/NoteSpawnPoint, $BG/NoteBar2/NoteSpawnPoint];
+@onready var note_spawn: Array = [$BG/NoteBar1/NoteSpawnPoint, $BG/NoteBar2/NoteSpawnPoint, $BG/NoteBar3/NoteSpawnPoint, $BG/NoteBar4/NoteSpawnPoint];
 
 #An array of each staff's hit indicator location
-@onready var hit_spot: Array = [$BG/NoteBar1/HitSpot, $BG/NoteBar2/HitSpot];
+@onready var hit_spot: Array = [$BG/NoteBar1/HitSpot, $BG/NoteBar2/HitSpot, $BG/NoteBar3/HitSpot, $BG/NoteBar4/HitSpot];
 
 #An array of each staff's note hit visuals
-@onready var hit_visuals: Array = [$BG/NoteBar1/HitSpot/PerfectSection/NoteTargetVisual, $BG/NoteBar2/HitSpot/PerfectSection/NoteTargetVisual];
+@onready var hit_visuals: Array = [$BG/NoteBar1/HitSpot/PerfectSection/NoteTargetVisual, $BG/NoteBar2/HitSpot/PerfectSection/NoteTargetVisual, $BG/NoteBar3/HitSpot/PerfectSection/NoteTargetVisual, $BG/NoteBar4/HitSpot/PerfectSection/NoteTargetVisual];
 
 #An array of each staff's center for note hits
-@onready var target_center: Array = [$BG/NoteBar1/HitSpot/PerfectSection/TargetCenter, $BG/NoteBar2/HitSpot/PerfectSection/TargetCenter];
+@onready var target_center: Array = [$BG/NoteBar1/HitSpot/PerfectSection/TargetCenter, $BG/NoteBar2/HitSpot/PerfectSection/TargetCenter, $BG/NoteBar3/HitSpot/PerfectSection/TargetCenter, $BG/NoteBar4/HitSpot/PerfectSection/TargetCenter];
 
 #An array of each staff's current hit indicator's button state
-var is_button_pressed: Array = [false, false];
+var is_button_pressed: Array = [false, false, false, false];
 
 
 #A current beat counter
@@ -67,17 +67,31 @@ var note_miss = preload("res://Audio/SFX/MISSSED NOTE.mp3");
 #The song file opened in a FileAccess
 var song_file: FileAccess;
 
+
 #The map of the note placements for staff 1
 var song_beat_maps_1: PackedStringArray;
 
 #The map of the note placements for staff 2
 var song_beat_maps_2: PackedStringArray;
 
+#The map of the note placements for staff 3
+var song_beat_maps_3: PackedStringArray;
+
+#The map of the note placements for staff 4
+var song_beat_maps_4: PackedStringArray;
+
+
 #Note placement for the current beat for staff 1
 var curr_beat_map_1: String;
 
 #Note placement for the current beat for staff 2
 var curr_beat_map_2: String;
+
+#Note placement for the current beat for staff 3
+var curr_beat_map_3: String;
+
+#Note placement for the current beat for staff 4
+var curr_beat_map_4: String;
 
 #Current index in the beat maps
 var curr_map_index: int = 0;
@@ -94,7 +108,7 @@ var total_points: int;
 
 
 #Progress Bar for Health
-@onready var health_bar: TextureProgressBar = $"../HealthBar"
+@onready var health_bar: TextureProgressBar = $"HealthBar"
 
 #Bool for God Mode (No health loss)
 var is_god_mode: bool = true;
@@ -118,6 +132,9 @@ func _ready() -> void:
 	init_song();
 	
 	Conductor.play_music();
+	
+	var mods = ModsDir.get_mods_dir();
+	print("The mods directory is: ", mods);
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -152,6 +169,8 @@ func bg_spawner():
 	if (beat_count < 1):
 		spawn_staff_note(0);
 		spawn_staff_note(1);
+		spawn_staff_note(2);
+		spawn_staff_note(3);
 		
 		measure_count = measure_count + 1;
 		#print("Measure" + String.num(measure_count))
@@ -159,6 +178,8 @@ func bg_spawner():
 	else:
 		spawn_measure_note(0);
 		spawn_measure_note(1);
+		spawn_measure_note(2);
+		spawn_measure_note(3);
 	
 	beat_count = beat_count - 1;
 	
@@ -172,16 +193,26 @@ func note_spawner():
 		read_next_beat(1);
 	if (curr_beat_map_2.length() == 0):
 		read_next_beat(2);
+	if (curr_beat_map_3.length() == 0):
+		read_next_beat(3);
+	if (curr_beat_map_4.length() == 0):
+		read_next_beat(4);
 	
 	var note = curr_beat_map_1[curr_map_index]; 
-	
 	if(note == "1"):
 		spawn_note(0);
 	
 	note = curr_beat_map_2[curr_map_index];
-	
 	if(note == "1"):
 		spawn_note(1);
+	
+	note = curr_beat_map_3[curr_map_index];
+	if(note == "1"):
+		spawn_note(2);
+	
+	note = curr_beat_map_4[curr_map_index];
+	if(note == "1"):
+		spawn_note(3);
 	
 	curr_map_index += 1;
 	if(curr_map_index > 3):
@@ -189,6 +220,8 @@ func note_spawner():
 		
 		curr_beat_map_1 = "";
 		curr_beat_map_2 = "";
+		curr_beat_map_3 = "";
+		curr_beat_map_4 = "";
 	
 
 #Bar spawn function
@@ -216,7 +249,7 @@ func spawn_note(staff: int):
 
 #Move all spawned objects based off song speed
 func move_notes(delta: float):
-	for i in range(0,2):
+	for i in range(4):
 		for note in notes_parent[i].get_children():
 			note.position.x = 0;
 			note.position.y += Conductor.song_speed * delta;
@@ -224,12 +257,11 @@ func move_notes(delta: float):
 			if (note.position.y > 1005):
 				note.reparent(lost_notes_parent[i]);
 				
-				if (!is_god_mode):
-					health_bar.value -= 0.2;
-					sfx_player.stream = note_miss;
-					sfx_player.play();
+				health_bar.value -= 0.2;
+				sfx_player.stream = note_miss;
+				sfx_player.play();
 				
-				if (health_bar.value == 0):
+				if (!is_god_mode && health_bar.value == 0):
 					game_over();
 		
 		for bar in bars_parent[i].get_children():
@@ -259,7 +291,7 @@ func shake_notes():
 	for hit_vis in hit_visuals:
 		hit_vis.rotation_degrees = new_rot;
 	
-	for i in range(0,2):
+	for i in range(4):
 		for note in notes_parent[i].get_children():
 			note.rotation_degrees = new_rot;
 
@@ -275,6 +307,16 @@ func staff_inputs() -> void:
 		rhythm_note_hit(1);
 		
 		is_button_pressed[1] = true;
+	if (Input.is_action_just_pressed("proto_rhythm_press_3")):
+		toggle_hitspot(2);
+		rhythm_note_hit(2);
+		
+		is_button_pressed[2] = true;
+	if (Input.is_action_just_pressed("proto_rhythm_press_4")):
+		toggle_hitspot(3);
+		rhythm_note_hit(3);
+		
+		is_button_pressed[3] = true;
 	
 	if (!Input.is_action_pressed("proto_rhythm_press_1") && is_button_pressed[0]):
 		toggle_hitspot(0);
@@ -282,7 +324,12 @@ func staff_inputs() -> void:
 	if (!Input.is_action_pressed("proto_rhythm_press_2") && is_button_pressed[1]):
 		toggle_hitspot(1);
 		is_button_pressed[1] = false;
-	
+	if (!Input.is_action_pressed("proto_rhythm_press_3") && is_button_pressed[2]):
+		toggle_hitspot(2);
+		is_button_pressed[2] = false;
+	if (!Input.is_action_pressed("proto_rhythm_press_4") && is_button_pressed[3]):
+		toggle_hitspot(3);
+		is_button_pressed[3] = false;
 
 #Note hit function
 func rhythm_note_hit(staff: int):
@@ -311,12 +358,11 @@ func rhythm_note_hit(staff: int):
 		#Miss
 		note.queue_free();
 		
-		if(!is_god_mode):
-			health_bar.value -= 0.2;
-			sfx_player.stream = note_miss;
-			sfx_player.play();
+		health_bar.value -= 0.2;
+		sfx_player.stream = note_miss;
+		sfx_player.play();
 	
-	if(health_bar.value == 0):
+	if(!is_god_mode && health_bar.value == 0):
 		game_over();
 
 #Hit indicator toggle function
@@ -328,12 +374,14 @@ func toggle_hitspot(hitspot: int):
 	okay.color = okay.color.inverted();
 	
 
-#Song initialization function
+##Song initialization function
 func init_song() -> void:
 	song_file = FileAccess.open(song_file_raw, FileAccess.READ);
 	
 	song_beat_maps_1 = song_file.get_csv_line(" ");
 	song_beat_maps_2 = song_file.get_csv_line(" ");
+	song_beat_maps_3 = song_file.get_csv_line(" ");
+	song_beat_maps_4 = song_file.get_csv_line(" ");
 
 #Read next beat from Beat Map or refill Beat Map
 func read_next_beat(staff: int):
@@ -362,4 +410,30 @@ func read_next_beat(staff: int):
 			curr_beat_map_2 = song_beat_maps_2[0];
 			
 			song_beat_maps_2.remove_at(0);
+	
+	if (staff == 3):
+		if (song_beat_maps_3.is_empty()):
+			song_beat_maps_3 = song_file.get_csv_line(" ");
+		
+		if (song_beat_maps_3[0] == ""):
+			curr_beat_map_3 = "0000";
+			song_beat_maps_3.clear();
+		
+		if (!song_beat_maps_3.is_empty()):
+			curr_beat_map_3 = song_beat_maps_3[0];
+			
+			song_beat_maps_3.remove_at(0);
+	
+	if (staff == 4):
+		if (song_beat_maps_4.is_empty()):
+			song_beat_maps_4 = song_file.get_csv_line(" ");
+		
+		if (song_beat_maps_4[0] == ""):
+			curr_beat_map_4 = "0000";
+			song_beat_maps_4.clear();
+		
+		if (!song_beat_maps_4.is_empty()):
+			curr_beat_map_4 = song_beat_maps_4[0];
+			
+			song_beat_maps_4.remove_at(0);
 	#print("New current beat map is: " + curr_beat_map);

@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1dtr7fkn1qpy"]
+
+[ext_resource type="Script" uid="uid://tlespub7e8gw" path="res://editor.gd" id="1_eyy8u"]
+
+[node name="Editor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eyy8u")
+
+[node name="FileDialog" type="FileDialog" parent="."]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+file_mode = 0
+display_mode = 1
+access = 2
+use_native_dialog = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 41.0
+text = "Import New Audio"
+
+[connection signal="pressed" from="Button" to="." method="_on_import_pressed"]

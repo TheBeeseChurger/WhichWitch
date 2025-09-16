@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bdv03821t1fbq"]
 
 [ext_resource type="Texture2D" uid="uid://dr4xpua05ut5j" path="res://Sprites/PumpkinNote.png" id="1_ka1q1"]
-[ext_resource type="Script" path="res://Scripts/Note.gd" id="2_1tv1d"]
+[ext_resource type="Script" uid="uid://dop6vkk82mdsy" path="res://Scripts/Note.gd" id="2_1tv1d"]
 
 [node name="RhythmNote" type="Sprite2D"]
 texture_filter = 1

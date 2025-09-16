@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://lgwgqw0i4sqh" path="res://Sprites/tut 2 fix.png" id="1_bwpun"]
 [ext_resource type="Resource" uid="uid://chghd2hydv51e" path="res://DynamicAudio/tutorial-music.tres" id="1_nugtv"]
-[ext_resource type="Script" path="res://Scripts/level.gd" id="1_omq3d"]
+[ext_resource type="Script" uid="uid://re1j7xs3807t" path="res://Scripts/level.gd" id="1_omq3d"]
 [ext_resource type="Texture2D" uid="uid://daduyihra3ocv" path="res://Sprites/pumpkin girl bg.png" id="2_lbx0q"]
 [ext_resource type="Resource" uid="uid://bcj2nxhmla31t" path="res://Levels/nightcore.tres" id="2_qvc3k"]
 [ext_resource type="Texture2D" uid="uid://73d3u8b27nyb" path="res://Sprites/tut 3 fix.png" id="4_jcd41"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://j536je5lcxyg"]
 
-[ext_resource type="Script" path="res://Scripts/NewScripts/conductor.gd" id="1_6fijg"]
+[ext_resource type="Script" uid="uid://dgb8ypg2qjogp" path="res://Scripts/NewScripts/conductor.gd" id="1_6fijg"]
 [ext_resource type="AudioStream" uid="uid://c48jq2546be7x" path="res://lvl3 full solng.mp3" id="1_f4i8r"]
 
 [node name="AudioStream" type="AudioStreamPlayer"]

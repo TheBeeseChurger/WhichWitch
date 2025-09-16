@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4fbnxgq2q0di" path="res://Sprites/CandyCornNote2.png" id="4_a7uyc"]
 [ext_resource type="Texture2D" uid="uid://dab01vs4gvsvu" path="res://Sprites/CandyCornNote1.png" id="5_5qpft"]
 [ext_resource type="Texture2D" uid="uid://cbp51e1wdt04t" path="res://Sprites/CandyCornNote.png" id="6_wb0jp"]
-[ext_resource type="Script" path="res://Scripts/level.gd" id="7_4oysq"]
+[ext_resource type="Script" uid="uid://re1j7xs3807t" path="res://Scripts/level.gd" id="7_4oysq"]
 
 [resource]
 script = ExtResource("7_4oysq")
