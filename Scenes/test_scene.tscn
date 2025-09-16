@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dhvtyenehd8lh" path="res://Scenes/UI/new_rhythm_staff.tscn" id="3_x1m5k"]
 [ext_resource type="PackedScene" uid="uid://bdv03821t1fbq" path="res://Scenes/UI/rhythm_note.tscn" id="4_lwj1u"]
 [ext_resource type="Script" uid="uid://dsjytqrnkufei" path="res://Scripts/NewScripts/new_character_portrait.gd" id="5_7j8hs"]
-[ext_resource type="Script" uid="uid://bn7i18c83lhna" path="res://Scripts/NewScripts/beat_shower.gd" id="8_jge7h"]
+[ext_resource type="Script" uid="uid://bn7i18c83lhna" path="res://Scenes/beat_shower.gd" id="8_jge7h"]
 [ext_resource type="Texture2D" uid="uid://b4l75ixqp7660" path="res://Sprites/PumpkinNote1.png" id="8_ju8tw"]
 [ext_resource type="Texture2D" uid="uid://dun8m3812dgma" path="res://Sprites/HealthBarBG.png" id="9_uivdg"]
 [ext_resource type="Texture2D" uid="uid://dskr23imdxloc" path="res://Sprites/HealthBarFG.png" id="10_lilrn"]
