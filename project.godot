@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Settings="*res://Scripts/settings.gd"
+Settings="*res://Scripts/OldScripts/settings.gd"
 Conductor="*res://Scenes/UI/conductor.tscn"
 
 [display]
