@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://btid74iavuc6j" path="res://ACTUALLY FINAL/lvl 1 part 1.mp3" id="3_aj6l1"]
 [ext_resource type="AudioStream" uid="uid://bsy8nwh0offdw" path="res://ACTUALLY FINAL/lvl 1 sped up version.mp3" id="4_g6gmc"]
 [ext_resource type="AudioStream" uid="uid://cyq8hndahyrms" path="res://Audio/music lvl 1 pt 1 transition_155bpm.mp3" id="6_crwuq"]
-[ext_resource type="Script" path="res://Scripts/DynamicMusic.gd" id="6_dfodq"]
+[ext_resource type="Script" uid="uid://cv7n6ocymwoej" path="res://Scripts/OldScripts/DynamicMusic.gd" id="6_dfodq"]
 [ext_resource type="AudioStream" uid="uid://bmnlh5mieg1p1" path="res://ACTUALLY FINAL/lvl 1 transition to sped up version.mp3" id="8_nj236"]
 
 [resource]
