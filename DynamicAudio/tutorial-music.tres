@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="DynamicMusic" load_steps=6 format=3 uid="uid://chghd2hydv51e"]
 
-[ext_resource type="Script" path="res://Scripts/OldScripts/DynamicMusic.gd" id="1_c6yew"]
+[ext_resource type="Script" path="res://Scripts/DynamicMusic.gd" id="1_c6yew"]
 [ext_resource type="AudioStream" uid="uid://eimxn6s3m88k" path="res://Audio/Tutorial pt 1_90bpm.mp3" id="1_e0dks"]
 [ext_resource type="AudioStream" uid="uid://c7ktyx3l1kicq" path="res://Audio/Tutorial intro_90bpm.mp3" id="1_jg0yk"]
 [ext_resource type="AudioStream" uid="uid://c663hdbgt3qp8" path="res://Audio/Tutorial sped_170bpm.mp3" id="3_6dimt"]

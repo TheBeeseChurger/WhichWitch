@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="DynamicMusic" load_steps=7 format=3 uid="uid://g0lgdsks0ilt"]
 
-[ext_resource type="Script" path="res://Scripts/OldScripts/DynamicMusic.gd" id="1_nyljo"]
+[ext_resource type="Script" path="res://Scripts/DynamicMusic.gd" id="1_nyljo"]
 [ext_resource type="AudioStream" uid="uid://ci8mulaitfvg5" path="res://Audio/LVL 2_INTRO_FINAL_141bpm.mp3" id="1_uvu0l"]
 [ext_resource type="AudioStream" uid="uid://cg124kpumphft" path="res://Audio/LVL 2_FirstPT_FINAL_141bpm.mp3" id="2_nh6u8"]
 [ext_resource type="AudioStream" uid="uid://cu4shsi14ht34" path="res://Audio/LVL 2 PT 2 LOOP 177BPM.mp3" id="4_54v34"]

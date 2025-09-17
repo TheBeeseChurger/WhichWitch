@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c1g1y7p37ca0l" path="res://Sprites/AutumnMoonLeafNote2.png" id="6_ewxul"]
 [ext_resource type="Texture2D" uid="uid://bwgvwti3c0454" path="res://Sprites/AutumnMoonLeafNote1.png" id="7_l1fcx"]
 [ext_resource type="Texture2D" uid="uid://bxh18w8eu7o0e" path="res://Sprites/AutumnMoonLeafNote.png" id="8_16cfp"]
-[ext_resource type="Script" path="res://Scripts/OldScripts/level.gd" id="9_el2vm"]
+[ext_resource type="Script" uid="uid://re1j7xs3807t" path="res://Scripts/level.gd" id="9_el2vm"]
 [ext_resource type="Texture2D" uid="uid://d2tf0r8qutnrw" path="res://Sprites/plant girl 6.png" id="10_lafhx"]
 [ext_resource type="Texture2D" uid="uid://hr0rqy76ykco" path="res://Sprites/plant girl 2.png" id="11_c5l2w"]
 
