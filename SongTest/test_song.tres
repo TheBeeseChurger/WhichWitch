@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Song" load_steps=3 format=3 uid="uid://nww5gwkr35my"]
+
+[ext_resource type="Script" path="res://Scripts/SongSystem/DifficultyData.gd" id="1_fampo"]
+[ext_resource type="Script" path="res://Scripts/SongSystem/Song.gd" id="2_rtmpd"]
+
+[resource]
+script = ExtResource("2_rtmpd")
+song_name = ""
+artist = ""
+first_beat_time = 0.0
+difficulties = Array[ExtResource("1_fampo")]([])

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Level" load_steps=13 format=3 uid="uid://bcj2nxhmla31t"]
 
 [ext_resource type="Texture2D" uid="uid://bm7r6ina5wp4r" path="res://Sprites/nc 4.png" id="1_tqcs8"]
-[ext_resource type="Script" path="res://Scripts/level.gd" id="1_xd3v5"]
+[ext_resource type="Script" path="res://Scripts/OldScripts/level.gd" id="1_xd3v5"]
 [ext_resource type="Texture2D" uid="uid://cd3m5qwuxbctc" path="res://Sprites/nightcore girl bg.png" id="2_5qatn"]
 [ext_resource type="Texture2D" uid="uid://dty51gaedjo8e" path="res://Sprites/nc 2.png" id="3_86gm3"]
 [ext_resource type="Resource" uid="uid://clmesysauk6mp" path="res://DynamicAudio/nightcore-music-2.tres" id="3_gtp7q"]

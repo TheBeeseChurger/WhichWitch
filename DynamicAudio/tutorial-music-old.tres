@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://b7llm4ooid77e" path="res://Audio/tutorial pt2.mp3" id="3_03pj6"]
 [ext_resource type="AudioStream" uid="uid://5j45eo3xsvp2" path="res://Audio/tutorial pt3.mp3" id="4_4wbag"]
 [ext_resource type="AudioStream" uid="uid://xnlb7vso2u2s" path="res://Audio/tutorial pt4.mp3" id="5_7xnnl"]
-[ext_resource type="Script" path="res://Scripts/DynamicMusic.gd" id="6_muf8w"]
+[ext_resource type="Script" path="res://Scripts/OldScripts/DynamicMusic.gd" id="6_muf8w"]
 [ext_resource type="AudioStream" uid="uid://c23omiapfmml8" path="res://Audio/tutorial speeding up transition.mp3" id="7_rd180"]
 
 [resource]

@@ -12,12 +12,12 @@ config_version=5
 
 config/name="Which Witch?"
 run/main_scene="res://Scenes/title-screen.tscn"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Settings="*res://Scripts/settings.gd"
+Settings="*res://Scripts/OldScripts/settings.gd"
 Conductor="*res://Scenes/UI/conductor.tscn"
 
 [display]

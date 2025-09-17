@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://dvqgxco60gkks" path="res://Audio/music lvl 1 pt 3.mp3" id="3_cv4ax"]
 [ext_resource type="AudioStream" uid="uid://be1bsrpdetuv8" path="res://Audio/music lvl 1 pt 4.mp3" id="4_jqs6k"]
 [ext_resource type="AudioStream" uid="uid://dpako4ys10352" path="res://Audio/music lvl 1 sped up.mp3" id="5_7rp3c"]
-[ext_resource type="Script" path="res://Scripts/DynamicMusic.gd" id="6_fpusr"]
+[ext_resource type="Script" path="res://Scripts/OldScripts/DynamicMusic.gd" id="6_fpusr"]
 [ext_resource type="AudioStream" uid="uid://dtxdw5sjqkwpm" path="res://Audio/music lvl 1 sped up transition.mp3" id="7_ssjnv"]
 
 [resource]
