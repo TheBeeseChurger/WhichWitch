@@ -3,6 +3,9 @@ extends Control
 ## The FileDialog node for opening audio files
 @onready var file_dialog : FileDialog = $FileDialog;
 
+##The Settings Panel holding all editor metadata
+@onready var settings_panel : PanelContainer = $HBoxContainer/SettingsPanel;
+
 ## The audio stream holding the audio currently being edited
 static var stream;
 
@@ -21,6 +24,10 @@ func _init_file_dialog() -> void:
 ## Button function for opening audio file dialog prompt
 func _on_import_pressed() -> void:
 	file_dialog.popup_centered();
+
+## Button function for opening settings panel
+func _on_side_panel_pressed() -> void:
+	settings_panel.visible = !settings_panel.visible;
 
 ## Return function for file dialog prompt
 ## 

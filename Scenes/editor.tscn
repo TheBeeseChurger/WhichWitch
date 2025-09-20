@@ -20,25 +20,154 @@ display_mode = 1
 access = 2
 use_native_dialog = true
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(229, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
+offset_right = 286.685
 grow_vertical = 2
 
-[node name="TabContainer" type="TabContainer" parent="PanelContainer"]
+[node name="SettingsPanel" type="PanelContainer" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(232.395, 0)
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/SettingsPanel"]
 layout_mode = 2
 current_tab = 0
 deselect_enabled = true
 
-[node name="SongSettings" type="VBoxContainer" parent="PanelContainer/TabContainer"]
+[node name="Song Settings" type="VBoxContainer" parent="HBoxContainer/SettingsPanel/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Button" type="Button" parent="PanelContainer/TabContainer/SongSettings"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Title:"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MarginContainer/VBoxContainer/Title"]
+custom_minimum_size = Vector2(170, 25)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.5625
+grow_horizontal = 0
+grow_vertical = 2
+placeholder_text = "<Title Here>"
+max_length = 32
+
+[node name="Artist" type="Label" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Artist:"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MarginContainer/VBoxContainer/Artist"]
+custom_minimum_size = Vector2(170, 25)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.5625
+grow_horizontal = 0
+grow_vertical = 2
+placeholder_text = "<Artist Here>"
+max_length = 32
+
+[node name="Difficulty" type="Label" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Difficulty:"
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MarginContainer/VBoxContainer/Difficulty"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+grow_horizontal = 0
+grow_vertical = 2
+selected = 0
+item_count = 5
+popup/item_0/text = "1"
+popup/item_0/id = 0
+popup/item_1/text = "2"
+popup/item_1/id = 1
+popup/item_2/text = "3"
+popup/item_2/id = 2
+popup/item_3/text = "4"
+popup/item_3/id = 3
+popup/item_4/text = "5"
+popup/item_4/id = 4
+
+[node name="SyncOffset" type="Label" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Sync Offset:"
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MarginContainer/VBoxContainer/SyncOffset"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -86.5625
+grow_horizontal = 0
+grow_vertical = 2
+step = 0.09999999999126885
+suffix = " sec"
+custom_arrow_step = 0.09999999999999999
+
+[node name="ImportSettings" type="FoldableContainer" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings"]
+layout_mode = 2
+folded = true
+title = "Import Settings"
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/ImportSettings"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/ImportSettings/MarginContainer2"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/ImportSettings/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 29.16)
 layout_mode = 2
 text = "Import New Audio"
 
-[connection signal="pressed" from="PanelContainer/TabContainer/SongSettings/Button" to="." method="_on_import_pressed"]
+[node name="MiscSettings" type="FoldableContainer" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings"]
+layout_mode = 2
+folded = true
+title = "Misc Settings"
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MiscSettings"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SettingsPanel/TabContainer/Song Settings/MiscSettings/MarginContainer2"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 80)
+layout_mode = 2
+size_flags_vertical = 4
+icon_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/SettingsPanel/TabContainer/Song Settings/ImportSettings/MarginContainer2/VBoxContainer/Button" to="." method="_on_import_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_side_panel_pressed"]
